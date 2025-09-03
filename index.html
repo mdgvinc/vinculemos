@@ -1,0 +1,349 @@
+# Proyecto: Vinculemos (HTML/CSS/JS estático)
+## Estructura de archivos
+- index.html
+- styles.css
+- script.js
+- categoria-1.html
+- categoria-2.html
+- categoria-3.html
+- categoria-4.html
+- categoria-5.html
+- blog.html
+- us.html
+- contacto.html
+- README.md
+
+---
+
+=== index.html ===
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vinculemos | Conexiones reales para actividades al aire libre</title>
+  <meta name="description" content="Vinculemos conecta personas para trekking, compartir un asado o una cerveza, y charlar en comunidad. Únete y encuentra tu próxima salida." />
+  <link rel="canonical" href="https://example.com/" />
+  <meta name="robots" content="index,follow" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vinculemos | Conexiones reales" />
+  <meta property="og:description" content="Conecta, sal a caminar, comparte una conversación y crea amistades." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="https://example.com/og.jpg" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vinculemos | Conexiones reales" />
+  <meta name="twitter:description" content="Conecta personas para actividades reales." />
+  <meta name="twitter:image" content="https://example.com/og.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script defer src="https://kit.fontawesome.com/a2e0e6b9f1.js" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Vinculemos",
+    "url": "https://example.com",
+    "sameAs": [
+      "https://www.instagram.com/",
+      "https://www.facebook.com/",
+      "https://x.com/"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#inicio">Saltar al contenido</a>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">Vinculemos</a>
+      <nav id="nav" class="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#categorias">Categorías</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+      <button id="burger" class="burger" aria-label="Abrir menú" aria-controls="nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main (single screen grid, no scroll) -->
+  <main id="inicio" class="screen-grid">
+    <!-- HERO video -->
+    <section class="panel hero" aria-label="Presentación">
+      <div class="hero-media">
+        <iframe
+          class="hero-iframe"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&rel=0&playsinline=1&loop=1&playlist=dQw4w9WgXcQ"
+          title="Video de bienvenida"
+          frameborder="0"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-copy">
+        <h1>Conectamos personas para vivir experiencias reales</h1>
+        <p>Únete a salidas de trekking, comparte un asado, conversa en una cervecería y amplía tu red de amistades.</p>
+        <a class="btn" href="#categorias">Explorar actividades</a>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section id="categorias" class="panel categories" aria-label="Categorías">
+      <h2>Categorías destacadas</h2>
+      <div class="cat-strip">
+        <article class="card">
+          <h3>Trekking</h3>
+          <p>Rutas guiadas y salidas colaborativas para distintos niveles. Conoce senderos cercanos, crea grupos y camina seguro mientras haces nuevas amistades.</p>
+          <a class="btn ghost" href="categoria-1.html">Conocer más</a>
+        </article>
+        <article class="card">
+          <h3>Asados & Parrillas</h3>
+          <p>Comparte fuego, recetas y buena conversación. Organizamos encuentros en parques o terrazas, cada quien aporta algo para disfrutar juntos sin complicaciones.</p>
+          <a class="btn ghost" href="categoria-2.html">Conocer más</a>
+        </article>
+        <article class="card">
+          <h3>Cervecerías & Charlas</h3>
+          <p>Reúnete en bares y microcervecerías para conversaciones amenas, networking relajado y juegos de mesa. Ideal para salir de la rutina y socializar.</p>
+          <a class="btn ghost" href="categoria-3.html">Conocer más</a>
+        </article>
+        <article class="card">
+          <h3>Deportes Urbanos</h3>
+          <p>Corre, pedalea o patina en compañía. Encuentra partners por ritmo y objetivos, arma micro-retos semanales y mantén la motivación siempre alta.</p>
+          <a class="btn ghost" href="categoria-4.html">Conocer más</a>
+        </article>
+        <article class="card">
+          <h3>Voluntariado</h3>
+          <p>Acciones breves con impacto: limpieza de parques, donaciones y apoyo comunitario. Vincúlate con causas locales y gente que quiere ayudar.</p>
+          <a class="btn ghost" href="categoria-5.html">Conocer más</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros" class="panel about" aria-label="Nosotros">
+      <div>
+        <h2>Nosotros</h2>
+        <p>Somos una iniciativa independiente que promueve vínculos presenciales de calidad. Diseñamos encuentros simples, seguros y abiertos para que cada persona pueda integrarse y sentirse parte.</p>
+        <a class="btn" href="us.html">Ver más</a>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="panel contact" aria-label="Contacto">
+      <div>
+        <h2>Contacto</h2>
+        <form class="form" action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde Vinculemos">
+          <input type="hidden" name="_captcha" value="false">
+          <label>Nombre
+            <input required name="nombre" type="text" placeholder="Tu nombre" />
+          </label>
+          <label>Email
+            <input required name="email" type="email" placeholder="tu@email.com" />
+          </label>
+          <label>Mensaje
+            <textarea required name="mensaje" rows="3" placeholder="¿Cómo podemos ayudarte?"></textarea>
+          </label>
+          <button class="btn" type="submit">Enviar</button>
+          <p class="form-note">También puedes escribirnos en redes sociales.</p>
+        </form>
+        <a class="btn ghost" href="contacto.html">Ir a la página de contacto</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (sticky) -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Vinculemos. Todos los derechos reservados.</p>
+      <div class="social">
+        <a aria-label="Instagram" href="#" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a aria-label="Facebook" href="#" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+        <a aria-label="X" href="#" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+        <a aria-label="YouTube" href="#" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a class="wa-float" href="https://chat.whatsapp.com/TU_GRUPO_AQUI" target="_blank" aria-label="Unirse al grupo de WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+=== styles.css ===
+
+:root{
+  --bg:#0f172a; /* slate-900 */
+  --card:#111827; /* gray-900 */
+  --text:#e5e7eb; /* gray-200 */
+  --muted:#94a3b8; /* slate-400 */
+  --brand:#22d3ee; /* cyan-400 */
+  --brand-2:#06b6d4; /* cyan-500 */
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
+body{background:var(--bg);color:var(--text);overflow:hidden}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 1rem}
+.skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip:focus{left:1rem;top:1rem;width:auto;height:auto;background:#000;color:#fff;padding:.5rem 1rem;border-radius:.5rem;z-index:10000}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(15,23,42,.8);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:56px}
+.logo{font-weight:800;letter-spacing:.5px}
+.nav{display:flex;gap:1rem}
+.nav a{opacity:.9}
+.nav a:hover{color:var(--brand)}
+.burger{display:none;flex-direction:column;gap:4px;background:transparent;border:0;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px}
+
+/* Grid (no-scroll single screen) */
+.screen-grid{
+  display:grid;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap:12px;
+  height:calc(100vh - 56px - 56px); /* header + footer reserved */
+  padding:12px;
+}
+.panel{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+.panel h2{margin:.2rem 0 .6rem}
+.panel p{color:var(--muted)}
+
+/* Hero */
+.hero{grid-column:1 / 2;grid-row:1 / 3}
+.hero-media{position:absolute;inset:0}
+.hero-iframe{width:100%;height:100%;opacity:.9}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.45))}
+.hero-copy{position:relative;z-index:2;max-width:520px;text-align:left}
+.hero-copy h1{font-size:clamp(22px, 3.2vw, 42px);margin:0 0 .5rem}
+.hero-copy p{font-size:clamp(14px, 1.3vw, 18px)}
+
+/* Categories */
+.categories{grid-column:2 / 3;grid-row:1 / 2;display:flex;flex-direction:column}
+.categories h2{margin:0 0 .5rem}
+.cat-strip{
+  display:flex;gap:10px;overflow:auto hidden;padding-bottom:4px;scroll-behavior:smooth
+}
+.card{
+  min-width:220px;flex:1;background:rgba(17,24,39,.9);
+  border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px
+}
+.card h3{margin:.2rem 0 .4rem}
+.card p{font-size:14px;line-height:1.35;min-height:72px}
+
+/* About / Contact */
+.about, .contact{grid-column:2 / 3;grid-row:2 / 3;text-align:left}
+.about .btn, .contact .btn{margin-top:.6rem}
+
+/* Footer */
+.site-footer{position:sticky;bottom:0;background:rgba(15,23,42,.9);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.06)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;min-height:56px}
+.social a{margin-left:.6rem;font-size:20px;opacity:.9}
+.social a:hover{color:var(--brand)}
+
+/* Buttons */
+.btn{
+  display:inline-block;background:var(--brand);
+  color:#0b1324;font-weight:700;padding:.6rem .9rem;border-radius:12px;border:0
+}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.2)}
+
+/* WhatsApp */
+.wa-float{
+  position:fixed;right:16px;bottom:72px;width:52px;height:52px;border-radius:50%;
+  display:grid;place-items:center;background:#25D366;color:#111;box-shadow:0 6px 18px rgba(0,0,0,.3);z-index:60
+}
+.wa-float i{font-size:26px}
+
+/* Mobile */
+@media (max-width: 880px){
+  .nav{display:none;position:absolute;right:12px;top:56px;background:#0b1324;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.6rem}
+  .nav.open{display:flex;flex-direction:column;gap:.6rem}
+  .burger{display:flex}
+  .screen-grid{grid-template-columns:1fr;grid-template-rows: .9fr .6fr .6fr; height:calc(100vh - 56px - 56px)}
+  .hero{grid-column:1;grid-row:1}
+  .categories{grid-column:1;grid-row:2}
+  .about, .contact{grid-column:1;grid-row:3}
+  .cat-strip{scroll-snap-type:x mandatory}
+  .card{scroll-snap-align:start}
+}
+
+
+=== script.js ===
+
+const year = document.getElementById('year'); if (year) year.textContent = new Date().getFullYear();
+const burger = document.getElementById('burger');
+const nav = document.getElementById('nav');
+if (burger) {
+  burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+}
+
+
+=== categoria-1.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Trekking | Vinculemos</title><meta name='description' content='Salidas de trekking y caminatas grupales.'><link rel='canonical' href='https://example.com/categoria-1.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#categorias'>Volver</a><a href='blog.html'>Blog</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Trekking</h1><p>Explora rutas cercanas y grupos por nivel.</p></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== categoria-2.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Asados & Parrillas | Vinculemos</title><meta name='description' content='Encuentros alrededor del fuego.'><link rel='canonical' href='https://example.com/categoria-2.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#categorias'>Volver</a><a href='blog.html'>Blog</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Asados & Parrillas</h1><p>Comparte recetas y buenas conversaciones.</p></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== categoria-3.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Cervecerías & Charlas | Vinculemos</title><meta name='description' content='Encuentros en bares y microcervecerías.'><link rel='canonical' href='https://example.com/categoria-3.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#categorias'>Volver</a><a href='blog.html'>Blog</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Cervecerías & Charlas</h1><p>Conversaciones amenas y networking relajado.</p></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== categoria-4.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Deportes Urbanos | Vinculemos</title><meta name='description' content='Corre, pedalea o patina en compañía.'><link rel='canonical' href='https://example.com/categoria-4.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#categorias'>Volver</a><a href='blog.html'>Blog</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Deportes Urbanos</h1><p>Partners por ritmo y micro-retos semanales.</p></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== categoria-5.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Voluntariado | Vinculemos</title><meta name='description' content='Acciones breves con impacto.'><link rel='canonical' href='https://example.com/categoria-5.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#categorias'>Volver</a><a href='blog.html'>Blog</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Voluntariado</h1><p>Conecta con causas locales y gente solidaria.</p></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== blog.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Blog | Vinculemos</title><meta name='description' content='Historias, rutas y encuentros de la comunidad.'><link rel='canonical' href='https://example.com/blog.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#inicio'>Inicio</a><a href='index.html#categorias'>Categorías</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Blog</h1><article class='panel' style='height:auto'><h2>Bienvenida a la comunidad</h2><p>Próximamente compartiremos experiencias y rutas recomendadas.</p></article></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== us.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Nosotros | Vinculemos</title><meta name='description' content='Quiénes somos y por qué hacemos esto.'><link rel='canonical' href='https://example.com/us.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#inicio'>Inicio</a><a href='blog.html'>Blog</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Nosotros</h1><p>Impulsamos encuentros simples para que la gente vuelva a vincularse en persona. Creemos en la confianza, la diversidad y el tiempo de calidad.</p></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== contacto.html ===
+<!doctype html><html lang='es'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Contacto | Vinculemos</title><meta name='description' content='Ponte en contacto con nuestro equipo.'><link rel='canonical' href='https://example.com/contacto.html'><link rel='stylesheet' href='styles.css'></head><body><header class='site-header'><div class='container header-inner'><a class='logo' href='/'>Vinculemos</a><nav class='nav'><a href='index.html#inicio'>Inicio</a></nav></div></header><main class='container' style='padding:24px 0; overflow:auto; height:calc(100vh - 112px)'><h1>Contacto</h1><form class='form' action='https://formsubmit.co/vinculemos.marketingdigital@gmail.com' method='POST'><input type='hidden' name='_subject' value='Nuevo mensaje desde Vinculemos'><input type='hidden' name='_captcha' value='false'><label>Nombre<input required name='nombre' type='text' placeholder='Tu nombre' /></label><label>Email<input required name='email' type='email' placeholder='tu@email.com' /></label><label>Mensaje<textarea required name='mensaje' rows='4' placeholder='Cuéntanos en qué te ayudamos'></textarea></label><button class='btn' type='submit'>Enviar</button></form></main><footer class='site-footer'><div class='container footer-inner'><p>© <span id='year'></span> Vinculemos</p></div></footer><script src='script.js'></script></body></html>
+
+=== README.md ===
+
+# Vinculemos (estático, gratis)
+
+- Sube estos archivos a un repo público en GitHub.
+- Activa GitHub Pages (Branch `main`, carpeta `/`, o `/docs` si mueves allí).
+- Cambia `canonical`, URLs sociales y el enlace de WhatsApp.
+- El formulario usa **formsubmit.co** (gratis). Puedes personalizar redirecciones con `_next`.
+
+## Notas
+- Home encaja en una pantalla (grid responsivo). El video se reproduce *inline* con `mute` para permitir autoplay.
+- Header y footer son sticky. WhatsApp flota.
+- SEO básico + JSON-LD.
+
