@@ -3,344 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinculemos | Categorías Mejoradas</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <title>Vinculemos - Conecta en la Vida Real | Trekking, Asados y Más</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Únete a Vinculemos y conecta con personas reales para actividades al aire libre: trekking, asados, charlas en cervecerías, deportes urbanos y voluntariado en tu ciudad.">
+    <meta name="keywords" content="trekking, asados, cervecerías, deportes urbanos, voluntariado, conexiones reales, actividades grupales, networking, vida social">
+    <meta name="author" content="Vinculemos">
+    <meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
+    <meta property="og:description" content="Plataforma para conectar personas en actividades reales: trekking, asados, charlas y más.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vinculemos.com">
+    
+    <!-- External Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #0f172a;
-            --card: rgba(17, 24, 39, 0.85);
-            --text: #e5e7eb;
-            --muted: #94a3b8;
-            --brand: #22d3ee;
-            --brand-2: #06b6d4;
-            --accent: #f97316;
-            --transition: all 0.3s ease;
+            --primary-color: #22d3ee;
+            --primary-dark: #0891b2;
+            --accent-color: #f97316;
+            --dark-bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
         }
-        
+
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            scroll-behavior: smooth;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), 
-                        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') center/cover no-repeat fixed;
-            color: var(--text);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--text-light);
+        }
+
+        .section-height {
             min-height: 100vh;
-            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
         }
-        
-        .container {
+
+        .sticky-header {
+            position: fixed;
+            top: 0;
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--brand);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .tagline {
-            color: var(--muted);
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .category-card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
         }
-        
-        .category-card:hover {
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            object-fit: cover;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
             transform: translateY(-5px);
-            border-color: var(--brand);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.2);
         }
-        
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-        
-        .icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            background: rgba(34, 211, 238, 0.1);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
         }
-        
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--brand);
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
         }
-        
-        .card-content {
-            flex-grow: 1;
-            margin-bottom: 20px;
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
         }
-        
-        .card-description {
-            line-height: 1.6;
-            color: var(--muted);
-            margin-bottom: 15px;
+
+        .mobile-menu.active {
+            transform: translateX(0);
         }
-        
-        .card-features {
-            list-style: none;
-            margin-top: 15px;
-        }
-        
-        .card-features li {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-        
-        .card-features i {
-            color: var(--brand);
-            font-size: 0.8rem;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--brand);
-            color: #0b1324;
-            font-weight: 600;
-            padding: 12px 20px;
-            border-radius: 12px;
-            border: 0;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            align-self: flex-start;
-        }
-        
-        .btn:hover {
-            background: var(--brand-2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
-        }
-        
-        .btn i {
-            font-size: 0.9rem;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--muted);
-            font-size: 0.9rem;
-        }
-        
+
         @media (max-width: 768px) {
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
+            .section-height {
+                min-height: auto;
+                padding: 4rem 0;
             }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-people-group"></i>
-                <span>Vinculemos</span>
-            </div>
-            <p class="tagline">Conexiones reales para actividades al aire libre</p>
-        </header>
-        
-        <main>
-            <div class="categories-grid">
-                <!-- Trekking -->
-                <div class="category-card">
-                    <div class="card-header">
-                        <div class="icon">
-                            <i class="fas fa-hiking"></i>
-                        </div>
-                        <h2 class="card-title">Trekking</h2>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-description">
-                            Rutas guiadas y salidas colaborativas para distintos niveles. Conoce senderos cercanos, crea grupos y camina seguro mientras haces nuevas amistades.
-                        </p>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Rutas para todos los niveles</li>
-                            <li><i class="fas fa-check-circle"></i> Guías experimentados</li>
-                            <li><i class="fas fa-check-circle"></i> Equipo de seguridad incluido</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn">
-                        <i class="fas fa-arrow-right"></i> Conocer más
-                    </a>
-                </div>
-                
-                <!-- Asados & Parrillas -->
-                <div class="category-card">
-                    <div class="card-header">
-                        <div class="icon">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                        <h2 class="card-title">Asados & Parrillas</h2>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-description">
-                            Comparte fuego, recetas y buena conversación. Organizamos encuentros en parques o terrazas, cada quien aporta algo para disfrutar juntos sin complicaciones.
-                        </p>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Parrillas equipadas</li>
-                            <li><i class="fas fa-check-circle"></i> Ingredientes locales</li>
-                            <li><i class="fas fa-check-circle"></i> Ambientes acogedores</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn">
-                        <i class="fas fa-arrow-right"></i> Conocer más
-                    </a>
-                </div>
-                
-                <!-- Cervecerías & Charlas -->
-                <div class="category-card">
-                    <div class="card-header">
-                        <div class="icon">
-                            <i class="fas fa-beer"></i>
-                        </div>
-                        <h2 class="card-title">Cervecerías & Charlas</h2>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-description">
-                            Reúnete en bares y microcervecerías para conversaciones amenas, networking relajado y juegos de mesa. Ideal para salir de la rutina y socializar.
-                        </p>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Degustación de cervezas</li>
-                            <li><i class="fas fa-check-circle"></i> Juegos de mesa</li>
-                            <li><i class="fas fa-check-circle"></i> Temáticas variadas</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn">
-                        <i class="fas fa-arrow-right"></i> Conocer más
-                    </a>
-                </div>
-                
-                <!-- Deportes Urbanos -->
-                <div class="category-card">
-                    <div class="card-header">
-                        <div class="icon">
-                            <i class="fas fa-biking"></i>
-                        </div>
-                        <h2 class="card-title">Deportes Urbanos</h2>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-description">
-                            Corre, pedalea o patina en compañía. Encuentra partners por ritmo y objetivos, arma micro-retos semanales y mantén la motivación siempre alta.
-                        </p>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Grupos por niveles</li>
-                            <li><i class="fas fa-check-circle"></i> Retos semanales</li>
-                            <li><i class="fas fa-check-circle"></i> Rutas urbanas seguras</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn">
-                        <i class="fas fa-arrow-right"></i> Conocer más
-                    </a>
-                </div>
-                
-                <!-- Voluntariado -->
-                <div class="category-card">
-                    <div class="card-header">
-                        <div class="icon">
-                            <i class="fas fa-hands-helping"></i>
-                        </div>
-                        <h2 class="card-title">Voluntariado</h2>
-                    </div>
-                    <div class="card-content">
-                        <p class="card-description">
-                            Acciones breves con impacto: limpieza de parques, donaciones y apoyo comunitario. Vincúlate con causas locales y gente que quiere ayudar.
-                        </p>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Impacto comunitario</li>
-                            <li><i class="fas fa-check-circle"></i> Diversas causas sociales</li>
-                            <li><i class="fas fa-check-circle"></i> Horarios flexibles</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="btn">
-                        <i class="fas fa-arrow-right"></i> Conocer más
-                    </a>
-                </div>
-            </div>
-        </main>
-        
-        <footer>
-            <p>© 2023 Vinculemos. Todos los derechos reservados.</p>
-        </footer>
-    </div>
 
-    <script>
-        // Efecto de aparición suave para las tarjetas
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.category-card');
-            
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
+<body>
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-people-group text-2xl" style="color: var(--primary-color);"></i>
+                    <span class="text-2xl font-bold text-white">Vinculemos</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="hover:text-cyan-400 transition-colors">Inicio</a>
+                    <a href="#categorias" class="hover:text-cyan-400 transition-colors">Categorías</a>
+                    <a href="#nosotros" class="hover:text-cyan-400 transition-colors">Nosotros</a>
+                    <a href="#contacto" class="hover:text-cyan-400 transition-colors">Contacto</a>
+                    <a href="#blog" class="hover:text-cyan-400 transition-colors">Blog</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white text-2xl" id="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav class="mobile-menu md:hidden absolute top-full left-0 w-full bg-slate-900 border-t border-cyan-400/20" id="mobile-menu">
+                <div class="flex flex-col space-y-4 p-6">
+                    <a href="#inicio" class="hover:text-cyan-400 transition-colors">Inicio</a>
+                    <a href="#categorias" class="hover:text-cyan-400 transition-colors">Categorías</a>
+                    <a href="#nosotros" class="hover:text-cyan-400 transition-colors">Nosotros</a>
+                    <a href="#contacto" class="hover:text-cyan-400 transition-colors">Contacto</a>
+                    <a href="#blog" class="hover:text-cyan-400 transition-colors">Blog</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="section-height relative overflow-hidden">
+        <div class="absolute inset-0">
+            <iframe 
+                class="hero-video"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&showinfo=0&rel=0&iv_load_policy=3"
+                title="Video de fondo"
+                frameborder="0"
+                allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+        
+        <div class="relative z-10 container mx-auto px-4 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                Conecta en la 
+                <span style="color: var(--primary-color);">Vida Real</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
+                Únete a actividades auténticas, conoce personas afines y construye conexiones genuinas a través de experiencias compartidas al aire libre.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#categorias" class="bg-cyan-400 text-slate-900 px-8 py-4 rounded-lg font-semibold hover:bg-cyan-300 transition-all transform hover:scale-105">
+                    Explorar Actividades
+                </a>
+                <a href="#nosotros" class="border-2 border-cyan-400 text-cyan-400 px-8 py-4 rounded-lg font-semibold hover:bg-cyan-400 hover:text-slate-900 transition-all">
+                    Conocer Más
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categorias" class="section-height py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Nuestras Categorías</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Encuentra tu pasión y conecta con personas que comparten tus intereses en actividades reales y emocionantes.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Trekking -->
+                <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-cyan-400/10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-hiking text-2xl text-cyan-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Trekking</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Descubre rutas espectaculares mientras forjas amistades duraderas. Desde senderos para principiantes hasta desafíos para expertos, cada paso es una oportunidad de conexión auténtica con la naturaleza y las personas.
+                    </p>
+                    <a href="/trekking.html" class="inline-flex items-center text-cyan-400 font-semibold hover:text-cyan-300 transition-colors">
+                        Conocer más <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Asados & Parrillas -->
+                <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-orange-400/10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-fire text-2xl text-orange-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Asados & Parrillas</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Comparte el ritual del fuego, las recetas familiares y conversaciones memorables. Organizamos encuentros donde cada persona aporta su toque especial para crear momentos únicos de camaradería y sabor.
+                    </p>
+                    <a href="/asados.html" class="inline-flex items-center text-orange-400 font-semibold hover:text-orange-300 transition-colors">
+                        Conocer más <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Cervecerías & Charlas -->
+                <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-amber-400/10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-beer text-2xl text-amber-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Cervecerías & Charlas</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Espacios relajados para networking auténtico, degustaciones y juegos que rompen el hielo. Desde microcervecerías hasta bares temáticos, cada encuentro es una oportunidad de expandir tu círculo social.
+                    </p>
+                    <a href="/cervecerias.html" class="inline-flex items-center text-amber-400 font-semibold hover:text-amber-300 transition-colors">
+                        Conocer más <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Deportes Urbanos -->
+                <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-green-400/10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-biking text-2xl text-green-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Deportes Urbanos</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Mantén la motivación alta con compañeros de entrenamiento que entienden tus metas. Running, ciclismo, patinaje: encuentra tu tribu deportiva y convierte el ejercicio en aventuras urbanas llenas de energía.
+                    </p>
+                    <a href="/deportes-urbanos.html" class="inline-flex items-center text-green-400 font-semibold hover:text-green-300 transition-colors">
+                        Conocer más <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Voluntariado -->
+                <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-purple-400/10 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-hands-helping text-2xl text-purple-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Voluntariado</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Transforma tu comunidad mientras construyes relaciones significativas. Desde limpieza de parques hasta apoyo comunitario, cada acción genera impacto positivo y conecta con personas de corazón solidario.
+                    </p>
+                    <a href="/voluntariado.html" class="inline-flex items-center text-purple-400 font-semibold hover:text-purple-300 transition-colors">
+                        Conocer más <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="nosotros" class="section-height py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8">Quiénes Somos</h2>
+                    <div class="space-y-6 text-lg text-gray-300 leading-relaxed">
+                        <p>
+                            Somos un movimiento que nació de la necesidad genuina de reconectar personas en un mundo cada vez más digital. Creemos firmemente que las mejores relaciones se construyen compartiendo experiencias reales, no através de pantallas.
+                        </p>
+                        <p>
+                            Nuestra misión es simple pero poderosa: crear oportunidades para que personas afines se encuentren, compartan aventuras y construyan amistades auténticas que trascienden lo virtual.
+                        </p>
+                        <p>
+                            Desde 2023, hemos facilitado más de 500 encuentros, conectando a miles de personas que ahora forman parte de una comunidad vibrante y solidaria que se extiende por toda Latinoamérica.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-8 mt-12">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-cyan-400 mb-2">500+</div>
+                            <div class="text-gray-400">Eventos Realizados</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-cyan-400 mb-2">2K+</div>
+                            <div class="text-gray-400">Conexiones Creadas</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-cyan-400 mb-2">15</div>
+                            <div class="text-gray-400">Ciudades Activas</div>
+                        </div>
+                    </div>
+                </div>
                 
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 * index);
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="space-y-6">
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-heart text-3xl text-red-400 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">Conexiones Auténticas</h4>
+                            <p class="text-gray-400">Facilitamos encuentros reales que generan amistades duraderas.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-shield-alt text-3xl text-green-400 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">Entorno Seguro</h4>
+                            <p class="text-gray-400">Priorizamos la seguridad y comodidad de todos los participantes.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6 mt-8">
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-globe-americas text-3xl text-blue-400 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">Comunidad Diversa</h4>
+                            <p class="text-gray-400">Celebramos la diversidad y fomentamos la inclusión social.</p>
+                        </div>
+                        <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                            <i class="fas fa-leaf text-3xl text-emerald-400 mb-4"></i>
+                            <h4 class="text-xl font-semibold mb-2">Impacto Positivo</h4>
+                            <p class="text-gray-400">Promovemos actividades que benefician a la comunidad y el medio ambiente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section-height py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Únete a la Comunidad</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    ¿Tienes una idea para una actividad? ¿Quieres ser parte del equipo? Contáctanos y construyamos juntos más conexiones reales.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Form -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                    <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
+                        <input type="hidden" name="_subject" value="Nuevo contacto desde Vinculemos">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://vinculemos.com/gracias.html">
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="nombre" class="block text-sm font-medium mb-2">Nombre Completo</label>
+                                <input type="text" id="nombre" name="nombre" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="telefono" class="block text-sm font-medium mb-2">Teléfono (Opcional)</label>
+                            <input type="tel" id="telefono" name="telefono" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors">
+                        </div>
+                        
+                        <div>
+                            <label for="interes" class="block text-sm font-medium mb-2">¿Qué te interesa?</label>
+                            <select id="interes" name="interes" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors">
+                                <option value="">Selecciona una opción</option>
+                                <option value="trekking">Trekking</option>
+                                <option value="asados">Asados & Parrillas</option>
+                                <option value="cervecerias">Cervecerías & Charlas</option>
+                                <option value="deportes">Deportes Urbanos</option>
+                                <option value="voluntariado">Voluntariado</option>
+                                <option value="colaboracion">Colaborar con Vinculemos</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="mensaje" class="block text-sm font-medium mb-2">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntanos tu idea, sugerencia o cómo te gustaría participar..." class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-cyan-400 focus:outline-none transition-colors resize-none"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-cyan-400 text-slate-900 py-4 rounded-lg font-semibold hover:bg-cyan-300 transition-all transform hover:scale-105 flex items-center justify-center space-x-2">
+                            <span>Enviar Mensaje</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-envelope text-2xl text-cyan-400 mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-semibold">Email</h4>
+                                <p class="text-gray-400">vinculemos.marketingdigital@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-clock text-2xl text-cyan-400 mr-4"></i>
+                            <div>
+                                <h4 class="text-xl font-semibold">Horario de Respuesta</h4>
+                                <p class="text-gray-400">Lun - Vie: 9:00 AM - 6:00 PM</p>
+                                <p class="text-gray-400">Respuesta en 24 horas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700">
+                        <h4 class="text-xl font-semibold mb-4">Síguenos en Redes</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                                <i class="fab fa-facebook-f text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center hover:bg-pink-500 transition-colors">
+                                <i class="fab fa-instagram text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-blue-400 rounded-lg flex items-center justify-center hover:bg-blue-300 transition-colors">
+                                <i class="fab fa-twitter text-white"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center hover:bg-red-500 transition-colors">
+                                <i class="fab fa-youtube text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-700 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fas fa-people-group text-2xl text-cyan-400"></i>
+                        <span class="text-2xl font-bold">Vinculemos</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Conectando personas reales a través de experiencias auténticas al aire libre.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Actividades</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/trekking.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Trekking</a></li>
+                        <li><a href="/asados.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Asados & Parrillas</a></li>
+                        <li><a href="/cervecerias.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Cervecerías & Charlas</a></li>
+                        <li><a href="/deportes-urbanos.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Deportes Urbanos</a></li>
+                        <li><a href="/voluntariado.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Voluntariado</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Información</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#nosotros" class="text-gray-400 hover:text-cyan-400 transition-colors">Nosotros</a></li>
+                        <li><a href="#blog" class="text-gray-400 hover:text-cyan-400 transition-colors">Blog</a></li>
+                        <li><a href="/preguntas-frecuentes.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="/terminos.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Términos y Condiciones</a></li>
+                        <li><a href="/privacidad.html" class="text-gray-400 hover:text-cyan-400 transition-colors">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            vinculemos.marketingdigital@gmail.com
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-clock mr-2"></i>
+                            Lun - Vie: 9:00 AM - 6:00 PM
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Vinculemos. Todos los derechos reservados. Desarrollado con ❤️ para conectar personas reales.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+1234567890?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20las%20actividades%20de%20Vinculemos" target="_blank" class="floating-whatsapp">
+        <i class="fab fa-whatsapp text-white text-2xl"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
             });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.sticky-header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll for cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.sticky-header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(15, 23, 42, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
         });
     </script>
 </body>
