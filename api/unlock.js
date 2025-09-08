@@ -5,7 +5,8 @@ export default function handler(req, res) {
 
   const { password } = req.body;
   if (password === process.env.SECRET_KEY) {
-    return res.status(200).send("ACCESS_GRANTED");
+    // return the secret itself
+    return res.status(200).send(process.env.SECRET_KEY);
   }
   return res.status(401).send("Unauthorized");
 }
