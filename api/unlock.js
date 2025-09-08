@@ -4,9 +4,11 @@ export default function handler(req, res) {
   }
 
   const { password } = req.body;
+
   if (password === process.env.SECRET_KEY) {
-    // return the secret itself
-    return res.status(200).send(process.env.SECRET_KEY);
+    // ✅ Return a proper Bearer token
+    return res.status(200).json({ token: `Bearer ${process.env.SECRET_KEY}` });
   }
+
   return res.status(401).send("Unauthorized");
 }
