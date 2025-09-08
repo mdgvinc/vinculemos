@@ -1,22 +1,47 @@
-import fs from "fs";
-import path from "path";
+import { kv } from "@vercel/kv";
 
-const filePath = path.join(process.cwd(), "data", "contacts.json");
+export default async function handler(req, res) {
+  const { method } = req;
 
-export default function handler(req, res) {
-  const { token } = req.query;
-  if (token !== "VALID_TOKEN") return res.status(401).json({ error: "Unauthorized" });
+  // Auth check
+  const authHeader = req.headers["authorization"];
+  if (!authHeader || authHeader !== `Bearer ${process.env.SECRET_KEY}`) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
 
-  if (req.method === "GET") {
-    const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    res.status(200).json(data);
-  } else if (req.method === "POST") {
-    const contact = req.body;
-    const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    data.push(contact);
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-    res.status(200).json({ ok: true });
-  } else {
-    res.status(405).end();
+  try {
+    if (method === "GET") {
+      const contacts = (await kv.get("contacts")) || [];
+      return res.status(200).json(contacts);
+    }
+
+    if (method === "POST") {
+      const newContact = req.body;
+      let contacts = (await kv.get("contacts")) || [];
+      contacts.push(newContact);
+      await kv.set("contacts", contacts);
+      return res.status(201).json({ success: true });
+    }
+
+    if (method === "PUT") {
+      const { index, updatedContact } = req.body;
+      let contacts = (await kv.get("contacts")) || [];
+      contacts[index] = updatedContact;
+      await kv.set("contacts", contacts);
+      return res.status(200).json({ success: true });
+    }
+
+    if (method === "DELETE") {
+      const { index } = req.body;
+      let contacts = (await kv.get("contacts")) || [];
+      contacts.splice(index, 1);
+      await kv.set("contacts", contacts);
+      return res.status(200).json({ success: true });
+    }
+
+    return res.status(405).json({ error: "Method Not Allowed" });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: "Server error" });
   }
 }
