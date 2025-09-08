@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Contactos</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f4f4f4; }
+    input, button { padding: 8px; margin: 4px 0; }
+    #main { display: none; }
+  </style>
+</head>
+<body>
+  <!-- 🔒 Login -->
+  <div id="login">
+    <h2>Acceso</h2>
+    <input type="password" id="password" placeholder="Contraseña" />
+    <button onclick="unlock()">Entrar</button>
+    <p id="error" style="color:red; display:none;">Clave incorrecta</p>
+  </div>
+
+  <!-- 🔓 Main App -->
+  <div id="main">
+    <h2>Base de Contactos</h2>
+
+    <table id="contacts-table">
+      <thead>
+        <tr>
+          <th>Nombre</th><th>Apellido</th><th>Email</th><th>RUT</th><th>Teléfono</th><th>Dirección</th><th>Active</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3>Agregar Contacto</h3>
+    <form id="contact-form" onsubmit="addContact(event)">
+      <input name="name" placeholder="Nombre" required />
+      <input name="surname" placeholder="Apellido" required />
+      <input name="mail" placeholder="Email" type="email" required />
+      <input name="rut" placeholder="RUT" required />
+      <input name="phone" placeholder="Teléfono" required />
+      <input name="address" placeholder="Dirección" required />
+      <input name="address" placeholder="Active" required />
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+
+  <script>
+    let token = null;
+
+    async function unlock() {
+      const pw = document.getElementById("password").value;
+      const res = await fetch("/api/unlock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pw })
+      });
+      if (res.ok) {
+        token = await res.text();
+        document.getElementById("login").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        loadContacts();
+      } else {
+        document.getElementById("error").style.display = "block";
+      }
+    }
+
+    async function loadContacts() {
+      const res = await fetch("/api/contacts?token=" + token);
+      const contacts = await res.json();
+      const tbody = document.querySelector("#contacts-table tbody");
+      tbody.innerHTML = "";
+      contacts.forEach(c => {
+        const row = `<tr>
+          <td>${c.name}</td>
+          <td>${c.surname}</td>
+          <td>${c.mail}</td>
+          <td>${c.rut}</td>
+          <td>${c.phone}</td>
+          <td>${c.address}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    async function addContact(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target));
+      const res = await fetch("/api/contacts?token=" + token, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        e.target.reset();
+        loadContacts();
+      }
+    }
+  </script>
+</body>
+</html>
