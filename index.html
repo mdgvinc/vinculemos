@@ -1,6 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- keep ALL your existing head content here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Título original de tu página</title>
+  <link rel="stylesheet" href="styles.css"> <!-- tus CSS originales -->
+  <style>
+    /* --- only for access screen --- */
+    #access-screen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("fondo.jpg") no-repeat center center/cover;
+      z-index: 9999; /* stays above everything */
+    }
+    #access-box {
+      background: rgba(0,0,0,0.7);
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      color: #fff;
+    }
+    #access-box input,
+    #access-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    #access-box button {
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    #access-box button:hover {
+      background: #45a049;
+    }
+    #main-content {
+      display: none; /* hide all original content until unlock */
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔒 Overlay de acceso -->
+  <div id="access-screen">
+    <div id="access-box">
+      <h2>Ingresa la clave</h2>
+      <input type="password" id="password-input" placeholder="Contraseña">
+      <button onclick="checkPassword()">Acceder</button>
+      <p id="error-msg" style="color:#ff6b6b; display:none; margin-top:10px;">Clave incorrecta</p>
+    </div>
+  </div>
+
+  <!-- 🔓 Aquí va TODO tu código original -->
+  <div id="main-content">
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vinculemos - Conecta en la Vida Real | Trekking, Asados y Más</title>
@@ -602,5 +666,20 @@
             }
         });
     </script>
+
+    <script>
+    function checkPassword() {
+      const input = document.getElementById("password-input").value;
+      const correct = "Thisisapassword1234!!";
+      if (input === correct) {
+        document.getElementById("access-screen").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+      } else {
+        document.getElementById("error-msg").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
 </body>
 </html>
