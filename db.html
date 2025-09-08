@@ -67,24 +67,36 @@
         document.getElementById("error").style.display = "block";
       }
     }
-
-    async function loadContacts() {
-      const res = await fetch("/api/contacts?token=" + token);
-      const contacts = await res.json();
-      const tbody = document.querySelector("#contacts-table tbody");
-      tbody.innerHTML = "";
-      contacts.forEach(c => {
-        const row = `<tr>
-          <td>${c.name}</td>
-          <td>${c.surname}</td>
-          <td>${c.mail}</td>
-          <td>${c.rut}</td>
-          <td>${c.phone}</td>
-          <td>${c.address}</td>
-        </tr>`;
-        tbody.innerHTML += row;
-      });
+    
+async function loadContacts(password) {
+  const res = await fetch("/api/contacts", {
+    headers: {
+      "Authorization": `Bearer ${password}`
     }
+  });
+
+  if (!res.ok) {
+    console.error("Error loading contacts");
+    return;
+  }
+
+  const contacts = await res.json();
+  const tbody = document.querySelector("#contacts-table tbody");
+  tbody.innerHTML = "";
+
+  contacts.forEach(c => {
+    const row = `<tr>
+      <td>${c.name}</td>
+      <td>${c.surname}</td>
+      <td>${c.mail}</td>
+      <td>${c.rut}</td>
+      <td>${c.phone}</td>
+      <td>${c.address}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+  });
+}
+
 
     async function addContact(e) {
       e.preventDefault();
