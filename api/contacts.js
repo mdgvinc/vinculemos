@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   console.log("📥 Request received:", req.method);
 
   const { method } = req;
-
+ 
   // Auth check
   const authHeader = req.headers.authorization;
   if (!authHeader || authHeader !== `Bearer ${process.env.SECRET_KEY}`) {
