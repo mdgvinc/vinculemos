@@ -1,118 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinculemos - Conecta en la Vida Real | Trekking, Asados y Más</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Únete a Vinculemos y conecta con personas reales para actividades al aire libre: trekking, asados, charlas en cervecerías, deportes urbanos y voluntariado en tu ciudad.">
-    <meta name="keywords" content="trekking, asados, cervecerías, deportes urbanos, voluntariado, conexiones reales, actividades grupales, networking, vida social">
-    <meta name="author" content="Vinculemos">
-    <meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
-    <meta property="og:description" content="Plataforma para conectar personas en actividades reales: trekking, asados, charlas y más.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vinculemos.com">
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-color: #22d3ee;
-            --primary-dark: #0891b2;
-            --accent-color: #f97316;
-            --dark-bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.8);
-            --text-light: #e2e8f0;
-            --text-muted: #94a3b8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinculemos - Conecta en la Vida Real | Trekking, Asados y Más</title>
+<!-- SEO Meta Tags -->
+<meta name="description" content="Únete a Vinculemos y conecta con personas reales para actividades al aire libre: trekking, asados, charlas en cervecerías, deportes urbanos y voluntariado en tu ciudad.">
+<meta name="keywords" content="trekking, asados, cervecerías, deportes urbanos, voluntariado, conexiones reales, actividades grupales, networking, vida social">
+<meta name="author" content="Vinculemos">
+<meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
+<meta property="og:description" content="Plataforma para conectar personas en actividades reales: trekking, asados, charlas y más.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vinculemos.com">
+<!-- External Libraries -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+--primary-color: #d0deff;
+--primary-dark: #b39294;
+--accent-color: #ffd0d4;
+--dark-bg: #FFFDD0;
+--card-bg: rgba(208, 222, 255, 0.8);
+--text-light: #929cb3;
+--text-muted: #b39294;
+}
 
-        * {
-            scroll-behavior: smooth;
-        }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: var(--text-light);
-        }
+* {
+scroll-behavior: smooth;
+}
 
-        .section-height {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
 
-        .sticky-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
-        }
+body {
+font-family: 'Inter', sans-serif;
+background: #FFFDD0;
+color: var(--text-light);
+}
 
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            object-fit: cover;
-        }
 
-        .card-hover {
-            transition: all 0.3s ease;
-        }
+.section-height {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
 
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.2);
-        }
 
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-        }
+.sticky-header {
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1000;
+background: rgba(255, 253, 208, 0.95);
+backdrop-filter: blur(10px);
+border-bottom: 1px solid rgba(179, 146, 148, 0.3);
+}
 
-        .floating-whatsapp:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
-        }
 
-        .mobile-menu {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
+.hero-video {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0.15;
+object-fit: cover;
+}
 
-        .mobile-menu.active {
-            transform: translateX(0);
-        }
 
-        @media (max-width: 768px) {
-            .section-height {
-                min-height: auto;
-                padding: 4rem 0;
-            }
-        }
-    </style>
+.card-hover {
+transition: all 0.3s ease;
+}
+
+
+.card-hover:hover {
+transform: translateY(-5px);
+box-shadow: 0 20px 40px rgba(179, 146, 148, 0.25);
+}
+
+
+.floating-whatsapp {
+position: fixed;
+bottom: 20px;
+right: 20px;
+z-index: 1000;
+width: 60px;
+height: 60px;
+background: #25d366;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+</style>
 </head>
 
 <body>
