@@ -151,70 +151,94 @@
 
 <body>
  <!-- Sticky Header -->
-    <header class="sticky-header">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <!-- Logo with properly sized image -->
-                <div class="flex items-center space-x-3">
-                    <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
-                </div>
-
-                <!-- Desktop Navigation (now on left side) -->
-                <nav class="hidden md:flex space-x-8 ml-8">
-                    <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
-                    <a href="#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
-                    <a href="#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
-                    <a href="#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
-                </nav>
-
-                <!-- Social Icons (on the right) -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="#" class="social-icon text-white hover:text-blue-500">
-                        <i class="fab fa-facebook-f text-lg"></i>
-                    </a>
-                    <a href="#" class="social-icon text-white hover:text-pink-500">
-                        <i class="fab fa-instagram text-lg"></i>
-                    </a>
-                    <a href="#" class="social-icon text-white hover:text-black">
-                        <i class="fab fa-tiktok text-lg"></i>
-                    </a>
-                    <a href="#nosotros" class="social-icon text-white hover:text-red-400">
-                        <i class="far fa-envelope text-lg"></i>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-white text-2xl" id="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
+<header class="sticky-header bg-slate-900 text-white fixed top-0 w-full z-50 shadow-md">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <!-- Logo with properly sized image -->
+            <div class="flex items-center space-x-3">
+                <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
             </div>
 
-            <!-- Mobile Navigation -->
-            <nav class="mobile-menu md:hidden absolute top-full left-0 w-full bg-slate-900 border-t border-pink-400/20" id="mobile-menu">
-                <div class="flex flex-col space-y-4 p-6">
-                    <a href="#inicio" class="hover:text-pink-400 transition-colors py-2">Inicio</a>
-                    <a href="#experiencias" class="hover:text-pink-400 transition-colors py-2">Experiencias</a>
-                    <a href="#nosotros" class="hover:text-pink-400 transition-colors py-2">Nosotros</a>
-                    <a href="#contacto" class="hover:text-pink-400 transition-colors py-2">Contacto</a>
-                    
-                    <div class="flex space-x-6 pt-4 border-t border-pink-400/20 mt-4">
-                        <a href="#" class="text-white hover:text-blue-500">
-                            <i class="fab fa-facebook-f text-xl"></i>
-                        </a>
-                        <a href="#" class="text-white hover:text-pink-500">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-white hover:text-black">
-                            <i class="fab fa-tiktok text-xl"></i>
-                        </a>
-                        <a href="#nosotros" class="text-white hover:text-red-400">
-                            <i class="far fa-envelope text-xl"></i>
-                        </a>
-                    </div>
-                </div>
+            <!-- Desktop Navigation (now on left side) -->
+            <nav class="hidden md:flex space-x-8 ml-8">
+                <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
+                <a href="#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
+                <a href="#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
+                <a href="#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
             </nav>
+
+            <!-- Social Icons (on the right) -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#" class="social-icon text-white hover:text-blue-500">
+                    <i class="fab fa-facebook-f text-lg"></i>
+                </a>
+                <a href="#" class="social-icon text-white hover:text-pink-500">
+                    <i class="fab fa-instagram text-lg"></i>
+                </a>
+                <a href="#" class="social-icon text-white hover:text-black">
+                    <i class="fab fa-tiktok text-lg"></i>
+                </a>
+                <a href="#nosotros" class="social-icon text-white hover:text-red-400">
+                    <i class="far fa-envelope text-lg"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-2xl" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </header>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-menu md:hidden hidden absolute top-full left-0 w-full bg-slate-900 border-t border-pink-400/20" id="mobile-menu">
+            <div class="flex flex-col space-y-4 p-6">
+                <a href="#inicio" class="hover:text-pink-400 transition-colors py-2">Inicio</a>
+                <a href="#experiencias" class="hover:text-pink-400 transition-colors py-2">Experiencias</a>
+                <a href="#nosotros" class="hover:text-pink-400 transition-colors py-2">Nosotros</a>
+                <a href="#contacto" class="hover:text-pink-400 transition-colors py-2">Contacto</a>
+                
+                <div class="flex space-x-6 pt-4 border-t border-pink-400/20 mt-4">
+                    <a href="#" class="text-white hover:text-blue-500">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-pink-500">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-black">
+                        <i class="fab fa-tiktok text-xl"></i>
+                    </a>
+                    <a href="#nosotros" class="text-white hover:text-red-400">
+                        <i class="far fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<style>
+/* Fix logo size */
+.logo-img {
+    max-height: 50px;   /* Adjust height as needed */
+    width: auto;        /* Keeps aspect ratio */
+    height: auto;       /* Ensures scaling */
+}
+
+/* Mobile menu toggle fix (optional JS toggle) */
+#mobile-menu {
+    display: none;
+}
+#mobile-menu.active {
+    display: block;
+}
+</style>
+
+<script>
+document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+    document.getElementById("mobile-menu").classList.toggle("active");
+});
+</script>
+
   <!-- Hero Section -->
   <section id="inicio" class="section-height relative overflow-hidden">
     <div class="absolute inset-0">
