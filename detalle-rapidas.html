@@ -266,19 +266,21 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
     </div>
 
     <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
-      <!-- Video -->
-      <div class="video-hover rounded-xl overflow-hidden border border-slate-700 shadow-lg">
-        <div class="relative w-full pb-[56.25%]"> <!-- mantiene proporción 16:9 -->
-          <iframe 
-            class="absolute top-0 left-0 w-full h-full"
-            src="https://www.youtube.com/embed/QbWStbEv4LU?autoplay=1&mute=1&loop=1&playlist=QbWStbEv4LU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
-            title="Encuentros Express Vinculemos"
-            frameborder="0"
-            allow="autoplay; encrypted-media; gyroscope"
-            allowfullscreen>
-          </iframe>
-        </div>
-      </div>
+      
+     <!-- Video -->
+<div class="video-hover rounded-xl overflow-hidden border border-slate-700 shadow-lg">
+  <div class="relative w-full pb-[56.25%]"> <!-- mantiene proporción 16:9 -->
+    <iframe 
+      class="absolute top-0 left-0 w-full h-full"
+      src="https://www.youtube.com/embed/QbWStbEv4LU?autoplay=1&mute=1&loop=1&playlist=QbWStbEv4LU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+      title="Encuentros Express Vinculemos"
+      frameborder="0"
+      allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
+
 
       <!-- Info -->
       <div>
@@ -432,19 +434,7 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
       }
     }
 
-    // Video hover play functionality
-    document.querySelectorAll('.video-hover iframe').forEach(iframe => {
-      const src = iframe.src;
-      iframe.src = src.replace('autoplay=1', 'autoplay=0');
-      
-      iframe.parentElement.addEventListener('mouseenter', function() {
-        iframe.src = src.replace('autoplay=0', 'autoplay=1');
-      });
-      
-      iframe.parentElement.addEventListener('mouseleave', function() {
-        iframe.src = src.replace('autoplay=1', 'autoplay=0');
-      });
-    });
+   
   </script>
 </body>
 </html>
