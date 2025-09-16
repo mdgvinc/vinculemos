@@ -242,23 +242,35 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
 </script>
   
 
-  <!-- Experience Detail Section -->
-  <section class="section-height py-20 relative overflow-hidden">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <h1 class="text-5xl md:text-6xl font-bold mb-6">
-          <span style="color: var(--primary-magenta);">Encuentros Express</span>
-        </h1>
-        <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-          Conoce varias personas en una sola noche a través de citas cortas y dinámicas.  
-          Perfecto para romper el hielo y descubrir nuevas conexiones.
-        </p>
-      </div>
+<!-- Experience Detail Section -->
+<section class="relative section-height py-20 overflow-hidden">
+  <!-- Fondo hero -->
+  <div class="absolute inset-0">
+    <video autoplay muted loop playsinline class="w-full h-full object-cover">
+      <source src="https://cdn.coverr.co/videos/coverr-speed-dating-nightlife-1234/1080p.mp4" type="video/mp4">
+      Tu navegador no soporta videos en HTML5
+    </video>
+    <!-- Overlay oscuro -->
+    <div class="absolute inset-0 bg-black opacity-60"></div>
+  </div>
 
-      <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
-        <!-- Video -->
-        <div class="video-hover rounded-xl overflow-hidden border border-slate-700 shadow-lg h-80">
+  <div class="relative container mx-auto px-4 z-10">
+    <div class="text-center mb-12">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+        <span style="color: var(--primary-magenta);">Encuentros Express</span>
+      </h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Conoce varias personas en una sola noche a través de citas cortas y dinámicas.  
+        Perfecto para romper el hielo y descubrir nuevas conexiones.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+      <!-- Video -->
+      <div class="video-hover rounded-xl overflow-hidden border border-slate-700 shadow-lg">
+        <div class="relative w-full pb-[56.25%]"> <!-- mantiene proporción 16:9 -->
           <iframe 
+            class="absolute top-0 left-0 w-full h-full"
             src="https://www.youtube.com/embed/QbWStbEv4LU?autoplay=1&mute=1&loop=1&playlist=QbWStbEv4LU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
             title="Encuentros Express Vinculemos"
             frameborder="0"
@@ -266,76 +278,76 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
             allowfullscreen>
           </iframe>
         </div>
+      </div>
 
-        <!-- Info -->
-        <div>
-          <h2 class="text-3xl font-bold mb-6">¿Qué te espera?</h2>
-          <ul class="space-y-4 text-lg text-gray-300">
-            <li><i class="fas fa-heart mr-2" style="color: var(--primary-magenta);"></i> Más de 10 mini citas en una sola noche</li>
-            <li><i class="fas fa-music mr-2" style="color: var(--primary-magenta);"></i> Ambiente relajado con música y buena onda</li>
-            <li><i class="fas fa-cocktail mr-2" style="color: var(--primary-magenta);"></i> Incluye 1 cocktail de bienvenida</li>
-            <li><i class="fas fa-users mr-2" style="color: var(--primary-magenta);"></i> Grupos reducidos para mayor cercanía</li>
-          </ul>
-          <div class="mt-8">
-            <a href="#formulario" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all inline-flex items-center">
-              Participar <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
+      <!-- Info -->
+      <div>
+        <h2 class="text-3xl font-bold mb-6">¿Qué te espera?</h2>
+        <ul class="space-y-4 text-lg text-gray-300">
+          <li><i class="fas fa-heart mr-2" style="color: var(--primary-magenta);"></i> Más de 10 mini citas en una sola noche</li>
+          <li><i class="fas fa-music mr-2" style="color: var(--primary-magenta);"></i> Ambiente relajado con música y buena onda</li>
+          <li><i class="fas fa-cocktail mr-2" style="color: var(--primary-magenta);"></i> Incluye 1 cocktail de bienvenida</li>
+          <li><i class="fas fa-users mr-2" style="color: var(--primary-magenta);"></i> Grupos reducidos para mayor cercanía</li>
+        </ul>
+        <div class="mt-8">
+          <a href="#formulario" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all inline-flex items-center">
+            Participar <i class="fas fa-arrow-right ml-2"></i>
+          </a>
         </div>
       </div>
-
-      <!-- Payment Form Section -->
-      <div id="formulario" class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-center">Reserva tu cupo</h2>
-        <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
-          <input type="hidden" name="_subject" value="Nueva inscripción Encuentros Express">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://vinculemos.cl/gracias.html">
-          
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
-              <input type="text" id="nombre" name="nombre" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-            <div>
-              <label for="apellido" class="block text-sm font-medium mb-2">Apellido</label>
-              <input type="text" id="apellido" name="apellido" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-          </div>
-          
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
-              <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-            <div>
-              <label for="telefono" class="block text-sm font-medium mb-2">Teléfono</label>
-              <input type="tel" id="telefono" name="telefono" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-          </div>
-          
-          <div>
-            <label for="fecha_nacimiento" class="block text-sm font-medium mb-2">Fecha de Nacimiento</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-          
-          <div class="bg-slate-700 p-4 rounded-lg mb-6">
-            <div class="flex items-center justify-between mb-2">
-              <span>Valor de la experiencia:</span>
-              <span class="font-semibold">$25.000 CLP</span>
-            </div>
-            <div class="text-sm text-gray-400">* El pago confirma tu reserva en el evento</div>
-          </div>
-          
-          <button type="submit" class="w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-400 transition-all flex items-center justify-center space-x-2">
-            <span>Pagar con Mercado Pago</span>
-            <i class="fas fa-lock"></i>
-          </button>
-        </form>
-      </div>
     </div>
-  </section>
 
+    <!-- Payment Form Section -->
+    <div id="formulario" class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6 text-center">Reserva tu cupo</h2>
+      <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
+        <input type="hidden" name="_subject" value="Nueva inscripción Encuentros Express">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://vinculemos.cl/gracias.html">
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+          </div>
+          <div>
+            <label for="apellido" class="block text-sm font-medium mb-2">Apellido</label>
+            <input type="text" id="apellido" name="apellido" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+          </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
+            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+          </div>
+          <div>
+            <label for="telefono" class="block text-sm font-medium mb-2">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+          </div>
+        </div>
+        
+        <div>
+          <label for="fecha_nacimiento" class="block text-sm font-medium mb-2">Fecha de Nacimiento</label>
+          <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+        </div>
+        
+        <div class="bg-slate-700 p-4 rounded-lg mb-6">
+          <div class="flex items-center justify-between mb-2">
+            <span>Valor de la experiencia:</span>
+            <span class="font-semibold">$25.000 CLP</span>
+          </div>
+          <div class="text-sm text-gray-400">* El pago confirma tu reserva en el evento</div>
+        </div>
+        
+        <button type="submit" class="w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-400 transition-all flex items-center justify-center space-x-2">
+          <span>Pagar con Mercado Pago</span>
+          <i class="fas fa-lock"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 
   
 <!-- Footer -->
