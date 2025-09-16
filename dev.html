@@ -240,39 +240,41 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
     document.getElementById("mobile-menu").classList.toggle("active");
 });
 </script>
+  
+<!-- Hero Section -->
+<section id="inicio" class="section-height relative overflow-hidden">
+  <div class="absolute inset-0">
+    <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
+    <iframe 
+      class="hero-video z-10"
+      src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=1&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+      title="Video de fondo Vinculemos"
+      frameborder="0"
+      allow="autoplay; encrypted-media; accelerometer; gyroscope"
+      allowfullscreen>
+    </iframe>
+  </div>
 
-  <!-- Hero Section -->
-  <section id="inicio" class="section-height relative overflow-hidden">
-    <div class="absolute inset-0">
-      <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
-      <iframe 
-        class="hero-video z-10"
-        src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=1&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
-        title="Video de fondo Vinculemos"
-        frameborder="0"
-        allow="autoplay; encrypted-media; accelerometer; gyroscope"
-        allowfullscreen>
-      </iframe>
+  <div class="relative z-10 container mx-auto px-4 text-center">
+    <!-- Replaced h1 with logo -->
+    <div class="flex justify-center mb-6">
+      <img src="logo.png" alt="Logo Vinculemos" class="mx-auto max-w-[250px] md:max-w-[350px]">
     </div>
 
-    <div class="relative z-10 container mx-auto px-4 text-center">
-      <h1 class="text-5xl md:text-7xl font-bold mb-6">
-        Descubre tu 
-        <span style="color: var(--primary-magenta);">match perfecto</span>
-      </h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
-        No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
-      </p>
-      <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <a href="#experiencias" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all">
-          Quiero participar
-        </a>
-        <a href="#nosotros" class="btn-secondary px-8 py-4 rounded-lg font-semibold transition-all">
-          Conoce más
-        </a>
-      </div>
+    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
+      No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
+    </p>
+    <div class="flex flex-col md:flex-row gap-4 justify-center">
+      <a href="#experiencias" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all">
+        Encuentra tu match perfecto
+      </a>
+      <a href="#nosotros" class="btn-secondary px-8 py-4 rounded-lg font-semibold transition-all">
+        Conoce más de nosotros
+      </a>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Experiences Section -->
   <section id="experiencias" class="section-height py-20">
