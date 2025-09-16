@@ -217,21 +217,30 @@
 </header>
 
 <style>
-/* Fix logo size */
-.logo-img {
-    max-height: 100px;   /* Adjust height as needed */
-    width: auto;        /* Keeps aspect ratio */
-    height: auto;       /* Ensures scaling */
+<!-- Logo container -->
+<div class="logo-container">
+  <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
+</div>
+
+<style>
+.logo-container {
+    height: 50px;            /* Final visible height of logo in header */
+    width: auto;
+    overflow: hidden;        /* Cuts extra parts */
+    display: flex;
+    justify-content: center; /* Keep centered horizontally */
+    align-items: center;     /* Keep centered vertically */
 }
 
-/* Mobile menu toggle fix (optional JS toggle) */
-#mobile-menu {
-    display: none;
-}
-#mobile-menu.active {
-    display: block;
+/* Image scaling + cropping */
+.logo-img {
+    height: 166%;            /* 100 / 60 ≈ 166% → zoom so only 60% is visible */
+    width: auto;
+    object-fit: cover;
+    object-position: center; /* Centers content */
 }
 </style>
+
 
 <script>
 document.getElementById("mobile-menu-btn").addEventListener("click", function() {
