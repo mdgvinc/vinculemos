@@ -218,29 +218,11 @@
 
 <style>
 <!-- Logo Container -->
-<div class="h-[50px] w-auto overflow-hidden flex items-center justify-center">
-  <img src="logo.png" alt="VINCU LEMOS Logo" 
+<div class="h-[50px] w-[auto] overflow-hidden flex items-center justify-center">
+  <img src="logo.png" alt="VINCU LEMOS Logo"
        class="h-[166%] w-auto object-cover object-center">
 </div>
-<style>
-.logo-container {
-    height: 50px;            /* Final visible height of logo in header */
-    width: auto;
-    overflow: hidden;        /* Cuts extra parts */
-    display: flex;
-    justify-content: center; /* Keep centered horizontally */
-    align-items: center;     /* Keep centered vertically */
-}
-
-/* Image scaling + cropping */
-.logo-img {
-    height: 1.66%;            /* 100 / 60 ≈ 166% → zoom so only 60% is visible */
-    width: auto;
-    object-fit: cover;
-    object-position: center; /* Centers content */
-}
 </style>
-
 
 <script>
 document.getElementById("mobile-menu-btn").addEventListener("click", function() {
