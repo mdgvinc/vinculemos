@@ -1,78 +1,4 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <!-- keep ALL your existing head content here -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Development dot Vinculemos dot CL</title>
-  <link rel="stylesheet" href="styles.css"> <!-- tus CSS originales -->
-  <style>
-    /* --- only for access screen --- */
-    #access-screen {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url("Untitled design (1).png") no-repeat center center/cover;
-      z-index: 9999; /* stays above everything */
-    }
-    #access-box {
-      background: rgba(0,0,0,0.7);
-      padding: 30px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      color: #fff;
-    }
-    #access-box input {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-  color: #fff;            /* ✅ makes dots/characters visible */
-  background: rgba(255,255,255,0.1); /* optional: subtle background */
-}
-,
-    #access-box button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-    #access-box button {
-      background: #4CAF50;
-      color: white;
-      cursor: pointer;
-    }
-    #access-box button:hover {
-      background: #45a049;
-    }
-    #main-content {
-      display: none; /* hide all original content until unlock */
-    }
-  </style>
-</head>
-<body>
-  <!-- 🔒 Overlay de acceso -->
-  <div id="access-screen">
-    <div id="access-box">
-      <h2>Ingresa la clave</h2>
-      <input type="password" id="password-input" placeholder="Contraseña">
-      <button onclick="checkPassword()">Acceder</button>
-      <p id="error-msg" style="color:#ff6b6b; display:none; margin-top:10px;">Clave incorrecta</p>
-    </div>
-  </div>
-
-  <!-- 🔓 Aquí va TODO tu código original -->
-  <div id="main-content">
-
-<!DOCTYPE html>
 <html lang="es-CL">
 <head>
   <meta charset="UTF-8">
@@ -112,19 +38,12 @@
       color: var(--secondary-crema);
     }
 
-   .section-height {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-@media (max-width: 768px) {
-  .section-height {
-    min-height: 100vh; /* keep equal height also on mobile */
-    padding: 4rem 0;
-  }
-}
+    .section-height {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
     .sticky-header {
       position: fixed;
@@ -149,6 +68,9 @@
     .card-hover {
       transition: all 0.3s ease;
       overflow: hidden;
+      height: 100%; /* Aseguramos que todas las cards tengan la misma altura */
+      display: flex;
+      flex-direction: column;
     }
 
     .card-hover:hover {
@@ -159,14 +81,28 @@
     .video-hover {
       position: relative;
       overflow: hidden;
+      height: 200px; /* Altura fija para todos los videos */
+      flex-shrink: 0; /* Evita que se reduzca */
     }
 
     .video-hover iframe {
       transition: transform 0.3s ease;
+      width: 100%;
+      height: 100%;
     }
 
     .video-hover:hover iframe {
       transform: scale(1.05);
+    }
+
+    .card-content {
+      flex: 1; /* Hace que el contenido ocupe el espacio restante */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-text {
+      flex: 1; /* Hace que el texto ocupe el espacio disponible */
     }
 
     .floating-whatsapp {
@@ -221,10 +157,24 @@
       color: white;
     }
 
+    .equal-height-cards {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .equal-height-cards > .card-item {
+      display: flex;
+      flex-direction: column;
+    }
+
     @media (max-width: 768px) {
       .section-height {
         min-height: auto;
         padding: 4rem 0;
+      }
+      
+      .equal-height-cards > .card-item {
+        margin-bottom: 1.5rem;
       }
     }
   </style>
@@ -313,73 +263,76 @@
       <!-- Citas Rápidas -->
       <div class="mb-20">
         <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--primary-magenta);">Citas Rápidas</h3>
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-3 gap-8 equal-height-cards">
           <!-- Card 1 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&rel=0"
-                title="Citas rápidas Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Encuentros Express</h4>
-              <p class="text-gray-400 mb-4">
-                Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&rel=0"
+                  title="Citas rápidas Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Encuentros Express</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--primary-magenta);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&loop=1&playlist=jfKfPfyJRdk&controls=0&showinfo=0&rel=0"
-                title="Citas temáticas Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Citas Temáticas</h4>
-              <p class="text-gray-400 mb-4">
-                Eventos con temáticas específicas que facilitan la conversación y conexión entre participantes.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&loop=1&playlist=jfKfPfyJRdk&controls=0&showinfo=0&rel=0"
+                  title="Citas temáticas Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Citas Temáticas</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Eventos con temáticas específicas que facilitan la conversación y conexión entre participantes.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--primary-magenta);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/L7OaV9p5hIc?autoplay=0&mute=1&loop=1&playlist=L7OaV9p5hIc&controls=0&showinfo=0&rel=0"
-                title="Speed dating Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Speed Dating Nocturno</h4>
-              <p class="text-gray-400 mb-4">
-                Ambiente relajado con música y cocktails para conocer personas interesantes en un formato ágil.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/L7OaV9p5hIc?autoplay=0&mute=1&loop=1&playlist=L7OaV9p5hIc&controls=0&showinfo=0&rel=0"
+                  title="Speed dating Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Speed Dating Nocturno</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Ambiente relajado con música y cocktails para conocer personas interesantes en un formato ágil.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--primary-magenta);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -388,73 +341,76 @@
       <!-- Citas Conscientes -->
       <div class="mb-20">
         <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-celeste);">Citas Conscientes</h3>
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-3 gap-8 equal-height-cards">
           <!-- Card 1 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/6SwiSpudKWI?autoplay=0&mute=1&loop=1&playlist=6SwiSpudKWI&controls=0&showinfo=0&rel=0"
-                title="Citas conscientes Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Encuentros con Propósito</h4>
-              <p class="text-gray-400 mb-4">
-                Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/6SwiSpudKWI?autoplay=0&mute=1&loop=1&playlist=6SwiSpudKWI&controls=0&showinfo=0&rel=0"
+                  title="Citas conscientes Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Encuentros con Propósito</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--secondary-celeste);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/7NOSDKb0HlU?autoplay=0&mute=1&loop=1&playlist=7NOSDKb0HlU&controls=0&showinfo=0&rel=0"
-                title="Talleres vínculos Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Talleres de Conexión</h4>
-              <p class="text-gray-400 mb-4">
-                Actividades guiadas por expertos en relaciones para fomentar vínculos conscientes y significativos.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/7NOSDKb0HlU?autoplay=0&mute=1&loop=1&playlist=7NOSDKb0HlU&controls=0&showinfo=0&rel=0"
+                  title="Talleres vínculos Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Talleres de Conexión</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Actividades guiadas por expertos en relaciones para fomentar vínculos conscientes y significativos.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--secondary-celeste);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/4N3N1MlvVc4?autoplay=0&mute=1&loop=1&playlist=4N3N1MlvVc4&controls=0&showinfo=0&rel=0"
-                title="Meditación Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Meditación en Pareja</h4>
-              <p class="text-gray-400 mb-4">
-                Experiencias de mindfulness compartidas para conectar desde la calma y autenticidad.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/4N3N1MlvVc4?autoplay=0&mute=1&loop=1&playlist=4N3N1MlvVc4&controls=0&showinfo=0&rel=0"
+                  title="Meditación Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Meditación en Pareja</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Experiencias de mindfulness compartidas para conectar desde la calma y autenticidad.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--secondary-celeste);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -463,73 +419,76 @@
       <!-- Conecta con tu Tribu -->
       <div>
         <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-rosa);">Conecta con tu Tribu</h3>
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-3 gap-8 equal-height-cards">
           <!-- Card 1 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=0&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0"
-                title="Trekking Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Trekking Grupal</h4>
-              <p class="text-gray-400 mb-4">
-                Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=0&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0"
+                  title="Trekking Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Trekking Grupal</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--secondary-rosa);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Card 2 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/5SLA-_pJ7-I?autoplay=0&mute=1&loop=1&playlist=5SLA-_pJ7-I&controls=0&showinfo=0&rel=0"
-                title="Asados Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Asados & Parrillas</h4>
-              <p class="text-gray-400 mb-4">
-                Comparte el ritual del fuego, recetas familiares y conversaciones memorables con tu tribu.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/5SLA-_pJ7-I?autoplay=0&mute=1&loop=1&playlist=5SLA-_pJ7-I&controls=0&showinfo=0&rel=0"
+                  title="Asados Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Asados & Parrillas</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Comparte el ritual del fuego, recetas familiares y conversaciones memorables con tu tribu.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--secondary-rosa);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Card 3 -->
-          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-            <div class="video-hover h-48">
-              <iframe 
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/4mRzS4fV_RE?autoplay=0&mute=1&loop=1&playlist=4mRzS4fV_RE&controls=0&showinfo=0&rel=0"
-                title="Voluntariado Vinculemos"
-                frameborder="0"
-                allow="accelerometer; encrypted-media; gyroscope"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-6">
-              <h4 class="text-xl font-bold mb-3">Voluntariado Comunitario</h4>
-              <p class="text-gray-400 mb-4">
-                Transforma tu comunidad mientras construyes relaciones significativas con personas solidarias.
-              </p>
-              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+          <div class="card-item">
+            <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 h-full">
+              <div class="video-hover">
+                <iframe 
+                  src="https://www.youtube.com/embed/4mRzS4fV_RE?autoplay=0&mute=1&loop=1&playlist=4mRzS4fV_RE&controls=0&showinfo=0&rel=0"
+                  title="Voluntariado Vinculemos"
+                  frameborder="0"
+                  allow="accelerometer; encrypted-media; gyroscope"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="p-6 card-content">
+                <h4 class="text-xl font-bold mb-3">Voluntariado Comunitario</h4>
+                <p class="text-gray-400 mb-4 card-text">
+                  Transforma tu comunidad mientras construyes relaciones significativas con personas solidarias.
+                </p>
+                <a href="#formulario" class="inline-flex items-center mt-auto" style="color: var(--secondary-rosa);">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -666,24 +625,24 @@
         
         <div class="grid grid-cols-2 gap-6">
           <div class="space-y-6">
-            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
               <i class="fas fa-heart text-3xl mb-4" style="color: var(--primary-magenta);"></i>
               <h4 class="text-xl font-semibold mb-2">Conexiones Auténticas</h4>
               <p class="text-gray-400">Facilitamos encuentros reales que generan amistades duraderas.</p>
             </div>
-            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
               <i class="fas fa-shield-alt text-3xl mb-4" style="color: var(--secondary-celeste);"></i>
               <h4 class="text-xl font-semibold mb-2">Entorno Seguro</h4>
               <p class="text-gray-400">Priorizamos la seguridad y comodidad de todos los participantes.</p>
             </div>
           </div>
-          <div class="space-y-6 mt-8">
-            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+          <div class="space-y-6">
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
               <i class="fas fa-globe-americas text-3xl mb-4" style="color: var(--secondary-rosa);"></i>
               <h4 class="text-xl font-semibold mb-2">Comunidad Diversa</h4>
               <p class="text-gray-400">Celebramos la diversidad y fomentamos la inclusión social.</p>
             </div>
-            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
               <i class="fas fa-leaf text-3xl mb-4" style="color: var(--secondary-celeste);"></i>
               <h4 class="text-xl font-semibold mb-2">Impacto Positivo</h4>
               <p class="text-gray-400">Promovemos actividades que benefician a la comunidad y el medio ambiente.</p>
@@ -695,34 +654,42 @@
       <!-- Ventajas Competitivas -->
       <div class="mt-20">
         <h3 class="text-3xl font-bold mb-12 text-center">Ventaja Competitiva</h3>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-pink-400/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="fas fa-star text-2xl" style="color: var(--primary-magenta);"></i>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 equal-height-cards">
+          <div class="card-item">
+            <div class="text-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
+              <div class="w-16 h-16 mx-auto bg-pink-400/10 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-star text-2xl" style="color: var(--primary-magenta);"></i>
+              </div>
+              <h4 class="text-xl font-semibold mb-2">Experiencias Únicas</h4>
+              <p class="text-gray-400">Diseñamos actividades memorables que facilitan conexiones genuinas.</p>
             </div>
-            <h4 class="text-xl font-semibold mb-2">Experiencias Únicas</h4>
-            <p class="text-gray-400">Diseñamos actividades memorables que facilitan conexiones genuinas.</p>
           </div>
-          <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-blue-400/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="fas fa-users text-2xl" style="color: var(--secondary-celeste);"></i>
+          <div class="card-item">
+            <div class="text-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
+              <div class="w-16 h-16 mx-auto bg-blue-400/10 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-users text-2xl" style="color: var(--secondary-celeste);"></i>
+              </div>
+              <h4 class="text-xl font-semibold mb-2">Comunidad Verificada</h4>
+              <p class="text-gray-400">Todos nuestros miembros pasan por un proceso de verificación.</p>
             </div>
-            <h4 class="text-xl font-semibold mb-2">Comunidad Verificada</h4>
-            <p class="text-gray-400">Todos nuestros miembros pasan por un proceso de verificación.</p>
           </div>
-          <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-purple-400/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="fas fa-map-marked-alt text-2xl" style="color: var(--secondary-rosa);"></i>
+          <div class="card-item">
+            <div class="text-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
+              <div class="w-16 h-16 mx-auto bg-purple-400/10 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-map-marked-alt text-2xl" style="color: var(--secondary-rosa);"></i>
+              </div>
+              <h4 class="text-xl font-semibold mb-2">Multi-locación</h4>
+              <p class="text-gray-400">Eventos en diferentes ciudades y espacios exclusivos.</p>
             </div>
-            <h4 class="text-xl font-semibold mb-2">Multi-locación</h4>
-            <p class="text-gray-400">Eventos en diferentes ciudades y espacios exclusivos.</p>
           </div>
-          <div class="text-center">
-            <div class="w-16 h-16 mx-auto bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
-              <i class="fas fa-hand-holding-heart text-2xl" style="color: var(--secondary-celeste);"></i>
+          <div class="card-item">
+            <div class="text-center bg-slate-800/50 p-6 rounded-xl border border-slate-700 h-full">
+              <div class="w-16 h-16 mx-auto bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-hand-holding-heart text-2xl" style="color: var(--secondary-celeste);"></i>
+              </div>
+              <h4 class="text-xl font-semibold mb-2">Enfoque Humano</h4>
+              <p class="text-gray-400">Priorizamos la calidad de las interacciones sobre la cantidad.</p>
             </div>
-            <h4 class="text-xl font-semibold mb-2">Enfoque Humano</h4>
-            <p class="text-gray-400">Priorizamos la calidad de las interacciones sobre la cantidad.</p>
           </div>
         </div>
       </div>
@@ -806,7 +773,7 @@
               </div>
               
               <div>
-                <label for="contact_message" class="block text-sm font-medium mb-2">Mensaje</label>
+                <label for="contact_message" class="block text-sm font-medium mb-2">Mensaje</h4>
                 <textarea id="contact_message" name="message" rows="5" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors resize-none"></textarea>
               </div>
               
@@ -912,101 +879,36 @@
         iframe.src = src.replace('autoplay=1', 'autoplay=0');
       });
     });
-  </script>
-</body>
-</html>
-   
-    <!-- JavaScript -->
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mobileMenu.classList.contains('active')) {
-                icon.className = 'fas fa-times';
-            } else {
-                icon.className = 'fas fa-bars';
-            }
+    // Equalize card heights
+    function equalizeCardHeights() {
+      // For each section, equalize the heights of cards
+      document.querySelectorAll('.equal-height-cards').forEach(section => {
+        let maxHeight = 0;
+        const cards = section.querySelectorAll('.card-item');
+        
+        // Reset heights
+        cards.forEach(card => {
+          card.style.height = 'auto';
         });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
-            });
+        
+        // Get max height
+        cards.forEach(card => {
+          if (card.offsetHeight > maxHeight) {
+            maxHeight = card.offsetHeight;
+          }
         });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = document.querySelector('.sticky-header').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+        
+        // Apply max height to all cards
+        cards.forEach(card => {
+          card.style.height = maxHeight + 'px';
         });
-
-        // Animation on scroll for cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all cards
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.card-hover');
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
-        });
-
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.sticky-header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(15, 23, 42, 0.98)';
-            } else {
-                header.style.background = 'rgba(15, 23, 42, 0.95)';
-            }
-        });
-    </script>
-
-    <script>
-    function checkPassword() {
-      const input = document.getElementById("password-input").value;
-      const correct = "Thisisapassword1234!!";
-      if (input === correct) {
-        document.getElementById("access-screen").style.display = "none";
-        document.getElementById("main-content").style.display = "block";
-      } else {
-        document.getElementById("error-msg").style.display = "block";
-      }
+      });
     }
+
+    // Run on load and resize
+    window.addEventListener('load', equalizeCardHeights);
+    window.addEventListener('resize', equalizeCardHeights);
   </script>
-</body>
-</html>
 </body>
 </html>
