@@ -73,123 +73,848 @@
   <div id="main-content">
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CL">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinculemos - Conecta en la Vida Real | Trekking, Asados y Más</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Únete a Vinculemos y conecta con personas reales para actividades al aire libre: trekking, asados, charlas en cervecerías, deportes urbanos y voluntariado en tu ciudad.">
-    <meta name="keywords" content="trekking, asados, cervecerías, deportes urbanos, voluntariado, conexiones reales, actividades grupales, networking, vida social">
-    <meta name="author" content="Vinculemos">
-    <meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
-    <meta property="og:description" content="Plataforma para conectar personas en actividades reales: trekking, asados, charlas y más.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vinculemos.com">
-    
-    <!-- External Libraries -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-color: #22d3ee;
-            --primary-dark: #0891b2;
-            --accent-color: #f97316;
-            --dark-bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.8);
-            --text-light: #e2e8f0;
-            --text-muted: #94a3b8;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinculemos - Conecta en la Vida Real | Citas, Trekking y Experiencias</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Vinculemos: encuentros reales para solteros. Citas rápidas, citas conscientes y conexión con tu tribu a través de experiencias auténticas.">
+  <meta name="keywords" content="citas rápidas, citas conscientes, trekking, asados, conexiones reales, eventos para solteros, actividades grupales">
+  <meta name="author" content="Vinculemos">
+  <meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
+  <meta property="og:description" content="Plataforma para conectar personas a través de experiencias reales: citas, trekking, asados y más.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vinculemos.cl">
+  
+  <!-- External Libraries -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-magenta: #FF0079;
+      --primary-azul: #092E3E;
+      --secondary-rosa: #FC89C6;
+      --secondary-celeste: #7784CF;
+      --secondary-crema: #EBE1D9;
+    }
 
-        * {
-            scroll-behavior: smooth;
-        }
+    * {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: var(--text-light);
-        }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, var(--primary-azul) 0%, #1a3b4e 100%);
+      color: var(--secondary-crema);
+    }
 
-        .section-height {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+   .section-height {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-        .sticky-header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
-        }
+@media (max-width: 768px) {
+  .section-height {
+    min-height: 100vh; /* keep equal height also on mobile */
+    padding: 4rem 0;
+  }
+}
 
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            object-fit: cover;
-        }
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(9, 46, 62, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 0, 121, 0.2);
+    }
 
-        .card-hover {
-            transition: all 0.3s ease;
-        }
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.15;
+      object-fit: cover;
+    }
 
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.2);
-        }
+    .card-hover {
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
 
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-        }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(255, 0, 121, 0.2);
+    }
 
-        .floating-whatsapp:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
-        }
+    .video-hover {
+      position: relative;
+      overflow: hidden;
+    }
 
-        .mobile-menu {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
+    .video-hover iframe {
+      transition: transform 0.3s ease;
+    }
 
-        .mobile-menu.active {
-            transform: translateX(0);
-        }
+    .video-hover:hover iframe {
+      transform: scale(1.05);
+    }
 
-        @media (max-width: 768px) {
-            .section-height {
-                min-height: auto;
-                padding: 4rem 0;
-            }
-        }
-    </style>
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    .btn-primary {
+      background: var(--primary-magenta);
+      color: white;
+      border: 2px solid var(--primary-magenta);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--primary-magenta);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--secondary-celeste);
+      border: 2px solid var(--secondary-celeste);
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary-celeste);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .section-height {
+        min-height: auto;
+        padding: 4rem 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Sticky Header -->
+  <header class="sticky-header">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl font-bold" style="color: var(--primary-magenta);">VINCU</span>
+          <span class="text-2xl font-bold text-white">LEMOS</span>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
+          <a href="#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
+          <a href="#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
+          <a href="#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-white text-2xl" id="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <nav class="mobile-menu md:hidden absolute top-full left-0 w-full bg-slate-900 border-t border-pink-400/20" id="mobile-menu">
+        <div class="flex flex-col space-y-4 p-6">
+          <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
+          <a href="#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
+          <a href="#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
+          <a href="#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="section-height relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
+      <iframe 
+        class="hero-video z-10"
+        src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=1&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+        title="Video de fondo Vinculemos"
+        frameborder="0"
+        allow="autoplay; encrypted-media; accelerometer; gyroscope"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        Descubre tu 
+        <span style="color: var(--primary-magenta);">match perfecto</span>
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
+        No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
+      </p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <a href="#experiencias" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all">
+          Quiero participar
+        </a>
+        <a href="#nosotros" class="btn-secondary px-8 py-4 rounded-lg font-semibold transition-all">
+          Conoce más
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiences Section -->
+  <section id="experiencias" class="section-height py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Nuestras Experiencias</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+          Conecta con personas afines a través de experiencias diseñadas para crear vínculos auténticos.
+        </p>
+      </div>
+
+      <!-- Citas Rápidas -->
+      <div class="mb-20">
+        <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--primary-magenta);">Citas Rápidas</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&rel=0"
+                title="Citas rápidas Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Encuentros Express</h4>
+              <p class="text-gray-400 mb-4">
+                Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&loop=1&playlist=jfKfPfyJRdk&controls=0&showinfo=0&rel=0"
+                title="Citas temáticas Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Citas Temáticas</h4>
+              <p class="text-gray-400 mb-4">
+                Eventos con temáticas específicas que facilitan la conversación y conexión entre participantes.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/L7OaV9p5hIc?autoplay=0&mute=1&loop=1&playlist=L7OaV9p5hIc&controls=0&showinfo=0&rel=0"
+                title="Speed dating Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Speed Dating Nocturno</h4>
+              <p class="text-gray-400 mb-4">
+                Ambiente relajado con música y cocktails para conocer personas interesantes en un formato ágil.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Citas Conscientes -->
+      <div class="mb-20">
+        <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-celeste);">Citas Conscientes</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/6SwiSpudKWI?autoplay=0&mute=1&loop=1&playlist=6SwiSpudKWI&controls=0&showinfo=0&rel=0"
+                title="Citas conscientes Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Encuentros con Propósito</h4>
+              <p class="text-gray-400 mb-4">
+                Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/7NOSDKb0HlU?autoplay=0&mute=1&loop=1&playlist=7NOSDKb0HlU&controls=0&showinfo=0&rel=0"
+                title="Talleres vínculos Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Talleres de Conexión</h4>
+              <p class="text-gray-400 mb-4">
+                Actividades guiadas por expertos en relaciones para fomentar vínculos conscientes y significativos.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/4N3N1MlvVc4?autoplay=0&mute=1&loop=1&playlist=4N3N1MlvVc4&controls=0&showinfo=0&rel=0"
+                title="Meditación Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Meditación en Pareja</h4>
+              <p class="text-gray-400 mb-4">
+                Experiencias de mindfulness compartidas para conectar desde la calma y autenticidad.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conecta con tu Tribu -->
+      <div>
+        <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-rosa);">Conecta con tu Tribu</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=0&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0"
+                title="Trekking Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Trekking Grupal</h4>
+              <p class="text-gray-400 mb-4">
+                Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/5SLA-_pJ7-I?autoplay=0&mute=1&loop=1&playlist=5SLA-_pJ7-I&controls=0&showinfo=0&rel=0"
+                title="Asados Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Asados & Parrillas</h4>
+              <p class="text-gray-400 mb-4">
+                Comparte el ritual del fuego, recetas familiares y conversaciones memorables con tu tribu.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/4mRzS4fV_RE?autoplay=0&mute=1&loop=1&playlist=4mRzS4fV_RE&controls=0&showinfo=0&rel=0"
+                title="Voluntariado Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Voluntariado Comunitario</h4>
+              <p class="text-gray-400 mb-4">
+                Transforma tu comunidad mientras construyes relaciones significativas con personas solidarias.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section id="formulario" class="section-height py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Únete a la Experiencia</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+          Completa el formulario para participar en nuestros eventos y conectar con personas afines.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 max-w-4xl mx-auto">
+        <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
+          <input type="hidden" name="_subject" value="Nueva inscripción desde Vinculemos">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://vinculemos.cl/gracias.html">
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+            <div>
+              <label for="apellido" class="block text-sm font-medium mb-2">Apellido</label>
+              <input type="text" id="apellido" name="apellido" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+            <div>
+              <label for="telefono" class="block text-sm font-medium mb-2">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="direccion" class="block text-sm font-medium mb-2">Dirección</label>
+              <input type="text" id="direccion" name="direccion" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+            <div>
+              <label for="comuna" class="block text-sm font-medium mb-2">Comuna</label>
+              <input type="text" id="comuna" name="comuna" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+          </div>
+          
+          <div>
+            <label for="fecha_nacimiento" class="block text-sm font-medium mb-2">Fecha de Nacimiento</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+          </div>
+          
+          <div class="flex items-center mb-4">
+            <input type="checkbox" id="primera_vez" name="primera_vez" class="w-4 h-4 text-pink-400 bg-slate-700 border-slate-600 rounded focus:ring-pink-400">
+            <label for="primera_vez" class="ml-2 text-sm">Es mi primera vez en eventos para solteros</label>
+          </div>
+          
+          <div>
+            <label for="comentarios" class="block text-sm font-medium mb-2">¿Qué otros panoramas te gustaría disfrutar con nosotros?</label>
+            <textarea id="comentarios" name="comentarios" rows="3" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors resize-none"></textarea>
+          </div>
+          
+          <div class="pt-6 border-t border-slate-700">
+            <h3 class="text-xl font-semibold mb-4">Proceso de Pago</h3>
+            <p class="text-gray-400 mb-6">Selecciona tu método de pago seguro a través de Mercado Pago</p>
+            
+            <div class="bg-slate-700 p-4 rounded-lg mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <span>Valor de la experiencia:</span>
+                <span class="font-semibold">$25.000 CLP</span>
+              </div>
+              <div class="text-sm text-gray-400">* El pago confirma tu reserva en el evento</div>
+            </div>
+            
+            <button type="button" onclick="simularPago()" class="w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-400 transition-all flex items-center justify-center space-x-2">
+              <span>Pagar con Mercado Pago</span>
+              <i class="fas fa-lock"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="nosotros" class="section-height py-20">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold mb-8">Quiénes Somos</h2>
+          <div class="space-y-6 text-lg text-gray-300 leading-relaxed">
+            <p>
+              Vinculemos es una marca que busca una conciencia colectiva a través de la unión de 2 mundos (2 personas, 2 almas). 
+              Puede ser a través de una amistad, de un compromiso, de una búsqueda personal y el amor.
+            </p>
+            <p>
+              Somos un movimiento que nació de la necesidad genuina de reconectar personas en un mundo cada vez más digital. 
+              Creemos firmemente que las mejores relaciones se construyen compartiendo experiencias reales, no a través de pantallas.
+            </p>
+            <p>
+              Nuestra misión es simple pero poderosa: crear oportunidades para que personas afines se encuentren, 
+              compartan aventuras y construyan amistades auténticas que trascienden lo virtual.
+            </p>
+            <p>
+              Desde 2023, hemos facilitado más de 500 encuentros, conectando a miles de personas que ahora forman parte 
+              de una comunidad vibrante y solidaria que se extiende por toda Latinoamérica.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-3 gap-8 mt-12">
+            <div class="text-center">
+              <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">500+</div>
+              <div class="text-gray-400">Eventos Realizados</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">2K+</div>
+              <div class="text-gray-400">Conexiones Creadas</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">15</div>
+              <div class="text-gray-400">Ciudades Activas</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-6">
+          <div class="space-y-6">
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+              <i class="fas fa-heart text-3xl mb-4" style="color: var(--primary-magenta);"></i>
+              <h4 class="text-xl font-semibold mb-2">Conexiones Auténticas</h4>
+              <p class="text-gray-400">Facilitamos encuentros reales que generan amistades duraderas.</p>
+            </div>
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+              <i class="fas fa-shield-alt text-3xl mb-4" style="color: var(--secondary-celeste);"></i>
+              <h4 class="text-xl font-semibold mb-2">Entorno Seguro</h4>
+              <p class="text-gray-400">Priorizamos la seguridad y comodidad de todos los participantes.</p>
+            </div>
+          </div>
+          <div class="space-y-6 mt-8">
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+              <i class="fas fa-globe-americas text-3xl mb-4" style="color: var(--secondary-rosa);"></i>
+              <h4 class="text-xl font-semibold mb-2">Comunidad Diversa</h4>
+              <p class="text-gray-400">Celebramos la diversidad y fomentamos la inclusión social.</p>
+            </div>
+            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+              <i class="fas fa-leaf text-3xl mb-4" style="color: var(--secondary-celeste);"></i>
+              <h4 class="text-xl font-semibold mb-2">Impacto Positivo</h4>
+              <p class="text-gray-400">Promovemos actividades que benefician a la comunidad y el medio ambiente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ventajas Competitivas -->
+      <div class="mt-20">
+        <h3 class="text-3xl font-bold mb-12 text-center">Ventaja Competitiva</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto bg-pink-400/10 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-star text-2xl" style="color: var(--primary-magenta);"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Experiencias Únicas</h4>
+            <p class="text-gray-400">Diseñamos actividades memorables que facilitan conexiones genuinas.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto bg-blue-400/10 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-users text-2xl" style="color: var(--secondary-celeste);"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Comunidad Verificada</h4>
+            <p class="text-gray-400">Todos nuestros miembros pasan por un proceso de verificación.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto bg-purple-400/10 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-map-marked-alt text-2xl" style="color: var(--secondary-rosa);"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Multi-locación</h4>
+            <p class="text-gray-400">Eventos en diferentes ciudades y espacios exclusivos.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto bg-green-400/10 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-hand-holding-heart text-2xl" style="color: var(--secondary-celeste);"></i>
+            </div>
+            <h4 class="text-xl font-semibold mb-2">Enfoque Humano</h4>
+            <p class="text-gray-400">Priorizamos la calidad de las interacciones sobre la cantidad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contacto" class="section-height py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Contáctanos</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+          ¿Tienes preguntas o quieres colaborar con nosotros? Estamos aquí para ayudarte.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <div>
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 h-full">
+            <h3 class="text-2xl font-semibold mb-6">Información de Contacto</h3>
+            
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <i class="fas fa-map-marker-alt mt-1" style="color: var(--primary-magenta);"></i>
+                <div>
+                  <h4 class="font-medium mb-1">Ubicación</h4>
+                  <p class="text-gray-400">Santiago, Chile</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <i class="fas fa-envelope mt-1" style="color: var(--primary-magenta);"></i>
+                <div>
+                  <h4 class="font-medium mb-1">Correo</h4>
+                  <p class="text-gray-400">vinculemos.marketingdigital@gmail.com</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <i class="fab fa-instagram mt-1" style="color: var(--primary-magenta);"></i>
+                <div>
+                  <h4 class="font-medium mb-1">Instagram</h4>
+                  <p class="text-gray-400">@vinculemos.cl</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4">
+                <i class="fab fa-tiktok mt-1" style="color: var(--primary-magenta);"></i>
+                <div>
+                  <h4 class="font-medium mb-1">TikTok</h4>
+                  <p class="text-gray-400">@vinculemos.cl</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-10">
+              <h4 class="font-medium mb-4">Horario de Atención</h4>
+              <p class="text-gray-400">Lunes a Viernes: 9:00 - 18:00 hrs</p>
+              <p class="text-gray-400">Sábados: 10:00 - 14:00 hrs</p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 h-full">
+            <h3 class="text-2xl font-semibold mb-6">Envíanos un Mensaje</h3>
+            
+            <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
+              <input type="hidden" name="_subject" value="Nuevo mensaje de contacto desde Vinculemos">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_next" value="https://vinculemos.cl/gracias.html">
+              
+              <div>
+                <label for="contact_name" class="block text-sm font-medium mb-2">Nombre</label>
+                <input type="text" id="contact_name" name="name" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+              </div>
+              
+              <div>
+                <label for="contact_email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
+                <input type="email" id="contact_email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+              </div>
+              
+              <div>
+                <label for="contact_message" class="block text-sm font-medium mb-2">Mensaje</label>
+                <textarea id="contact_message" name="message" rows="5" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors resize-none"></textarea>
+              </div>
+              
+              <button type="submit" class="btn-primary w-full py-3 rounded-lg font-semibold transition-all">
+                Enviar Mensaje
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-slate-700">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex items-center space-x-3 mb-6 md:mb-0">
+          <span class="text-2xl font-bold" style="color: var(--primary-magenta);">VINCU</span>
+          <span class="text-2xl font-bold text-white">LEMOS</span>
+        </div>
+        
+        <div class="flex space-x-6 mb-6 md:mb-0">
+          <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+            <i class="fab fa-instagram text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+            <i class="fab fa-tiktok text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+            <i class="fab fa-facebook text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+            <i class="fab fa-youtube text-xl"></i>
+          </a>
+        </div>
+        
+        <div class="text-center md:text-right">
+          <p class="text-gray-400">© 2023 Vinculemos. Todos los derechos reservados.</p>
+          <p class="text-gray-400 text-sm mt-1">Conectando personas en la vida real</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/56912345678?text=Hola%20Vinculemos,%20me%20interesa%20participar%20en%20sus%20eventos" target="_blank" class="floating-whatsapp">
+    <i class="fab fa-whatsapp text-white text-2xl"></i>
+  </a>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      
+      if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target)) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+
+    // Form validation and payment simulation
+    function simularPago() {
+      const form = document.querySelector('form');
+      let valid = true;
+      
+      // Simple validation
+      const requiredFields = form.querySelectorAll('[required]');
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.borderColor = 'red';
+          valid = false;
+        } else {
+          field.style.borderColor = '';
+        }
+      });
+      
+      if (valid) {
+        // Simulate payment process
+        alert('Redirigiendo a Mercado Pago para completar tu pago seguro...');
+        // In a real implementation, this would redirect to the payment gateway
+      } else {
+        alert('Por favor completa todos los campos obligatorios antes de proceder al pago.');
+      }
+    }
+
+    // Video hover play functionality
+    document.querySelectorAll('.video-hover iframe').forEach(iframe => {
+      const src = iframe.src;
+      iframe.src = src.replace('autoplay=1', 'autoplay=0');
+      
+      iframe.parentElement.addEventListener('mouseenter', function() {
+        iframe.src = src.replace('autoplay=0', 'autoplay=1');
+      });
+      
+      iframe.parentElement.addEventListener('mouseleave', function() {
+        iframe.src = src.replace('autoplay=1', 'autoplay=0');
+      });
+    });
+  </script>
+</body>
+</html>
     <!-- Sticky Header -->
     <header class="sticky-header">
         <div class="container mx-auto px-4">
