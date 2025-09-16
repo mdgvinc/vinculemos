@@ -154,12 +154,29 @@
 <header class="sticky-header bg-slate-900 text-gray-800 fixed top-0 w-full z-50 shadow-md">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
-            <!-- Logo with properly sized image -->
-            <div class="h-[50px] w-[150px] overflow-hidden flex items-center justify-center">
-              <img src="logo.png" alt="VINCU LEMOS Logo"
-                class="max-h-[50px] w-auto object-contain object-center">            
-            </div>
+           <!-- Logo Container -->
+<div class="logo-container">
+  <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
+</div>
 
+<style>
+.logo-container {
+  height: 50px;          /* Final visible height in header */
+  width: 150px;          /* You can adjust this */
+  overflow: hidden;      /* Hides extra parts */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-img {
+  height: 166%;          /* Zoom so only ~60% of height shows */
+  width: auto;
+  object-fit: cover;
+  object-position: center; /* Crops equally top and bottom */
+  display: block;
+}
+</style>
             <!-- Desktop Navigation (now on left side) -->
             <nav class="hidden md:flex space-x-8 ml-8">
                 <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
