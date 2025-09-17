@@ -256,16 +256,21 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
       </div>
 
       <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
-        <!-- Video -->
-        <div class="video-hover rounded-xl overflow-hidden border border-slate-700 shadow-lg h-500">
-          <iframe 
-            src="https://www.youtube.com/embed/QbWStbEv4LU?autoplay=1&mute=1&loop=1&playlist=QbWStbEv4LU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
-            title="Encuentros Express Vinculemos"
-            frameborder="0"
-            allow="autoplay; encrypted-media; gyroscope"
-            allowfullscreen>
-          </iframe>
-        </div>
+        
+<!-- Video -->
+<div class="video-hover rounded-xl overflow-hidden border border-slate-700 shadow-lg">
+  <div class="relative w-full" style="padding-top: 56.25%;"> <!-- 16:9 ratio -->
+    <iframe 
+      class="absolute top-0 left-0 w-full h-full"
+      src="https://www.youtube.com/embed/QbWStbEv4LU?autoplay=0&mute=1&loop=1&playlist=QbWStbEv4LU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
+      title="Encuentros Express Vinculemos"
+      frameborder="0"
+      allow="autoplay; encrypted-media; gyroscope"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
+
 
         <!-- Info -->
         <div>
