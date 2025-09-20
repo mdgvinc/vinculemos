@@ -67,28 +67,35 @@
       object-fit: cover;
     }
 
-    .card-hover {
-      transition: all 0.3s ease;
-      overflow: hidden;
-    }
+ .card-hover {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
 
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(255, 0, 121, 0.2);
-    }
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(255, 0, 121, 0.2);
+}
 
-    .video-hover {
-      position: relative;
-      overflow: hidden;
-    }
+.video-hover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16; /* Ensures vertical 9:16 format */
+  overflow: hidden;
+}
 
-    .video-hover iframe {
-      transition: transform 0.3s ease;
-    }
+.video-hover iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
 
-    .video-hover:hover iframe {
-      transform: scale(1.05);
-    }
+.video-hover:hover iframe {
+  transform: scale(1.05);
+}
 
     .floating-whatsapp {
       position: fixed;
