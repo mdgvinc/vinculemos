@@ -1,229 +1,273 @@
 <!DOCTYPE html>
 <html lang="es-CL">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vinculemos - Conecta en la Vida Real | Citas, Trekking y Experiencias</title>
-<!-- SEO Meta Tags -->
-<meta name="description" content="Vinculemos: encuentros reales para solteros. Citas rápidas, citas conscientes y conexión con tu tribu a través de experiencias auténticas.">
-<meta name="keywords" content="citas rápidas, citas conscientes, trekking, asados, conexiones reales, eventos para solteros, actividades grupales">
-<meta name="author" content="Vinculemos">
-<meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
-<meta property="og:description" content="Plataforma para conectar personas a través de experiencias reales: citas, trekking, asados y más.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://vinculemos.cl">
-<!-- External Libraries -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --primary-magenta: #FF0079;
-    --primary-azul: #092E3E;
-    --secondary-rosa: #FC89C6;
-    --secondary-celeste: #7784CF;
-    --secondary-crema: #EBE1D9;
-  }
-  * {
-    scroll-behavior: smooth;
-  }
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, var(--primary-azul) 0%, #1a3b4e 100%);
-    color: var(--secondary-crema);
-    position: relative;
-  }
-  .section-height {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .sticky-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: #EBE1D9;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #092E3E;
-  }
-  .hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.85;
-    object-fit: cover;
-  }
-  .card-hover {
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-  .card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(255, 0, 121, 0.2);
-  }
-  .video-hover {
-    position: relative;
-    overflow: hidden;
-  }
-  .video-hover iframe {
-    transition: transform 0.3s ease;
-  }
-  .video-hover:hover iframe {
-    transform: scale(1.05);
-  }
-  .floating-whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    width: 60px;
-    height: 60px;
-    background: #25d366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s ease;
-  }
-  .floating-whatsapp:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
-  }
-  .mobile-menu {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  .mobile-menu.active {
-    transform: translateX(0);
-  }
-  .btn-primary {
-    background: var(--primary-magenta);
-    color: white;
-    border: 2px solid var(--primary-magenta);
-  }
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--primary-magenta);
-  }
-  .btn-secondary {
-    background: transparent;
-    color: var(--secondary-celeste);
-    border: 2px solid var(--secondary-celeste);
-  }
-  .btn-secondary:hover {
-    background: var(--secondary-celeste);
-    color: white;
-  }
-  @media (max-width: 768px) {
-    .section-height {
-      min-height: auto;
-      padding: 4rem 0;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinculemos - Conecta en la Vida Real | Citas, Trekking y Experiencias</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Vinculemos: encuentros reales para solteros. Citas rápidas, citas conscientes y conexión con tu tribu a través de experiencias auténticas.">
+  <meta name="keywords" content="citas rápidas, citas conscientes, trekking, asados, conexiones reales, eventos para solteros, actividades grupales">
+  <meta name="author" content="Vinculemos">
+  <meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
+  <meta property="og:description" content="Plataforma para conectar personas a través de experiencias reales: citas, trekking, asados y más.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vinculemos.cl">
+  
+  <!-- External Libraries -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-magenta: #FF0079;
+      --primary-azul: #092E3E;
+      --secondary-rosa: #FC89C6;
+      --secondary-celeste: #7784CF;
+      --secondary-crema: #EBE1D9;
     }
-  }
-</style>
+
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, var(--primary-azul) 0%, #1a3b4e 100%);
+      color: var(--secondary-crema);
+    }
+
+    .section-height {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: #EBE1D9;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #092E3E;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.85;
+      object-fit: cover;
+    }
+
+    .card-hover {
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(255, 0, 121, 0.2);
+    }
+
+    .video-hover {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-hover iframe {
+      transition: transform 0.3s ease;
+    }
+
+    .video-hover:hover iframe {
+      transform: scale(1.05);
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    .btn-primary {
+      background: var(--primary-magenta);
+      color: white;
+      border: 2px solid var(--primary-magenta);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--primary-magenta);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--secondary-celeste);
+      border: 2px solid var(--secondary-celeste);
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary-celeste);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .section-height {
+        min-height: auto;
+        padding: 4rem 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<!-- Sticky Header -->
+ <!-- Sticky Header -->
 <header class="sticky-header bg-slate-900 text-gray-800 fixed top-0 w-full z-50 shadow-md">
-  <div class="container mx-auto px-4">
-    <div class="flex justify-between items-center py-4">
-      <!-- Logo Container -->
-      <div class="logo-container">
-        <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
-      </div>
-      <style>
-        .logo-container {
-          height: 50px; /* Final visible height in header */
-          width: 150px; /* You can adjust this */
-          overflow: hidden; /* Hides extra parts */
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .logo-img {
-          height: 300%; /* Zoom so only ~60% of height shows */
-          width: auto;
-          object-fit: cover;
-          object-position: center; /* Crops equally top and bottom */
-          display: block;
-        }
-      </style>
-      <!-- Desktop Navigation (now on left side) -->
-      <nav class="hidden md:flex space-x-8 ml-8">
-        <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
-        <a href="#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
-        <a href="#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
-        <a href="#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
-      </nav>
-      <!-- Social Icons (on the right) -->
-      <div class="hidden md:flex items-center space-x-4">
-        <a href="#" class="social-icon text-gray hover:text-blue-500">
-          <i class="fab fa-facebook-f text-lg"></i>
-        </a>
-        <a href="#" class="social-icon text-gray hover:text-pink-500">
-          <i class="fab fa-instagram text-lg"></i>
-        </a>
-        <a href="#" class="social-icon text-gray hover:text-black">
-          <i class="fab fa-tiktok text-lg"></i>
-        </a>
-        <a href="#nosotros" class="social-icon text-gray hover:text-red-400">
-          <i class="far fa-envelope text-lg"></i>
-        </a>
-      </div>
-      <!-- Mobile Menu Button -->
-      <button class="md:hidden text-gray text-2xl" id="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-    <!-- Mobile Navigation -->
-    <nav class="mobile-menu md:hidden hidden absolute top-full left-0 w-full bg-slate-900 border-t border-pink-400/20" id="mobile-menu">
-      <div class="flex flex-col space-y-4 p-6">
-        <a href="#inicio" class="hover:text-pink-400 transition-colors py-2">Inicio</a>
-        <a href="#experiencias" class="hover:text-pink-400 transition-colors py-2">Experiencias</a>
-        <a href="#nosotros" class="hover:text-pink-400 transition-colors py-2">Nosotros</a>
-        <a href="#contacto" class="hover:text-pink-400 transition-colors py-2">Contacto</a>
-        <div class="flex space-x-6 pt-4 border-t border-pink-400/20 mt-4">
-          <a href="#" class="text-gray hover:text-blue-500">
-            <i class="fab fa-facebook-f text-xl"></i>
-          </a>
-          <a href="#" class="text-gray hover:text-pink-500">
-            <i class="fab fa-instagram text-xl"></i>
-          </a>
-          <a href="#" class="text-gray hover:text-black">
-            <i class="fab fa-tiktok text-xl"></i>
-          </a>
-          <a href="#nosotros" class="text-gray hover:text-red-400">
-            <i class="far fa-envelope text-xl"></i>
-          </a>
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+           <!-- Logo Container -->
+<div class="logo-container">
+  <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
+</div>
+
+<style>
+.logo-container {
+  height: 50px;          /* Final visible height in header */
+  width: 150px;          /* You can adjust this */
+  overflow: hidden;      /* Hides extra parts */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-img {
+  height: 300%;          /* Zoom so only ~60% of height shows */
+  width: auto;
+  object-fit: cover;
+  object-position: center; /* Crops equally top and bottom */
+  display: block;
+}
+</style>
+            <!-- Desktop Navigation (now on left side) -->
+            <nav class="hidden md:flex space-x-8 ml-8">
+                <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
+                <a href="#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
+                <a href="#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
+                <a href="#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Social Icons (on the right) -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#" class="social-icon text-gray hover:text-blue-500">
+                    <i class="fab fa-facebook-f text-lg"></i>
+                </a>
+                <a href="#" class="social-icon text-gray hover:text-pink-500">
+                    <i class="fab fa-instagram text-lg"></i>
+                </a>
+                <a href="#" class="social-icon text-gray hover:text-black">
+                    <i class="fab fa-tiktok text-lg"></i>
+                </a>
+                <a href="#nosotros" class="social-icon text-gray hover:text-red-400">
+                    <i class="far fa-envelope text-lg"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray text-2xl" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-      </div>
-    </nav>
-  </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-menu md:hidden hidden absolute top-full left-0 w-full bg-slate-900 border-t border-pink-400/20" id="mobile-menu">
+            <div class="flex flex-col space-y-4 p-6">
+                <a href="#inicio" class="hover:text-pink-400 transition-colors py-2">Inicio</a>
+                <a href="#experiencias" class="hover:text-pink-400 transition-colors py-2">Experiencias</a>
+                <a href="#nosotros" class="hover:text-pink-400 transition-colors py-2">Nosotros</a>
+                <a href="#contacto" class="hover:text-pink-400 transition-colors py-2">Contacto</a>
+                
+                <div class="flex space-x-6 pt-4 border-t border-pink-400/20 mt-4">
+                    <a href="#" class="text-gray hover:text-blue-500">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray hover:text-pink-500">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray hover:text-black">
+                        <i class="fab fa-tiktok text-xl"></i>
+                    </a>
+                    <a href="#nosotros" class="text-gray hover:text-red-400">
+                        <i class="far fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
 </header>
+
+
 <script>
-  document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+document.getElementById("mobile-menu-btn").addEventListener("click", function() {
     document.getElementById("mobile-menu").classList.toggle("active");
-  });
+});
 </script>
+  
 <!-- Hero Section -->
 <section id="inicio" class="section-height relative overflow-hidden">
   <div class="absolute inset-0">
     <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
-    <iframe class="hero-video z-10" src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=1&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1" title="Video de fondo Vinculemos" frameborder="0" allow="autoplay; encrypted-media; accelerometer; gyroscope" allowfullscreen>
+    <iframe 
+      class="hero-video z-10"
+      src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=1&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+      title="Video de fondo Vinculemos"
+      frameborder="0"
+      allow="autoplay; encrypted-media; accelerometer; gyroscope"
+      allowfullscreen>
     </iframe>
   </div>
+
   <div class="relative z-10 container mx-auto px-4 text-center">
     <!-- Replaced h1 with logo -->
     <div class="flex justify-center mb-6">
-      <div class="bg-black/70 rounded-xl flex items-center justify-center w-[350px] h-[250px] md:w-[500px] md:h-[350px]">
-        <img src="logo_s.png" alt="Logo Vinculemos" class="max-w-full max-h-full object-contain" >
-      </div>
-    </div>
+  <div class="bg-black/70 rounded-xl flex items-center justify-center w-[350px] h-[250px] md:w-[500px] md:h-[350px]">
+    <img 
+      src="logo_s.png" 
+      alt="Logo Vinculemos" 
+      class="max-w-full max-h-full object-contain"
+    >
+  </div>
+</div>
+
+
     <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
       No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
     </p>
@@ -237,264 +281,331 @@
     </div>
   </div>
 </section>
-<!-- Experiences Section -->
-<section id="experiencias" class="section-height py-20">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">Nuestras Experiencias</h2>
-      <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-        Conecta con personas afines a través de experiencias diseñadas para crear vínculos auténticos.
-      </p>
-    </div>
-    <!-- Citas Rápidas -->
-    <div class="mb-20">
-      <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--primary-magenta);">Citas Rápidas</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&rel=0" title="Citas rápidas Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Encuentros Express</h4>
-            <p class="text-gray-400 mb-4">
-              Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&loop=1&playlist=jfKfPfyJRdk&controls=0&showinfo=0&rel=0" title="Citas temáticas Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Citas Temáticas</h4>
-            <p class="text-gray-400 mb-4">
-              Eventos con temáticas específicas que facilitan la conversación y conexión entre participantes.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/L7OaV9p5hIc?autoplay=0&mute=1&loop=1&playlist=L7OaV9p5hIc&controls=0&showinfo=0&rel=0" title="Speed dating Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Speed Dating Nocturno</h4>
-            <p class="text-gray-400 mb-4">
-              Ambiente relajado con música y cocktails para conocer personas interesantes en un formato ágil.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
+
+
+  <!-- Experiences Section -->
+  <section id="experiencias" class="section-height py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Nuestras Experiencias</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+          Conecta con personas afines a través de experiencias diseñadas para crear vínculos auténticos.
+        </p>
       </div>
-    </div>
-    <!-- Citas Conscientes -->
-    <div class="mb-20">
-      <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-celeste);">Citas Conscientes</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/6SwiSpudKWI?autoplay=0&mute=1&loop=1&playlist=6SwiSpudKWI&controls=0&showinfo=0&rel=0" title="Citas conscientes Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Encuentros con Propósito</h4>
-            <p class="text-gray-400 mb-4">
-              Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/7NOSDKb0HlU?autoplay=0&mute=1&loop=1&playlist=7NOSDKb0HlU&controls=0&showinfo=0&rel=0" title="Talleres vínculos Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Talleres de Conexión</h4>
-            <p class="text-gray-400 mb-4">
-              Actividades guiadas por expertos en relaciones para fomentar vínculos conscientes y significativos.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/4N3N1MlvVc4?autoplay=0&mute=1&loop=1&playlist=4N3N1MlvVc4&controls=0&showinfo=0&rel=0" title="Meditación Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Meditación en Pareja</h4>
-            <p class="text-gray-400 mb-4">
-              Experiencias de mindfulness compartidas para conectar desde la calma y autenticidad.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Conecta con tu Tribu -->
-    <div>
-      <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-rosa);">Conecta con tu Tribu</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=0&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0" title="Trekking Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Trekking Grupal</h4>
-            <p class="text-gray-400 mb-4">
-              Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/5SLA-_pJ7-I?autoplay=0&mute=1&loop=1&playlist=5SLA-_pJ7-I&controls=0&showinfo=0&rel=0" title="Asados Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Asados & Parrillas</h4>
-            <p class="text-gray-400 mb-4">
-              Comparte el ritual del fuego, recetas familiares y conversaciones memorables con tu tribu.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="card-hover backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover h-48">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/4mRzS4fV_RE?autoplay=0&mute=1&loop=1&playlist=4mRzS4fV_RE&controls=0&showinfo=0&rel=0" title="Voluntariado Vinculemos" frameborder="0" allow="accelerometer; encrypted-media; gyroscope" allowfullscreen>
-            </iframe>
-          </div>
-          <div class="p-6">
-            <h4 class="text-xl font-bold mb-3">Voluntariado Comunitario</h4>
-            <p class="text-gray-400 mb-4">
-              Transforma tu comunidad mientras construyes relaciones significativas con personas solidarias.
-            </p>
-            <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
-              Participar
-              <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Form Section -->
-<section id="formulario" class="section-height py-20">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">Únete a la Experiencia</h2>
-      <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-        Completa el formulario para participar en nuestros eventos y conectar con personas afines.
-      </p>
-    </div>
-    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 max-w-4xl mx-auto">
-      <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
-        <input type="hidden" name="_subject" value="Nueva inscripción desde Vinculemos">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://vinculemos.cl/gracias.html">
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-          <div>
-            <label for="apellido" class="block text-sm font-medium mb-2">Apellido</label>
-            <input type="text" id="apellido" name="apellido" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-        </div>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
-            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-          <div>
-            <label for="telefono" class="block text-sm font-medium mb-2">Teléfono</label>
-            <input type="tel" id="telefono" name="telefono" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-        </div>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <label for="direccion" class="block text-sm font-medium mb-2">Dirección</label>
-            <input type="text" id="direccion" name="direccion" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-          <div>
-            <label for="comuna" class="block text-sm font-medium mb-2">Comuna</label>
-            <input type="text" id="comuna" name="comuna" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-        </div>
-        <div>
-          <label for="fecha_nacimiento" class="block text-sm font-medium mb-2">Fecha de Nacimiento</label>
-          <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-        </div>
-        <div class="flex items-center mb-4">
-          <input type="checkbox" id="primera_vez" name="primera_vez" class="w-4 h-4 text-pink-400 bg-slate-700 border-slate-600 rounded focus:ring-pink-400">
-          <label for="primera_vez" class="ml-2 text-sm">Es mi primera vez en eventos para solteros</label>
-        </div>
-        <div>
-          <label for="comentarios" class="block text-sm font-medium mb-2">¿Qué otros panoramas te gustaría disfrutar con nosotros?</label>
-          <textarea id="comentarios" name="comentarios" rows="3" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors resize-none"></textarea>
-        </div>
-        <div class="pt-6 border-t border-slate-700">
-          <h3 class="text-xl font-semibold mb-4">Proceso de Pago</h3>
-          <p class="text-gray-400 mb-6">Selecciona tu método de pago seguro a través de Mercado Pago</p>
-          <div class="bg-slate-700 p-4 rounded-lg mb-6">
-            <div class="flex items-center justify-between mb-2">
-              <span>Valor de la experiencia:</span>
-              <span class="font-semibold">$25.000 CLP</span>
+
+      <!-- Citas Rápidas -->
+      <div class="mb-20">
+        <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--primary-magenta);">Citas Rápidas</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&rel=0"
+                title="Citas rápidas Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
             </div>
-            <div class="text-sm text-gray-400">* El pago confirma tu reserva en el evento</div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Encuentros Express</h4>
+              <p class="text-gray-400 mb-4">
+                Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
           </div>
-          <button type="button" onclick="simularPago()" class="w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-400 transition-all flex items-center justify-center space-x-2">
-            <span>Pagar con Mercado Pago</span>
-            <i class="fas fa-lock"></i>
-          </button>
+
+          <!-- Card 2 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&loop=1&playlist=jfKfPfyJRdk&controls=0&showinfo=0&rel=0"
+                title="Citas temáticas Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Citas Temáticas</h4>
+              <p class="text-gray-400 mb-4">
+                Eventos con temáticas específicas que facilitan la conversación y conexión entre participantes.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/L7OaV9p5hIc?autoplay=0&mute=1&loop=1&playlist=L7OaV9p5hIc&controls=0&showinfo=0&rel=0"
+                title="Speed dating Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Speed Dating Nocturno</h4>
+              <p class="text-gray-400 mb-4">
+                Ambiente relajado con música y cocktails para conocer personas interesantes en un formato ágil.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--primary-magenta);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
         </div>
-      </form>
+      </div>
+
+      <!-- Citas Conscientes -->
+      <div class="mb-20">
+        <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-celeste);">Citas Conscientes</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/6SwiSpudKWI?autoplay=0&mute=1&loop=1&playlist=6SwiSpudKWI&controls=0&showinfo=0&rel=0"
+                title="Citas conscientes Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Encuentros con Propósito</h4>
+              <p class="text-gray-400 mb-4">
+                Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/7NOSDKb0HlU?autoplay=0&mute=1&loop=1&playlist=7NOSDKb0HlU&controls=0&showinfo=0&rel=0"
+                title="Talleres vínculos Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Talleres de Conexión</h4>
+              <p class="text-gray-400 mb-4">
+                Actividades guiadas por expertos en relaciones para fomentar vínculos conscientes y significativos.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/4N3N1MlvVc4?autoplay=0&mute=1&loop=1&playlist=4N3N1MlvVc4&controls=0&showinfo=0&rel=0"
+                title="Meditación Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Meditación en Pareja</h4>
+              <p class="text-gray-400 mb-4">
+                Experiencias de mindfulness compartidas para conectar desde la calma y autenticidad.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-celeste);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conecta con tu Tribu -->
+      <div>
+        <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--secondary-rosa);">Conecta con tu Tribu</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=0&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0"
+                title="Trekking Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Trekking Grupal</h4>
+              <p class="text-gray-400 mb-4">
+                Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/5SLA-_pJ7-I?autoplay=0&mute=1&loop=1&playlist=5SLA-_pJ7-I&controls=0&showinfo=0&rel=0"
+                title="Asados Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Asados & Parrillas</h4>
+              <p class="text-gray-400 mb-4">
+                Comparte el ritual del fuego, recetas familiares y conversaciones memorables con tu tribu.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-hover bg-slate-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover h-48">
+              <iframe 
+                class="w-full h-full"
+                src="https://www.youtube.com/embed/4mRzS4fV_RE?autoplay=0&mute=1&loop=1&playlist=4mRzS4fV_RE&controls=0&showinfo=0&rel=0"
+                title="Voluntariado Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="p-6">
+              <h4 class="text-xl font-bold mb-3">Voluntariado Comunitario</h4>
+              <p class="text-gray-400 mb-4">
+                Transforma tu comunidad mientras construyes relaciones significativas con personas solidarias.
+              </p>
+              <a href="#formulario" class="inline-flex items-center" style="color: var(--secondary-rosa);">
+                Participar <i class="fas fa-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
-  
+  </section>
+
+  <!-- Form Section -->
+  <section id="formulario" class="section-height py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Únete a la Experiencia</h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+          Completa el formulario para participar en nuestros eventos y conectar con personas afines.
+        </p>
+      </div>
+
+      <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 max-w-4xl mx-auto">
+        <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
+          <input type="hidden" name="_subject" value="Nueva inscripción desde Vinculemos">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://vinculemos.cl/gracias.html">
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+            <div>
+              <label for="apellido" class="block text-sm font-medium mb-2">Apellido</label>
+              <input type="text" id="apellido" name="apellido" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+            <div>
+              <label for="telefono" class="block text-sm font-medium mb-2">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="direccion" class="block text-sm font-medium mb-2">Dirección</label>
+              <input type="text" id="direccion" name="direccion" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+            <div>
+              <label for="comuna" class="block text-sm font-medium mb-2">Comuna</label>
+              <input type="text" id="comuna" name="comuna" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+            </div>
+          </div>
+          
+          <div>
+            <label for="fecha_nacimiento" class="block text-sm font-medium mb-2">Fecha de Nacimiento</label>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
+          </div>
+          
+          <div class="flex items-center mb-4">
+            <input type="checkbox" id="primera_vez" name="primera_vez" class="w-4 h-4 text-pink-400 bg-slate-700 border-slate-600 rounded focus:ring-pink-400">
+            <label for="primera_vez" class="ml-2 text-sm">Es mi primera vez en eventos para solteros</label>
+          </div>
+          
+          <div>
+            <label for="comentarios" class="block text-sm font-medium mb-2">¿Qué otros panoramas te gustaría disfrutar con nosotros?</label>
+            <textarea id="comentarios" name="comentarios" rows="3" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors resize-none"></textarea>
+          </div>
+          
+          <div class="pt-6 border-t border-slate-700">
+            <h3 class="text-xl font-semibold mb-4">Proceso de Pago</h3>
+            <p class="text-gray-400 mb-6">Selecciona tu método de pago seguro a través de Mercado Pago</p>
+            
+            <div class="bg-slate-700 p-4 rounded-lg mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <span>Valor de la experiencia:</span>
+                <span class="font-semibold">$25.000 CLP</span>
+              </div>
+              <div class="text-sm text-gray-400">* El pago confirma tu reserva en el evento</div>
+            </div>
+            
+            <button type="button" onclick="simularPago()" class="w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-400 transition-all flex items-center justify-center space-x-2">
+              <span>Pagar con Mercado Pago</span>
+              <i class="fas fa-lock"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- About Us Section -->
   <section id="nosotros" class="section-height py-20">
     <div class="container mx-auto px-4">
