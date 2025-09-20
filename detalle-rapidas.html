@@ -32,11 +32,21 @@
       scroll-behavior: smooth;
     }
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, var(--primary-azul) 0%, #1a3b4e 100%);
-      color: var(--secondary-crema);
-    }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, var(--primary-azul) 0%, #1a3b4e 100%);
+  color: var(--secondary-crema);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: black;
+  opacity: 0.6;
+  z-index: 0;
+}
 
     .section-height {
       min-height: 100vh;
