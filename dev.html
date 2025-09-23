@@ -5,15 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vinculemos - Conecta en la Vida Real | Citas, Trekking y Experiencias</title>
   
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Vinculemos: encuentros reales para solteros. Citas rápidas, citas conscientes y conexión con tu tribu a través de experiencias auténticas.">
-  <meta name="keywords" content="citas rápidas, citas conscientes, trekking, asados, conexiones reales, eventos para solteros, actividades grupales">
-  <meta name="author" content="Vinculemos">
-  <meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
-  <meta property="og:description" content="Plataforma para conectar personas a través de experiencias reales: citas, trekking, asados y más.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vinculemos.cl">
-  
   <!-- External Libraries -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -80,7 +71,7 @@
     .video-hover {
       position: relative;
       width: 100%;
-      aspect-ratio: 9 / 16; /* Ensures vertical 9:16 format */
+      aspect-ratio: 9 / 16;
       overflow: hidden;
     }
 
@@ -116,6 +107,156 @@
     .floating-whatsapp:hover {
       transform: scale(1.1);
       box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+
+    /* New floating heart button */
+    .floating-heart {
+      position: fixed;
+      bottom: 100px;
+      left: 20px;
+      z-index: 1000;
+      width: auto;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(255, 0, 121, 0.4);
+      transition: all 0.3s ease;
+      border-radius: 50px;
+      background: var(--primary-magenta);
+      color: white;
+      padding: 12px 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .floating-heart:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 25px rgba(255, 0, 121, 0.6);
+    }
+
+    .floating-heart i {
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
+
+    /* Popup overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+    }
+
+    .popup-content {
+      background: var(--primary-azul);
+      border-radius: 15px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--secondary-celeste);
+    }
+
+    .popup-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--secondary-celeste);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .popup-header h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .popup-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .popup-body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--secondary-celeste);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-magenta);
+    }
+
+    .legal-disclaimer {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .legal-toggle {
+      color: var(--primary-magenta);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .btn-payment {
+      background: var(--primary-magenta);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 15px;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn-payment:hover {
+      background: #e0006a;
+      transform: translateY(-2px);
     }
 
     .mobile-menu {
@@ -205,6 +346,47 @@
         width: 120px;
       }
 
+      /* Floating buttons for mobile */
+      .floating-heart {
+        bottom: 90px;
+        left: 15px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+
+      .floating-heart i {
+        font-size: 1rem;
+        margin-right: 5px;
+      }
+
+      .floating-whatsapp {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .floating-whatsapp i {
+        font-size: 1.5rem;
+      }
+
+      /* Popup adjustments for mobile */
+      .popup-overlay {
+        padding: 10px;
+      }
+
+      .popup-content {
+        max-height: 95vh;
+      }
+
+      .popup-header {
+        padding: 15px;
+      }
+
+      .popup-body {
+        padding: 15px;
+      }
+
       /* Hero section mobile adjustments */
       #inicio .container {
         padding-top: 2rem;
@@ -277,18 +459,6 @@
         font-size: 16px; /* Prevents zoom on iOS */
       }
 
-      /* Floating WhatsApp button size adjustment */
-      .floating-whatsapp {
-        width: 50px;
-        height: 50px;
-        bottom: 15px;
-        right: 15px;
-      }
-
-      .floating-whatsapp i {
-        font-size: 1.5rem;
-      }
-
       /* Mobile menu close button */
       .mobile-menu-close {
         position: absolute;
@@ -318,18 +488,17 @@
       }
     }
   </style>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
- <!-- Sticky Header -->
-<header class="sticky-header text-gray-800 fixed top-0 w-full z-50 shadow-md">
+  <!-- Sticky Header -->
+  <header class="sticky-header text-gray-800 fixed top-0 w-full z-50 shadow-md">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-2">
            <!-- Logo Container -->
-<div class="logo-container">
-  <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
-</div>
+           <div class="logo-container">
+             <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
+           </div>
 
             <!-- Desktop Navigation (now on left side) -->
             <nav class="hidden md:flex space-x-8 ml-8">
@@ -389,182 +558,156 @@
             </div>
         </div>
     </nav>
-</header>
+  </header>
 
-<script>
-function closeMobileMenu() {
-    document.getElementById("mobile-menu").classList.remove("active");
-}
-
-document.getElementById("mobile-menu-btn").addEventListener("click", function() {
-    document.getElementById("mobile-menu").classList.add("active");
-});
-
-document.getElementById("mobile-menu-close").addEventListener("click", function() {
-    closeMobileMenu();
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(event) {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuBtn = document.getElementById('mobile-menu-btn');
-    
-    if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
-        closeMobileMenu();
-    }
-});
-</script>
-  
-<!-- Hero Section -->
-<section id="inicio" class="section-height relative overflow-hidden">
-  <div class="absolute inset-0">
-    <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
-    <iframe 
-      class="hero-video z-10"
-      src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=1&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
-      title="Video de fondo Vinculemos"
-      frameborder="0"
-      allow="autoplay; encrypted-media; accelerometer; gyroscope"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-  <div class="relative z-10 container mx-auto px-4 text-center">
-    <!-- Replaced h1 with logo -->
-    <div class="flex justify-center mb-6">
-  <div class="bg-black/70 rounded-xl flex items-center justify-center w-[350px] h-[250px] md:w-[500px] md:h-[350px]">
-    <img 
-      src="logo_s.png" 
-      alt="Logo Vinculemos" 
-      class="max-w-full max-h-full object-contain"
-    >
-  </div>
-</div>
-
-    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
-      No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
-    </p>
-    <div class="flex flex-col md:flex-row gap-4 justify-center">
-      <a href="#experiencias" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all">
-        Encuentra tu match perfecto
-      </a>
-      <a href="#nosotros" class="btn-secondary px-8 py-4 rounded-lg font-semibold transition-all">
-        Conoce más de nosotros
-      </a>
+  <!-- Hero Section -->
+  <section id="inicio" class="section-height relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
+      <iframe 
+        class="hero-video z-10"
+        src="https://www.youtube.com/embed/nSajmCoqsuo?autoplay=1&mute=1&loop=1&playlist=nSajmCoqsuo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1"
+        title="Video de fondo Vinculemos"
+        frameborder="0"
+        allow="autoplay; encrypted-media; accelerometer; gyroscope"
+        allowfullscreen>
+      </iframe>
     </div>
-  </div>
-</section>
 
+    <div class="relative z-10 container mx-auto px-4 text-center">
+      <!-- Replaced h1 with logo -->
+      <div class="flex justify-center mb-6">
+        <div class="bg-black/70 rounded-xl flex items-center justify-center w-[350px] h-[250px] md:w-[500px] md:h-[350px]">
+          <img 
+            src="logo_s.png" 
+            alt="Logo Vinculemos" 
+            class="max-w-full max-h-full object-contain"
+          >
+        </div>
+      </div>
 
-<!-- Experiences Section -->
-<section id="experiencias" class="section-height py-20 md:py-40">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold mb-6">Nuestras Experiencias</h2>
-      <p class="text-xl max-w-3xl mx-auto" style="color: var(--secondary-crema);">
-        Conecta con personas afines a través de experiencias diseñadas para crear vínculos auténticos.
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
+        No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
       </p>
-    </div>
-
-    <!-- Citas Rápidas -->
-    <div class="mb-20">
-      <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--primary-magenta);">
-      </h3>
-      <div class="grid md:grid-cols-3 gap-8">
-
-        <!-- Card 1 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover relative aspect-[9/16]">
-            <!-- Video -->
-            <iframe 
-              class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&rel=0"
-              title="Citas rápidas Vinculemos"
-              frameborder="0"
-              allow="accelerometer; encrypted-media; gyroscope"
-              allowfullscreen>
-            </iframe>
-
-            <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
-
-            <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-              <h4 class="text-xl font-bold mb-3 text-white">Citas Rápidas</h4>
-              <p class="mb-4 text-white">
-                Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
-              </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover relative aspect-[9/16]">
-            <!-- Video -->
-            <iframe 
-              class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&loop=1&playlist=jfKfPfyJRdk&controls=0&showinfo=0&rel=0"
-              title="Citas temáticas Vinculemos"
-              frameborder="0"
-              allow="accelerometer; encrypted-media; gyroscope"
-              allowfullscreen>
-            </iframe>
-
-            <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
-
-            <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-              <h4 class="text-xl font-bold mb-3 text-white">Citas Conscientes</h4>
-              <p class="mb-4 text-white">
-                Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
-              </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
-          <div class="video-hover relative aspect-[9/16]">
-            <!-- Video -->
-            <iframe 
-              class="absolute inset-0 w-full h-full"
-              src="https://www.youtube.com/embed/L7OaV9p5hIc?autoplay=0&mute=1&loop=1&playlist=L7OaV9p5hIc&controls=0&showinfo=0&rel=0"
-              title="Speed dating Vinculemos"
-              frameborder="0"
-              allow="accelerometer; encrypted-media; gyroscope"
-              allowfullscreen>
-            </iframe>
-
-            <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
-
-            <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-              <h4 class="text-xl font-bold mb-3 text-white">Conecta con tu Tribu</h4>
-              <p class="mb-4 text-white">
-                Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
-              </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <a href="#experiencias" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all">
+          Encuentra tu match perfecto
+        </a>
+        <a href="#nosotros" class="btn-secondary px-8 py-4 rounded-lg font-semibold transition-all">
+          Conoce más de nosotros
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-    
+  <!-- Experiences Section -->
+  <section id="experiencias" class="section-height py-20 md:py-40">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">Nuestras Experiencias</h2>
+        <p class="text-xl max-w-3xl mx-auto" style="color: var(--secondary-crema);">
+          Conecta con personas afines a través de experiencias diseñadas para crear vínculos auténticos.
+        </p>
+      </div>
+
+      <!-- Citas Rápidas -->
+      <div class="mb-20">
+        <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--primary-magenta);">
+        </h3>
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <!-- Card 1 -->
+          <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover relative aspect-[9/16]">
+              <!-- Video -->
+              <iframe 
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&mute=1&loop=1&playlist=5qap5aO4i9A&controls=0&showinfo=0&rel=0"
+                title="Citas rápidas Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+
+              <!-- Black Overlay -->
+              <div class="absolute inset-0 bg-black/50"></div>
+
+              <!-- Centered Content -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <h4 class="text-xl font-bold mb-3 text-white">Citas Rápidas</h4>
+                <p class="mb-4 text-white">
+                  Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
+                </p>
+                <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover relative aspect-[9/16]">
+              <!-- Video -->
+              <iframe 
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&loop=1&playlist=jfKfPfyJRdk&controls=0&showinfo=0&rel=0"
+                title="Citas temáticas Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+
+              <!-- Black Overlay -->
+              <div class="absolute inset-0 bg-black/50"></div>
+
+              <!-- Centered Content -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <h4 class="text-xl font-bold mb-3 text-white">Citas Conscientes</h4>
+                <p class="mb-4 text-white">
+                  Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
+                </p>
+                <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
+            <div class="video-hover relative aspect-[9/16]">
+              <!-- Video -->
+              <iframe 
+                class="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/L7OaV9p5hIc?autoplay=0&mute=1&loop=1&playlist=L7OaV9p5hIc&controls=0&showinfo=0&rel=0"
+                title="Speed dating Vinculemos"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope"
+                allowfullscreen>
+              </iframe>
+
+              <!-- Black Overlay -->
+              <div class="absolute inset-0 bg-black/50"></div>
+
+              <!-- Centered Content -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <h4 class="text-xl font-bold mb-3 text-white">Conecta con tu Tribu</h4>
+                <p class="mb-4 text-white">
+                  Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
+                </p>
+                <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
+                  Participar <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- About Us Section -->
   <section id="nosotros" class="section-height py-20">
     <div class="container mx-auto px-4">
@@ -799,60 +942,188 @@ document.addEventListener('click', function(event) {
     <i class="fab fa-whatsapp text-white text-2xl"></i>
   </a>
 
+  <!-- New Floating Heart Button -->
+  <div class="floating-heart" id="floating-heart">
+    <i class="fas fa-heart"></i>
+    <span>Vincular ahora!</span>
+  </div>
+
+  <!-- Popup Form for Mercado Pago -->
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3>Reserva tu Experiencia</h3>
+        <button class="popup-close" id="popup-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="popup-body">
+        <form id="payment-form">
+          <div class="form-group">
+            <label for="experience">Selecciona tu Experiencia</label>
+            <select id="experience" class="form-control" required>
+              <option value="" disabled selected>Elige una experiencia</option>
+              <option value="citas-rapidas" data-price="20000">Citas Rápidas - $20.000 CLP</option>
+              <option value="citas-conscientes" data-price="25000">Citas Conscientes - $25.000 CLP</option>
+              <option value="conecta-tribu" data-price="30000">Conecta con tu Tribu - $30.000 CLP</option>
+              <option value="combo-completo" data-price="65000">Combo Completo (3 experiencias) - $65.000 CLP</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="name">Nombre Completo</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="date">Fecha Preferida</label>
+            <input type="date" id="date" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="comments">Comentarios Adicionales</label>
+            <textarea id="comments" class="form-control" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <div>
+              <input type="checkbox" id="legal-check" required>
+              <label for="legal-check">Acepto los <span class="legal-toggle" id="legal-toggle">términos y condiciones</span></label>
+            </div>
+            
+            <div class="legal-disclaimer" id="legal-disclaimer" style="display: none;">
+              <p><strong>Términos y Condiciones de Participación</strong></p>
+              <p>Al participar en nuestras experiencias, aceptas:</p>
+              <ul>
+                <li>Respetar a todos los participantes y mantener un comportamiento adecuado</li>
+                <li>Asistir puntualmente a la experiencia seleccionada</li>
+                <li>Cancelar con al menos 48 horas de anticipación para obtener reembolso</li>
+                <li>Autorizar el uso de fotografías para fines promocionales (opcional)</li>
+                <li>Cumplir con las normas de seguridad establecidas para cada actividad</li>
+              </ul>
+              <p>Vinculemos se reserva el derecho de admisión y puede modificar las condiciones según sea necesario.</p>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-payment">
+            <i class="fas fa-lock"></i> Proceder al Pago
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- JavaScript -->
   <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-      document.getElementById('mobile-menu').classList.add('active');
+    // Mobile menu functionality
+    function closeMobileMenu() {
+        document.getElementById("mobile-menu").classList.remove("active");
+    }
+
+    document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+        document.getElementById("mobile-menu").classList.add("active");
+    });
+
+    document.getElementById("mobile-menu-close").addEventListener("click", function() {
+        closeMobileMenu();
     });
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      
-      if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
-        mobileMenu.classList.remove('active');
-      }
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        
+        if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    // Floating heart button functionality
+    document.getElementById('floating-heart').addEventListener('click', function() {
+        document.getElementById('popup-overlay').classList.add('active');
+    });
+
+    // Close popup
+    document.getElementById('popup-close').addEventListener('click', function() {
+        document.getElementById('popup-overlay').classList.remove('active');
+    });
+
+    // Close popup when clicking outside
+    document.getElementById('popup-overlay').addEventListener('click', function(event) {
+        if (event.target === this) {
+            document.getElementById('popup-overlay').classList.remove('active');
+        }
+    });
+
+    // Legal disclaimer toggle
+    document.getElementById('legal-toggle').addEventListener('click', function() {
+        const disclaimer = document.getElementById('legal-disclaimer');
+        if (disclaimer.style.display === 'none') {
+            disclaimer.style.display = 'block';
+        } else {
+            disclaimer.style.display = 'none';
+        }
     });
 
     // Form validation and payment simulation
-    function simularPago() {
-      const form = document.querySelector('form');
-      let valid = true;
-      
-      // Simple validation
-      const requiredFields = form.querySelectorAll('[required]');
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-          field.style.borderColor = 'red';
-          valid = false;
-        } else {
-          field.style.borderColor = '';
+    document.getElementById('payment-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simple validation
+        const requiredFields = this.querySelectorAll('[required]');
+        let valid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.style.borderColor = 'red';
+                valid = false;
+            } else {
+                field.style.borderColor = '';
+            }
+        });
+        
+        if (!document.getElementById('legal-check').checked) {
+            alert('Debes aceptar los términos y condiciones para continuar.');
+            valid = false;
         }
-      });
-      
-      if (valid) {
-        // Simulate payment process
-        alert('Redirigiendo a Mercado Pago para completar tu pago seguro...');
-        // In a real implementation, this would redirect to the payment gateway
-      } else {
-        alert('Por favor completa todos los campos obligatorios antes de proceder al pago.');
-      }
-    }
+        
+        if (valid) {
+            // Get selected experience and price
+            const experienceSelect = document.getElementById('experience');
+            const selectedOption = experienceSelect.options[experienceSelect.selectedIndex];
+            const experience = selectedOption.text;
+            const price = selectedOption.getAttribute('data-price');
+            
+            // Simulate payment process
+            alert(`Redirigiendo a Mercado Pago para ${experience} - Valor: $${price} CLP`);
+            // In a real implementation, this would redirect to the payment gateway
+        } else {
+            alert('Por favor completa todos los campos obligatorios antes de proceder al pago.');
+        }
+    });
 
     // Video hover play functionality
     document.querySelectorAll('.video-hover iframe').forEach(iframe => {
-      const src = iframe.src;
-      iframe.src = src.replace('autoplay=1', 'autoplay=0');
-      
-      iframe.parentElement.addEventListener('mouseenter', function() {
-        iframe.src = src.replace('autoplay=0', 'autoplay=1');
-      });
-      
-      iframe.parentElement.addEventListener('mouseleave', function() {
+        const src = iframe.src;
         iframe.src = src.replace('autoplay=1', 'autoplay=0');
-      });
+        
+        iframe.parentElement.addEventListener('mouseenter', function() {
+            iframe.src = src.replace('autoplay=0', 'autoplay=1');
+        });
+        
+        iframe.parentElement.addEventListener('mouseleave', function() {
+            iframe.src = src.replace('autoplay=1', 'autoplay=0');
+        });
     });
   </script>
 </body>
