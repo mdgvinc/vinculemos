@@ -1101,43 +1101,100 @@
         }
     });
 
-    // Form validation and payment simulation
-    document.getElementById('payment-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Simple validation
-        const requiredFields = this.querySelectorAll('[required]');
-        let valid = true;
-        
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                field.style.borderColor = 'red';
-                valid = false;
-            } else {
-                field.style.borderColor = '';
-            }
-        });
-        
-        if (!document.getElementById('legal-check').checked) {
-            alert('Debes aceptar los términos y condiciones para continuar.');
+   // Updated payment form functionality
+document.getElementById('payment-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Validation
+    const requiredFields = this.querySelectorAll('[required]');
+    let valid = true;
+    
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            field.style.borderColor = 'red';
             valid = false;
-        }
-        
-        if (valid) {
-            // Get selected experience and price
-            const experienceSelect = document.getElementById('experience');
-            const selectedOption = experienceSelect.options[experienceSelect.selectedIndex];
-            const experience = selectedOption.text;
-            const price = selectedOption.getAttribute('data-price');
-            
-            // Simulate payment process
-            alert(`Redirigiendo a Mercado Pago para ${experience} - Valor: $${price} CLP`);
-            // In a real implementation, this would redirect to the payment gateway
         } else {
-            alert('Por favor completa todos los campos obligatorios antes de proceder al pago.');
+            field.style.borderColor = '';
         }
     });
-
+    
+    if (!document.getElementById('legal-check').checked) {
+        alert('Debes aceptar los términos y condiciones para continuar.');
+        valid = false;
+    }
+    
+    if (!valid) {
+        alert('Por favor completa todos los campos obligatorios antes de proceder al pago.');
+        return;
+    }
+    
+    // Get form data
+    const experienceSelect = document.getElementById('experience');
+    const selectedOption = experienceSelect.options[experienceSelect.selectedIndex];
+    const experience = selectedOption.text;
+    const price = selectedOption.getAttribute('data-price');
+    
+    const formData = {
+        experience: experience,
+        price: price,
+        userEmail: document.getElementById('email').value,
+        userName: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        preferredDate: document.getElementById('date').value,
+        comments: document.getElementById('comments').value
+    };
+    
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+    submitBtn.disabled = true;
+    
+    try {
+        // First, register the user
+        await fetch('/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: formData.userEmail,
+                name: formData.userName,
+                phone: formData.phone,
+                preferences: { interestedIn: experience },
+                signupDate: new Date().toISOString()
+            })
+        });
+        
+        // Then create payment preference
+        const response = await fetch('/api/mp/create-preference', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        if (!response.ok) {
+            throw new Error('Error creating payment');
+        }
+        
+        const data = await response.json();
+        
+        // Redirect to Mercado Pago
+        window.location.href = process.env.NODE_ENV === 'development' 
+            ? data.sandbox_init_point 
+            : data.init_point;
+            
+    } catch (error) {
+        console.error('Payment error:', error);
+        alert('Error al procesar el pago. Por favor intenta nuevamente.');
+        
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
     // Video hover play functionality
     document.querySelectorAll('.video-hover iframe').forEach(iframe => {
         const src = iframe.src;
