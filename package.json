@@ -2,9 +2,7 @@
   "name": "vinculemos-website",
   "version": "1.0.0",
   "description": "Vinculemos - Conecta en la Vida Real",
-  "type": "module",
   "dependencies": {
-    "mercadopago": "^1.5.17",
     "@upstash/redis": "^1.22.0"
   },
   "engines": {
