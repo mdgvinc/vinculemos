@@ -1,19 +1,31 @@
-// /api/users/register.js
 const { Redis } = require('@upstash/redis');
 
-// Initialize Upstash Redis
+// Initialize Upstash Redis with new variable names
 const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  url: process.env.flow_REDIS_URL,
+  token: process.env.flow_REST_API_TOKEN || process.env.flow_KV_REST_API_TOKEN,
 });
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
     const { email, name, phone, preferences, signupDate } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
     
     const userKey = `user:${email}`;
     
@@ -49,9 +61,9 @@ export default async function handler(req, res) {
       await redis.sadd('users:all', email);
     }
     
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, message: 'User registered successfully' });
   } catch (error) {
     console.error('Redis error:', error);
-    res.status(500).json({ error: 'Failed to register user' });
+    res.status(500).json({ error: 'Failed to register user: ' + error.message });
   }
-}
+};
