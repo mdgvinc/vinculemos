@@ -8,6 +8,10 @@
     {
       "src": "*.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "payment/*.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -16,11 +20,12 @@
       "dest": "/api/$1"
     },
     {
+      "src": "/payment/(.*)",
+      "dest": "/payment/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
