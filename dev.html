@@ -980,7 +980,7 @@
     <span>Vincular ahora!</span>
   </div>
 
-<!-- Popup Form for Mercado Pago -->
+<!-- Popup Form for Payment -->
 <div class="popup-overlay" id="popup-overlay">
     <div class="popup-content">
         <div class="popup-header">
@@ -1101,7 +1101,7 @@
         }
     });
 
-   // Updated payment form functionality
+  // Updated payment form functionality for Flow.cl
 document.getElementById('payment-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -1151,8 +1151,8 @@ document.getElementById('payment-form').addEventListener('submit', async functio
     submitBtn.disabled = true;
     
     try {
-        // First, register the user
-        await fetch('/api/users/register', {
+        // Register user first
+        const userResponse = await fetch('/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1161,13 +1161,20 @@ document.getElementById('payment-form').addEventListener('submit', async functio
                 email: formData.userEmail,
                 name: formData.userName,
                 phone: formData.phone,
-                preferences: { interestedIn: experience },
+                preferences: { 
+                    interestedIn: experience,
+                    preferredDate: formData.preferredDate 
+                },
                 signupDate: new Date().toISOString()
             })
         });
         
-        // Then create payment preference
-        const response = await fetch('/api/mp/create-preference', {
+        if (!userResponse.ok) {
+            throw new Error('Error registering user');
+        }
+        
+        // Create Flow payment
+        const paymentResponse = await fetch('/api/flow/create-payment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1175,20 +1182,24 @@ document.getElementById('payment-form').addEventListener('submit', async functio
             body: JSON.stringify(formData)
         });
         
-        if (!response.ok) {
-            throw new Error('Error creating payment');
+        if (!paymentResponse.ok) {
+            const errorData = await paymentResponse.json();
+            throw new Error(errorData.error || 'Error creating payment');
         }
         
-        const data = await response.json();
+        const data = await paymentResponse.json();
         
-        // Redirect to Mercado Pago
-        window.location.href = process.env.NODE_ENV === 'development' 
-            ? data.sandbox_init_point 
-            : data.init_point;
+        // Store commerceOrder in localStorage for status checking
+        localStorage.setItem('lastCommerceOrder', data.commerceOrder);
+        
+        // Redirect to Flow payment page
+        window.location.href = data.flowPayment.url;
             
     } catch (error) {
         console.error('Payment error:', error);
-        alert('Error al procesar el pago. Por favor intenta nuevamente.');
+        
+        // Show user-friendly error message
+        alert(`Error al procesar el pago: ${error.message}. Por favor intenta nuevamente o contacta a soporte.`);
         
         // Reset button
         submitBtn.innerHTML = originalText;
