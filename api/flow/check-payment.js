@@ -3,7 +3,7 @@ const { Redis } = require('@upstash/redis');
 // Initialize Upstash Redis with new variable names
 const redis = new Redis({
   url: process.env.flow_REDIS_URL,
-  token: process.env.flow_REST_API_TOKEN || process.env.flow_KV_REST_API_TOKEN,
+  token: process.env.flow_KV_REST_API_TOKEN,
 });
 
 module.exports = async (req, res) => {
