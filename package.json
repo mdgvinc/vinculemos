@@ -1,9 +1,4 @@
 {
   "name": "vinculemos-website",
-  "version": "1.0.0",
-  "description": "Vinculemos - Conecta en la Vida Real",
-  "dependencies": {},
-  "engines": {
-    "node": ">=18.x"
-  }
+  "version": "1.0.0"
 }
