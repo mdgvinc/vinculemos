@@ -3,16 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vinculemos - Conecta en la Vida Real | Citas, Trekking y Experiencias</title>
+  <title>Vinculemos - Citas Rápidas | Encuentros Express</title>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Vinculemos: encuentros reales para solteros. Citas rápidas, citas conscientes y conexión con tu tribu a través de experiencias auténticas.">
-  <meta name="keywords" content="citas rápidas, citas conscientes, trekking, asados, conexiones reales, eventos para solteros, actividades grupales">
+  <meta name="description" content="Encuentros Express de Vinculemos: Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.">
+  <meta name="keywords" content="citas rápidas, encuentros express, citas conscientes, conexiones reales, eventos para solteros">
   <meta name="author" content="Vinculemos">
-  <meta property="og:title" content="Vinculemos - Conecta en la Vida Real">
-  <meta property="og:description" content="Plataforma para conectar personas a través de experiencias reales: citas, trekking, asados y más.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vinculemos.cl">
   
   <!-- External Libraries -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -119,9 +115,170 @@
       box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
     }
 
+    /* Floating Heart Button */
+    .floating-heart {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+      width: auto;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(255, 0, 121, 0.4);
+      transition: all 0.3s ease;
+      border-radius: 50px;
+      background: var(--primary-magenta);
+      color: white;
+      padding: 12px 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .floating-heart:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 25px rgba(255, 0, 121, 0.6);
+    }
+
+    .floating-heart i {
+      margin-right: 8px;
+      font-size: 1.2rem;
+    }
+
+    /* Popup Styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+    }
+
+    .popup-content {
+      background: var(--primary-azul);
+      border-radius: 15px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--secondary-celeste);
+    }
+
+    .popup-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--secondary-celeste);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .popup-header h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .popup-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .popup-body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--secondary-celeste);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-magenta);
+    }
+
+    .legal-disclaimer {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      font-size: 0.85rem;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .legal-toggle {
+      color: var(--primary-magenta);
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .btn-payment {
+      background: var(--primary-magenta);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 15px;
+      width: 100%;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn-payment:hover {
+      background: #e0006a;
+      transform: translateY(-2px);
+    }
+
     .mobile-menu {
       transform: translateX(-100%);
       transition: transform 0.3s ease;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(9, 46, 62, 0.95);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .mobile-menu.active {
@@ -163,7 +320,22 @@
       z-index: 10;
     }
 
+    .logo-container {
+      height: 50px;
+      width: 150px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
+    .logo-img {
+      height: 150%;
+      width: auto;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
 
     @media (max-width: 768px) {
       .section-height {
@@ -175,47 +347,41 @@
         min-height: auto;
         padding: 6rem 0 4rem;
       }
+
+      .floating-heart {
+        bottom: 90px;
+        left: 15px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+
+      .floating-heart i {
+        font-size: 1rem;
+        margin-right: 5px;
+      }
     }
   </style>
 </head>
 
 <body>
  <!-- Sticky Header -->
-<header class="sticky-header bg-slate-900 text-gray-800 fixed top-0 w-full z-50 shadow-md">
-    <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center py-4">
+<header class="sticky-header text-gray-800 fixed top-0 w-full z-50 shadow-md">
+    <div class="container mx-auto px-4 h-full">
+        <div class="flex justify-between items-center h-full py-2">
            <!-- Logo Container -->
-<div class="logo-container">
-  <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
-</div>
+           <div class="logo-container">
+             <img src="logo.png" alt="VINCU LEMOS Logo" class="logo-img">
+           </div>
 
-<style>
-.logo-container {
-  height: 50px;          /* Final visible height in header */
-  width: 150px;          /* You can adjust this */
-  overflow: hidden;      /* Hides extra parts */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo-img {
-  height: 300%;          /* Zoom so only ~60% of height shows */
-  width: auto;
-  object-fit: cover;
-  object-position: center; /* Crops equally top and bottom */
-  display: block;
-}
-</style>
-            <!-- Desktop Navigation (now on left side) -->
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-8 ml-8">
-                <a href="#inicio" class="hover:text-pink-400 transition-colors">Inicio</a>
-                <a href="#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
-                <a href="#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
-                <a href="#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
+                <a href="index.html" class="hover:text-pink-400 transition-colors">Inicio</a>
+                <a href="index.html#experiencias" class="hover:text-pink-400 transition-colors">Experiencias</a>
+                <a href="index.html#nosotros" class="hover:text-pink-400 transition-colors">Nosotros</a>
+                <a href="index.html#contacto" class="hover:text-pink-400 transition-colors">Contacto</a>
             </nav>
 
-            <!-- Social Icons (on the right) -->
+            <!-- Social Icons -->
             <div class="hidden md:flex items-center space-x-4">
                 <a href="#" class="social-icon text-gray hover:text-blue-500">
                     <i class="fab fa-facebook-f text-lg"></i>
@@ -226,7 +392,7 @@
                 <a href="#" class="social-icon text-gray hover:text-black">
                     <i class="fab fa-tiktok text-lg"></i>
                 </a>
-                <a href="#nosotros" class="social-icon text-gray hover:text-red-400">
+                <a href="index.html#contacto" class="social-icon text-gray hover:text-red-400">
                     <i class="far fa-envelope text-lg"></i>
                 </a>
             </div>
@@ -236,45 +402,39 @@
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-
-        <!-- Mobile Navigation -->
-        <nav class="mobile-menu md:hidden hidden absolute top-full left-0 w-full bg-slate-900 border-t border-pink-400/20" id="mobile-menu">
-            <div class="flex flex-col space-y-4 p-6">
-                <a href="#inicio" class="hover:text-pink-400 transition-colors py-2">Inicio</a>
-                <a href="#experiencias" class="hover:text-pink-400 transition-colors py-2">Experiencias</a>
-                <a href="#nosotros" class="hover:text-pink-400 transition-colors py-2">Nosotros</a>
-                <a href="#contacto" class="hover:text-pink-400 transition-colors py-2">Contacto</a>
-                
-                <div class="flex space-x-6 pt-4 border-t border-pink-400/20 mt-4">
-                    <a href="#" class="text-gray hover:text-blue-500">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray hover:text-pink-500">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray hover:text-black">
-                        <i class="fab fa-tiktok text-xl"></i>
-                    </a>
-                    <a href="#nosotros" class="text-gray hover:text-red-400">
-                        <i class="far fa-envelope text-xl"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
     </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-menu md:hidden hidden" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="flex flex-col space-y-8 p-6 text-center">
+            <a href="index.html" class="hover:text-pink-400 transition-colors py-2 text-2xl">Inicio</a>
+            <a href="index.html#experiencias" class="hover:text-pink-400 transition-colors py-2 text-2xl">Experiencias</a>
+            <a href="index.html#nosotros" class="hover:text-pink-400 transition-colors py-2 text-2xl">Nosotros</a>
+            <a href="index.html#contacto" class="hover:text-pink-400 transition-colors py-2 text-2xl">Contacto</a>
+            
+            <div class="flex justify-center space-x-8 pt-8 border-t border-pink-400/20 mt-8">
+                <a href="#" class="text-gray hover:text-blue-500">
+                    <i class="fab fa-facebook-f text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray hover:text-pink-500">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="text-gray hover:text-black">
+                    <i class="fab fa-tiktok text-2xl"></i>
+                </a>
+                <a href="index.html#contacto" class="text-gray hover:text-red-400">
+                    <i class="far fa-envelope text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
 </header>
 
-
-<script>
-document.getElementById("mobile-menu-btn").addEventListener("click", function() {
-    document.getElementById("mobile-menu").classList.toggle("active");
-});
-</script>
-  
-
-  <!-- Hero Section (Transformed from Experience Detail Section) -->
+  <!-- Hero Section -->
   <section id="inicio" class="hero-section">
-    <div class="hero-bg-overlay"></div>
     <div class="container mx-auto px-4 hero-content">
       <div class="text-center mb-12">
         <h1 class="text-5xl md:text-6xl font-bold mb-6">
@@ -290,7 +450,7 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
         
         <!-- Video -->
         <div class="video-hover rounded-xl overflow-hidden border border-slate-700 shadow-lg">
-          <div class="relative w-full" style="padding-top: 56.25%;"> <!-- 16:9 ratio -->
+          <div class="relative w-full" style="padding-top: 56.25%;">
             <iframe 
               class="absolute top-0 left-0 w-full h-full"
               src="https://www.youtube.com/embed/QbWStbEv4LU?autoplay=0&mute=1&loop=1&playlist=QbWStbEv4LU&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
@@ -312,107 +472,28 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
             <li><i class="fas fa-users mr-2" style="color: var(--primary-magenta);"></i> Grupos reducidos para mayor cercanía</li>
           </ul>
           <div class="mt-8">
-            <a href="#formulario" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all inline-flex items-center">
+            <button id="floating-heart-btn" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all inline-flex items-center">
               Participar <i class="fas fa-arrow-right ml-2"></i>
-            </a>
+            </button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Payment Form Section -->
-  <section id="formulario" class="py-20 relative">
-    <div class="container mx-auto px-4">
-      <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-center">Reserva tu cupo</h2>
-        <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" class="space-y-6">
-          <input type="hidden" name="_subject" value="Nueva inscripción Encuentros Express">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://vinculemos.cl/gracias.html">
-          
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label for="nombre" class="block text-sm font-medium mb-2">Nombre</label>
-              <input type="text" id="nombre" name="nombre" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-            <div>
-              <label for="apellido" class="block text-sm font-medium mb-2">Apellido</label>
-              <input type="text" id="apellido" name="apellido" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-          </div>
-          
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <label for="email" class="block text-sm font-medium mb-2">Correo Electrónico</label>
-              <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-            <div>
-              <label for="telefono" class="block text-sm font-medium mb-2">Teléfono</label>
-              <input type="tel" id="telefono" name="telefono" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-            </div>
-          </div>
-          
-          <div>
-            <label for="fecha_nacimiento" class="block text-sm font-medium mb-2">Fecha de Nacimiento</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors">
-          </div>
-          
-          <div class="bg-slate-700 p-4 rounded-lg mb-6">
-            <div class="flex items-center justify-between mb-2">
-              <span>Valor de la experiencia:</span>
-              <span class="font-semibold">$500 CLP</span>
-            </div>
-            <div class="text-sm text-gray-400">* El pago confirma tu reserva en el evento</div>
-          </div>
-          
-          <button type="submit" class="w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-400 transition-all flex items-center justify-center space-x-2">
-            <span>Pagar con Mercado Pago</span>
-            <i class="fas fa-lock"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  
-<!-- Footer -->
-<footer class="relative overflow-hidden py-12 border-t border-slate-700">
-  
-  <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
-
-  <div class="relative z-10 container mx-auto px-4">
-    <div class="flex flex-col md:flex-row justify-between items-center">
-      <div class="flex items-center space-x-3 mb-6 md:mb-0">
-        <span class="text-2xl font-bold" style="color: var(--primary-magenta);">VINCU</span>
-        <span class="text-2xl font-bold text-white">LEMOS</span>
-      </div>
-      
-      <div class="flex space-x-6 mb-6 md:mb-0">
-        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
-          <i class="fab fa-instagram text-xl"></i>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
-          <i class="fab fa-tiktok text-xl"></i>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
-          <i class="fab fa-facebook text-xl"></i>
-        </a>
-        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
-          <i class="fab fa-youtube text-xl"></i>
-        </a>
-      </div>
-      
-      <div class="text-center md:text-right">
-        <p class="text-gray-400">© 2025 Vinculemos. Todos los derechos reservados.</p>
-        <p class="text-gray-400 text-sm mt-1">Conectando personas en la vida real</p>
-      </div>
-    </div>
+  <!-- Floating Heart Button -->
+  <div class="floating-heart" id="floating-heart">
+    <i class="fas fa-heart"></i>
+    <span>Reservar Ahora</span>
   </div>
-</footer>
-  
- <!-- Popup Form for Payment -->
-<div class="popup-overlay" id="popup-overlay">
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/56912345678?text=Hola%20Vinculemos,%20me%20interesa%20participar%20en%20Encuentros%20Express" target="_blank" class="floating-whatsapp">
+    <i class="fab fa-whatsapp text-white text-2xl"></i>
+  </a>
+
+  <!-- Popup Form for Payment -->
+  <div class="popup-overlay" id="popup-overlay">
     <div class="popup-content">
         <div class="popup-header">
             <h3>Reserva tu Experiencia</h3>
@@ -423,7 +504,7 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
         <div class="popup-body">
             <!-- FormSubmit.co Form for Contact Information -->
             <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" id="contact-form" style="display: none;">
-                <input type="hidden" name="_subject" value="Nueva Reserva - Vinculemos">
+                <input type="hidden" name="_subject" value="Nueva Reserva - Encuentros Express">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_next" value="https://vinculemos.vercel.app/payment/success.html">
@@ -442,12 +523,12 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
             <form id="payment-form">
                 <div class="form-group">
                     <label for="experience">Selecciona tu Experiencia</label>
-                    <select id="experience" class="form-control" required style="background: rgba(71, 85, 105, 0.8); color: white; border: 1px solid var(--secondary-celeste);">
-                        <option value="" disabled selected style="background: var(--primary-azul); color: white;">Elige una experiencia</option>
-                        <option value="citas-rapidas" data-price="20000" style="background: var(--primary-azul); color: white;">Citas Rápidas - $20.000 CLP</option>
-                        <option value="citas-conscientes" data-price="25000" style="background: var(--primary-azul); color: white;">Citas Conscientes - $25.000 CLP</option>
-                        <option value="conecta-tribu" data-price="30000" style="background: var(--primary-azul); color: white;">Conecta con tu Tribu - $30.000 CLP</option>
-                        <option value="combo-completo" data-price="65000" style="background: var(--primary-azul); color: white;">Combo Completo (3 experiencias) - $65.000 CLP</option>
+                    <select id="experience" class="form-control" required>
+                        <option value="" disabled selected>Elige una experiencia</option>
+                        <option value="citas-rapidas" data-price="20000">Encuentros Express - $20.000 CLP</option>
+                        <option value="citas-conscientes" data-price="25000">Citas Conscientes - $25.000 CLP</option>
+                        <option value="conecta-tribu" data-price="30000">Conecta con tu Tribu - $30.000 CLP</option>
+                        <option value="combo-completo" data-price="65000">Combo Completo (3 experiencias) - $65.000 CLP</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -490,14 +571,105 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
                 </div>
                 <button type="submit" class="btn-payment">
                     <i class="fas fa-lock"></i>
-                    Proceder al Pago
+                    Proceder al Pago con Flow
                 </button>
             </form>
         </div>
     </div>
 </div>
-    <!-- JavaScript -->
-  <script>
+
+  
+<!-- Footer -->
+<footer class="relative overflow-hidden py-12 border-t border-slate-700">
+  <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
+
+  <div class="relative z-10 container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="flex items-center space-x-3 mb-6 md:mb-0">
+        <span class="text-2xl font-bold" style="color: var(--primary-magenta);">VINCU</span>
+        <span class="text-2xl font-bold text-white">LEMOS</span>
+      </div>
+      
+      <div class="flex space-x-6 mb-6 md:mb-0">
+        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+          <i class="fab fa-instagram text-xl"></i>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+          <i class="fab fa-tiktok text-xl"></i>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+          <i class="fab fa-facebook text-xl"></i>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+          <i class="fab fa-youtube text-xl"></i>
+        </a>
+      </div>
+      
+      <div class="text-center md:text-right">
+        <p class="text-gray-400">© 2025 Vinculemos. Todos los derechos reservados.</p>
+        <p class="text-gray-400 text-sm mt-1">Conectando personas en la vida real</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+// Mobile menu functionality
+function closeMobileMenu() {
+    document.getElementById("mobile-menu").classList.remove("active");
+}
+
+document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+    document.getElementById("mobile-menu").classList.add("active");
+});
+
+document.getElementById("mobile-menu-close").addEventListener("click", function() {
+    closeMobileMenu();
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    
+    if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
+
+// Floating heart button functionality
+document.getElementById('floating-heart').addEventListener('click', function() {
+    document.getElementById('popup-overlay').classList.add('active');
+});
+
+// Also make the "Participar" button open the popup
+document.getElementById('floating-heart-btn').addEventListener('click', function() {
+    document.getElementById('popup-overlay').classList.add('active');
+});
+
+// Close popup
+document.getElementById('popup-close').addEventListener('click', function() {
+    document.getElementById('popup-overlay').classList.remove('active');
+});
+
+// Close popup when clicking outside
+document.getElementById('popup-overlay').addEventListener('click', function(event) {
+    if (event.target === this) {
+        document.getElementById('popup-overlay').classList.remove('active');
+    }
+});
+
+// Legal disclaimer toggle
+document.getElementById('legal-toggle').addEventListener('click', function() {
+    const disclaimer = document.getElementById('legal-disclaimer');
+    if (disclaimer.style.display === 'none') {
+        disclaimer.style.display = 'block';
+    } else {
+        disclaimer.style.display = 'none';
+    }
+});
+
 // Updated payment form functionality for Flow.cl with FormSubmit.co
 document.getElementById('payment-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -596,70 +768,19 @@ document.getElementById('payment-form').addEventListener('submit', async functio
     }
 });
 
-// Mobile menu functionality
-function closeMobileMenu() {
-    document.getElementById("mobile-menu").classList.remove("active");
-}
-
-document.getElementById("mobile-menu-btn").addEventListener("click", function() {
-    document.getElementById("mobile-menu").classList.add("active");
-});
-
-document.getElementById("mobile-menu-close").addEventListener("click", function() {
-    closeMobileMenu();
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(event) {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuBtn = document.getElementById('mobile-menu-btn');
+// Video hover play functionality
+document.querySelectorAll('.video-hover iframe').forEach(iframe => {
+    const src = iframe.src;
+    iframe.src = src.replace('autoplay=1', 'autoplay=0');
     
-    if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
-        closeMobileMenu();
-    }
-});
-
-// Floating heart button functionality
-document.getElementById('floating-heart').addEventListener('click', function() {
-    document.getElementById('popup-overlay').classList.add('active');
-});
-
-// Close popup
-document.getElementById('popup-close').addEventListener('click', function() {
-    document.getElementById('popup-overlay').classList.remove('active');
-});
-
-// Close popup when clicking outside
-document.getElementById('popup-overlay').addEventListener('click', function(event) {
-    if (event.target === this) {
-        document.getElementById('popup-overlay').classList.remove('active');
-    }
-});
-
-// Legal disclaimer toggle
-document.getElementById('legal-toggle').addEventListener('click', function() {
-    const disclaimer = document.getElementById('legal-disclaimer');
-    if (disclaimer.style.display === 'none') {
-        disclaimer.style.display = 'block';
-    } else {
-        disclaimer.style.display = 'none';
-    }
-});
-  
-
-    // Video hover play functionality
-    document.querySelectorAll('.video-hover iframe').forEach(iframe => {
-      const src = iframe.src;
-      iframe.src = src.replace('autoplay=1', 'autoplay=0');
-      
-      iframe.parentElement.addEventListener('mouseenter', function() {
+    iframe.parentElement.addEventListener('mouseenter', function() {
         iframe.src = src.replace('autoplay=0', 'autoplay=1');
-      });
-      
-      iframe.parentElement.addEventListener('mouseleave', function() {
-        iframe.src = src.replace('autoplay=1', 'autoplay=0');
-      });
     });
-  </script>
+    
+    iframe.parentElement.addEventListener('mouseleave', function() {
+        iframe.src = src.replace('autoplay=1', 'autoplay=0');
+    });
+});
+</script>
 </body>
 </html>
