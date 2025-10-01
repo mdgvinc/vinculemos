@@ -495,7 +495,9 @@
         </div>
     </footer>
 
-    <script>
+   <script>
+
+       
         // Mobile menu functionality
         function closeMobileMenu() {
             document.getElementById("mobile-menu").classList.remove("active");
@@ -541,13 +543,15 @@
             }
         });
 
-        // Legal disclaimer toggle
+        // Legal disclaimer toggle - FIXED
         document.getElementById('legal-toggle').addEventListener('click', function() {
             const disclaimer = document.getElementById('legal-disclaimer');
-            if (disclaimer.style.display === 'none') {
-                disclaimer.style.display = 'block';
+            if (disclaimer.classList.contains('hidden')) {
+                disclaimer.classList.remove('hidden');
+                this.innerHTML = '<i class="fas fa-chevron-up mr-2"></i> Información legal';
             } else {
-                disclaimer.style.display = 'none';
+                disclaimer.classList.add('hidden');
+                this.innerHTML = '<i class="fas fa-chevron-down mr-2"></i> Información legal';
             }
         });
 
@@ -642,11 +646,15 @@
             }
         });
 
-        // Set minimum date to today
+        // Set default date to October 30th and minimum date to today
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('date');
             const today = new Date().toISOString().split('T')[0];
             dateInput.setAttribute('min', today);
+            
+            // Set default date to October 30, 2024
+            const defaultDate = '2024-10-30';
+            dateInput.value = defaultDate;
             
             // Optional: Add input validation
             const phoneInput = document.getElementById('phone');
@@ -659,7 +667,11 @@
             
             // Auto-select the only experience option
             document.getElementById('experience').selectedIndex = 1;
+            
+            // Initialize price display
+            document.getElementById('price-display').style.display = 'block';
         });
+
   
 // Video hover play functionality
 document.querySelectorAll('.video-hover iframe').forEach(iframe => {
