@@ -12,7 +12,7 @@ const FLOW_CONFIG = {
     ? `https://${process.env.VERCEL_URL}/api/flow/confirm` 
     : 'http://localhost:3000/api/flow/confirm',
   URL_RETURN: process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}/payment/success.html` 
+    ? `https://${process.env.VERCEL_URL}/success.html` 
     : 'http://localhost:3000/payment/success.html'
 };
 
