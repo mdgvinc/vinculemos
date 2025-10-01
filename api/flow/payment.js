@@ -1,39 +1,37 @@
 // /api/flow/payment.js - Vercel Serverless Function para integración con Flow (CommonJS)
 const crypto = require('crypto');
 
-// Configuración de Flow - REEMPLAZAR CON TUS CREDENCIALES REALES
-const FLOW_CONFIG = {
-  // Sandbox credentials (para pruebas)
-  API_URL: process.env.FLOW_API_URL || 'https://www.flow.cl/api',
-  API_KEY: process.env.FLOW_API_KEY || 'tu_api_key_aqui',
-  SECRET_KEY: process.env.FLOW_SECRET_KEY || 'tu_secret_key_aqui',
-  
-  // URLs de retorno
-  URL_CONFIRMATION: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/flow/confirm` : /api/flow/confirm',
-  URL_RETURN: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/payment/success` :/payment/success.html'
-};
-module.exports = async function handler(req, res) {
-  // Debug: Check if environment variables are loaded
-  console.log('API_KEY exists:', !!process.env.FLOW_API_KEY);
-  console.log('SECRET_KEY exists:', !!process.env.FLOW_SECRET_KEY);
-  
-  // If missing credentials, return proper JSON error
-  if (!process.env.FLOW_API_KEY || !process.env.FLOW_SECRET_KEY) {
-    return res.status(500).json({
-      error: 'Configuración del servidor incompleta',
-      details: 'Credenciales de Flow no configuradas'
-    });
-  }
+console.log('=== PAYMENT.JS LOADED ===');
 
+// Configuración de Flow
+const FLOW_CONFIG = {
+  API_URL: process.env.FLOW_API_URL || 'https://sandbox.flow.cl/api',
+  API_KEY: process.env.FLOW_API_KEY,
+  SECRET_KEY: process.env.FLOW_SECRET_KEY,
+  URL_CONFIRMATION: process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}/api/flow/confirm` 
+    : 'http://localhost:3000/api/flow/confirm',
+  URL_RETURN: process.env.VERCEL_URL 
+    ? `https://${process.env.VERCEL_URL}/payment/success.html` 
+    : 'http://localhost:3000/payment/success.html'
+};
+
+console.log('Flow config check:', {
+  hasApiKey: !!FLOW_CONFIG.API_KEY,
+  hasSecretKey: !!FLOW_CONFIG.SECRET_KEY,
+  apiUrl: FLOW_CONFIG.API_URL
+});
 
 // Función para generar firma Flow
 function generateFlowSignature(params, secretKey) {
-  // Ordenar parámetros alfabéticamente y crear string
-  const sortedKeys = Object.keys(params).sort();
-  const signString = sortedKeys.map(key => `${key}${params[key]}`).join('');
-  
-  // Generar HMAC SHA256
-  return crypto.createHmac('sha256', secretKey).update(signString).digest('hex');
+  try {
+    const sortedKeys = Object.keys(params).sort();
+    const signString = sortedKeys.map(key => `${key}${params[key]}`).join('');
+    return crypto.createHmac('sha256', secretKey).update(signString).digest('hex');
+  } catch (error) {
+    console.error('Signature generation error:', error);
+    throw error;
+  }
 }
 
 // Función para generar número de orden único
@@ -44,44 +42,64 @@ function generateOrderNumber() {
 }
 
 module.exports = async function handler(req, res) {
-  // Configurar CORS para permitir requests desde tu frontend
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  console.log('=== HANDLER CALLED ===', {
+    method: req.method,
+    url: req.url
+  });
+
+  // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
-
-  // Manejar preflight OPTIONS request
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+  
+  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
+    console.log('Handling OPTIONS request');
     return res.status(200).end();
   }
 
-  // Solo permitir POST
+  // Only allow POST
   if (req.method !== 'POST') {
+    console.log('Method not allowed:', req.method);
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
-  try {
-    const { experience, name, email, phone, date, comments, price } = req.body;
+  // Validate environment variables
+  if (!FLOW_CONFIG.API_KEY || !FLOW_CONFIG.SECRET_KEY) {
+    console.error('MISSING CREDENTIALS:', {
+      API_KEY: FLOW_CONFIG.API_KEY,
+      SECRET_KEY: FLOW_CONFIG.SECRET_KEY
+    });
+    return res.status(500).json({ 
+      error: 'Configuración incompleta',
+      details: 'Credenciales de Flow no configuradas correctamente'
+    });
+  }
 
-    // Validar datos requeridos
+  try {
+    console.log('Request body received');
+    const body = req.body || {};
+    console.log('Body:', body);
+
+    const { experience, name, email, phone, date, comments, price } = body;
+
+    // Validate required fields
     if (!experience || !name || !email || !phone || !date || !price) {
+      console.log('Missing required fields:', { experience, name, email, phone, date, price });
       return res.status(400).json({ 
         error: 'Faltan datos requeridos',
-        required: ['experience', 'name', 'email', 'phone', 'date', 'price']
+        received: { experience, name, email, phone, date, price }
       });
     }
 
-    // Validar que price sea un número válido
     const amount = parseInt(price);
     if (isNaN(amount) || amount <= 0) {
-      return res.status(400).json({ error: 'El precio debe ser un número válido mayor a 0' });
+      console.log('Invalid price:', price);
+      return res.status(400).json({ error: 'Precio inválido' });
     }
 
-    // Generar número de orden único
     const commerceOrder = generateOrderNumber();
+    console.log('Generated order:', commerceOrder);
 
     // Preparar parámetros para Flow
     const flowParams = {
@@ -104,7 +122,7 @@ module.exports = async function handler(req, res) {
       })
     };
 
-    console.log('Creando pago Flow para:', email, 'Monto:', amount);
+    console.log('Flow params prepared:', flowParams);
 
     // Generar firma
     const signature = generateFlowSignature(flowParams, FLOW_CONFIG.SECRET_KEY);
@@ -116,6 +134,8 @@ module.exports = async function handler(req, res) {
       formData.append(key, flowParams[key]);
     });
 
+    console.log('Calling Flow API...', FLOW_CONFIG.API_URL);
+
     // Llamar a Flow API
     const flowResponse = await fetch(`${FLOW_CONFIG.API_URL}/payment/create`, {
       method: 'POST',
@@ -125,28 +145,30 @@ module.exports = async function handler(req, res) {
       body: formData.toString()
     });
 
+    console.log('Flow API response status:', flowResponse.status);
+
     const flowResult = await flowResponse.json();
+    console.log('Flow API response:', flowResult);
 
     if (flowResult.url && flowResult.token) {
-      console.log('Pago creado exitosamente:', commerceOrder);
+      console.log('Payment created successfully');
       
       return res.status(200).json({
         success: true,
         flowUrl: `${flowResult.url}?token=${flowResult.token}`,
         commerceOrder: commerceOrder,
-        token: flowResult.token,
-        redirectUrl: flowResult.url
+        token: flowResult.token
       });
     } else {
-      console.error('Error de Flow:', flowResult);
+      console.error('Flow API error response:', flowResult);
       throw new Error(flowResult.message || 'Error al crear el pago en Flow');
     }
 
   } catch (error) {
-    console.error('Error en Flow payment:', error);
+    console.error('FATAL ERROR in handler:', error);
     return res.status(500).json({ 
       error: 'Error interno del servidor',
-      details: error.message 
+      details: error.message
     });
   }
-}
+};
