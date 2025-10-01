@@ -11,9 +11,7 @@ const FLOW_CONFIG = {
   URL_CONFIRMATION: process.env.VERCEL_URL 
     ? `https://${process.env.VERCEL_URL}/api/flow/confirm` 
     : 'http://localhost:3000/api/flow/confirm',
-  URL_RETURN: process.env.VERCEL_URL 
-    ? `https://${process.env.VERCEL_URL}/success.html` 
-    : 'http://localhost:3000/success.html'
+  URL_RETURN: 'https://vinculemos.cl/success.html'
 };
 
 console.log('Flow config check:', {
