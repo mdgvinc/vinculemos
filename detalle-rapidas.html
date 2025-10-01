@@ -505,194 +505,200 @@
     </footer>
 
 <script>
-        // Mobile menu functionality
-        function closeMobileMenu() {
-            document.getElementById("mobile-menu").classList.remove("active");
+    // Mobile menu functionality
+    function closeMobileMenu() {
+        document.getElementById("mobile-menu").classList.remove("active");
+    }
+
+    document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+        document.getElementById("mobile-menu").classList.add("active");
+    });
+
+    document.getElementById("mobile-menu-close").addEventListener("click", function() {
+        closeMobileMenu();
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        
+        if (mobileMenu && menuBtn && !mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+
+    // All functionality inside DOMContentLoaded to avoid duplicate declarations
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing scripts...');
+
+        // Fix for floating heart button
+        const floatingHeart = document.querySelector('.floating-btn');
+        if (floatingHeart) {
+            floatingHeart.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('popup-overlay').classList.add('active');
+            });
         }
 
-        document.getElementById("mobile-menu-btn").addEventListener("click", function() {
-            document.getElementById("mobile-menu").classList.add("active");
-        });
+        // Fix for "Participar" button in hero section
+        const participarBtn = document.getElementById('floating-heart-btn');
+        if (participarBtn) {
+            participarBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('popup-overlay').classList.add('active');
+            });
+        }
 
-        document.getElementById("mobile-menu-close").addEventListener("click", function() {
-            closeMobileMenu();
-        });
+        // Close popup
+        const popupClose = document.getElementById('popup-close');
+        if (popupClose) {
+            popupClose.addEventListener('click', function() {
+                document.getElementById('popup-overlay').classList.remove('active');
+            });
+        }
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            
-            if (mobileMenu && menuBtn && !mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
-                closeMobileMenu();
-            }
-        });
+        // Close popup when clicking outside
+        const popupOverlay = document.getElementById('popup-overlay');
+        if (popupOverlay) {
+            popupOverlay.addEventListener('click', function(event) {
+                if (event.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        }
 
-        // All functionality inside DOMContentLoaded to avoid duplicate declarations
-        document.addEventListener('DOMContentLoaded', function() {
-            // Fix for floating heart button
-            const floatingHeart = document.querySelector('.floating-btn');
-            if (floatingHeart) {
-                floatingHeart.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.getElementById('popup-overlay').classList.add('active');
-                });
-            }
+        // Legal disclaimer toggle
+        const legalToggle = document.getElementById('legal-toggle');
+        if (legalToggle) {
+            legalToggle.addEventListener('click', function() {
+                const disclaimer = document.getElementById('legal-disclaimer');
+                if (disclaimer.classList.contains('hidden')) {
+                    disclaimer.classList.remove('hidden');
+                    this.innerHTML = '<i class="fas fa-chevron-up mr-2"></i> Información legal';
+                } else {
+                    disclaimer.classList.add('hidden');
+                    this.innerHTML = '<i class="fas fa-chevron-down mr-2"></i> Información legal';
+                }
+            });
+        }
 
-            // Fix for "Participar" button in hero section
-            const participarBtn = document.getElementById('floating-heart-btn');
-            if (participarBtn) {
-                participarBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.getElementById('popup-overlay').classList.add('active');
-                });
-            }
+        // Price display functionality
+        const experienceSelect = document.getElementById('experience');
+        if (experienceSelect) {
+            experienceSelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const price = selectedOption.getAttribute('data-price');
+                
+                if (price) {
+                    document.getElementById('selected-price').textContent = parseInt(price).toLocaleString('es-CL');
+                    document.getElementById('price-display').style.display = 'block';
+                } else {
+                    document.getElementById('price-display').style.display = 'none';
+                }
+            });
+        }
 
-            // Close popup
-            const popupClose = document.getElementById('popup-close');
-            if (popupClose) {
-                popupClose.addEventListener('click', function() {
-                    document.getElementById('popup-overlay').classList.remove('active');
-                });
-            }
-
-            // Close popup when clicking outside
-            const popupOverlay = document.getElementById('popup-overlay');
-            if (popupOverlay) {
-                popupOverlay.addEventListener('click', function(event) {
-                    if (event.target === this) {
-                        this.classList.remove('active');
+        // Form submission with Flow integration - FIXED: Added null check
+        const paymentForm = document.getElementById('payment-form');
+        console.log('Payment form element:', paymentForm);
+        
+        if (paymentForm) {
+            paymentForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                console.log('Form submission started');
+                
+                const payBtn = document.getElementById('pay-btn');
+                const spinner = document.getElementById('loading-spinner');
+                const originalBtnText = payBtn.innerHTML;
+                
+                try {
+                    // Show loading state
+                    payBtn.disabled = true;
+                    if (spinner) spinner.classList.remove('hidden');
+                    payBtn.innerHTML = '<div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Procesando...';
+                    
+                    // Get form data
+                    const formData = {
+                        experience: document.getElementById('experience').value,
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        genero: document.getElementById('genero').value,
+                        comments: document.getElementById('comments').value,
+                        price: document.getElementById('experience').options[document.getElementById('experience').selectedIndex].getAttribute('data-price')
+                    };
+                    
+                    console.log('Form data:', formData);
+                    
+                    // Validate required fields
+                    if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.genero || !formData.price) {
+                        throw new Error('Por favor completa todos los campos requeridos');
                     }
-                });
-            }
-
-            // Legal disclaimer toggle
-            const legalToggle = document.getElementById('legal-toggle');
-            if (legalToggle) {
-                legalToggle.addEventListener('click', function() {
-                    const disclaimer = document.getElementById('legal-disclaimer');
-                    if (disclaimer.classList.contains('hidden')) {
-                        disclaimer.classList.remove('hidden');
-                        this.innerHTML = '<i class="fas fa-chevron-up mr-2"></i> Información legal';
+                    
+                    // Use Vercel URL directly
+                    const vercelUrl = 'https://vinculemos.vercel.app';
+                    console.log('Sending request to:', `${vercelUrl}/api/flow/payment`);
+                    
+                    const response = await fetch(`${vercelUrl}/api/flow/payment`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    console.log('Response status:', response.status);
+                    
+                    // Check if response is JSON
+                    const contentType = response.headers.get('content-type');
+                    if (!contentType || !contentType.includes('application/json')) {
+                        const text = await response.text();
+                        console.error('Non-JSON response:', text);
+                        throw new Error('El servidor respondió con un error inesperado');
+                    }
+                    
+                    const result = await response.json();
+                    console.log('API response:', result);
+                    
+                    if (!response.ok) {
+                        throw new Error(result.error || `Error ${response.status} al procesar el pago`);
+                    }
+                    
+                    if (result.success && result.flowUrl) {
+                        console.log('Redirecting to Flow:', result.flowUrl);
+                        // Redirect to Flow payment page
+                        window.location.href = result.flowUrl;
                     } else {
-                        disclaimer.classList.add('hidden');
-                        this.innerHTML = '<i class="fas fa-chevron-down mr-2"></i> Información legal';
+                        throw new Error(result.error || 'No se pudo generar el enlace de pago');
                     }
-                });
-            }
-
-            // Price display functionality - FIXED: Removed duplicate declaration
-            const experienceSelect = document.getElementById('experience');
-            if (experienceSelect) {
-                experienceSelect.addEventListener('change', function() {
-                    const selectedOption = this.options[this.selectedIndex];
-                    const price = selectedOption.getAttribute('data-price');
                     
-                    if (price) {
-                        document.getElementById('selected-price').textContent = parseInt(price).toLocaleString('es-CL');
-                        document.getElementById('price-display').style.display = 'block';
-                    } else {
-                        document.getElementById('price-display').style.display = 'none';
-                    }
-                });
-            }
-
-            // Form submission with Flow integration
-            const paymentForm = document.getElementById('payment-form');
-            if (paymentForm) {
-                paymentForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    console.log('Form submission started');
+                } catch (error) {
+                    console.error('Payment error:', error);
+                    alert('Error al procesar el pago: ' + error.message);
                     
-                    const payBtn = document.getElementById('pay-btn');
-                    const spinner = document.getElementById('loading-spinner');
-                    const originalBtnText = payBtn.innerHTML;
-                    
-                    try {
-                        // Show loading state
-                        payBtn.disabled = true;
-                        if (spinner) spinner.style.display = 'block';
-                        payBtn.innerHTML = '<div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Procesando...';
-                        
-                        // Get form data
-                        const formData = {
-                            experience: document.getElementById('experience').value,
-                            name: document.getElementById('name').value,
-                            email: document.getElementById('email').value,
-                            phone: document.getElementById('phone').value,
-                            genero: document.getElementById('genero').value,
-                            comments: document.getElementById('comments').value,
-                            price: document.getElementById('experience').options[document.getElementById('experience').selectedIndex].getAttribute('data-price')
-                        };
-                        
-                        console.log('Form data:', formData);
-                        
-                        // Validate required fields
-                        if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.genero || !formData.price) {
-                            throw new Error('Por favor completa todos los campos requeridos');
-                        }
-                        
-                        // Use Vercel URL directly
-                        const vercelUrl = 'https://vinculemos.vercel.app';
-                        console.log('Sending request to:', `${vercelUrl}/api/flow/payment`);
-                        
-                        const response = await fetch(`${vercelUrl}/api/flow/payment`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(formData)
-                        });
-                        
-                        console.log('Response status:', response.status);
-                        
-                        // Check if response is JSON
-                        const contentType = response.headers.get('content-type');
-                        if (!contentType || !contentType.includes('application/json')) {
-                            const text = await response.text();
-                            console.error('Non-JSON response:', text);
-                            throw new Error('El servidor respondió con un error inesperado');
-                        }
-                        
-                        const result = await response.json();
-                        console.log('API response:', result);
-                        
-                        if (!response.ok) {
-                            throw new Error(result.error || `Error ${response.status} al procesar el pago`);
-                        }
-                        
-                        if (result.success && result.flowUrl) {
-                            console.log('Redirecting to Flow:', result.flowUrl);
-                            // Redirect to Flow payment page
-                            window.location.href = result.flowUrl;
-                        } else {
-                            throw new Error(result.error || 'No se pudo generar el enlace de pago');
-                        }
-                        
-                    } catch (error) {
-                        console.error('Payment error:', error);
-                        alert('Error al procesar el pago: ' + error.message);
-                        
-                        // Reset button state
-                        payBtn.disabled = false;
-                        if (spinner) spinner.style.display = 'none';
-                        payBtn.innerHTML = originalBtnText;
-                    }
-                });
-            }
+                    // Reset button state
+                    payBtn.disabled = false;
+                    if (spinner) spinner.classList.add('hidden');
+                    payBtn.innerHTML = originalBtnText;
+                }
+            });
+        } else {
+            console.error('Payment form not found!');
+        }
 
-            // Auto-select the only experience option - FIXED: Using same variable name
-            const expSelect = document.getElementById('experience');
-            if (expSelect) {
-                expSelect.selectedIndex = 1;
-            }
-            
-            // Initialize price display
-            const priceDisplay = document.getElementById('price-display');
-            if (priceDisplay) {
-                priceDisplay.style.display = 'block';
-            }
-        });
-    </script>
+        // Auto-select the only experience option
+        const expSelect = document.getElementById('experience');
+        if (expSelect && expSelect.options.length > 1) {
+            expSelect.selectedIndex = 1;
+        }
+        
+        // Initialize price display
+        const priceDisplay = document.getElementById('price-display');
+        if (priceDisplay) {
+            priceDisplay.style.display = 'block';
+        }
+    });
+</script>
 </body>
 </html>
