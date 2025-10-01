@@ -12,6 +12,19 @@ const FLOW_CONFIG = {
   URL_CONFIRMATION: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/flow/confirm` : /api/flow/confirm',
   URL_RETURN: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/payment/success` :/payment/success.html'
 };
+module.exports = async function handler(req, res) {
+  // Debug: Check if environment variables are loaded
+  console.log('API_KEY exists:', !!process.env.FLOW_API_KEY);
+  console.log('SECRET_KEY exists:', !!process.env.FLOW_SECRET_KEY);
+  
+  // If missing credentials, return proper JSON error
+  if (!process.env.FLOW_API_KEY || !process.env.FLOW_SECRET_KEY) {
+    return res.status(500).json({
+      error: 'Configuración del servidor incompleta',
+      details: 'Credenciales de Flow no configuradas'
+    });
+  }
+
 
 // Función para generar firma Flow
 function generateFlowSignature(params, secretKey) {
