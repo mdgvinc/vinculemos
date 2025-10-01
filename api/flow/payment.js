@@ -4,13 +4,13 @@ const crypto = require('crypto');
 // Configuración de Flow - REEMPLAZAR CON TUS CREDENCIALES REALES
 const FLOW_CONFIG = {
   // Sandbox credentials (para pruebas)
-  API_URL: process.env.FLOW_API_URL || 'https://sandbox.flow.cl/api',
+  API_URL: process.env.FLOW_API_URL || 'https://www.flow.cl/api',
   API_KEY: process.env.FLOW_API_KEY || 'tu_api_key_aqui',
   SECRET_KEY: process.env.FLOW_SECRET_KEY || 'tu_secret_key_aqui',
   
   // URLs de retorno
-  URL_CONFIRMATION: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/flow/confirm` : 'http://localhost:3000/api/flow/confirm',
-  URL_RETURN: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/payment/success` : 'http://localhost:3000/payment/success.html'
+  URL_CONFIRMATION: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/flow/confirm` : /api/flow/confirm',
+  URL_RETURN: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/payment/success` :/payment/success.html'
 };
 
 // Función para generar firma Flow
