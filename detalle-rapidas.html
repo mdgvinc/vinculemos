@@ -718,7 +718,7 @@ document.getElementById('experience').addEventListener('change', function() {
     }
 });
 
-// Form submission with Flow integration - IMPROVED VERSION
+// Form submission with Flow integration - FIXED VERSION
 document.getElementById('payment-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -753,9 +753,9 @@ document.getElementById('payment-form').addEventListener('submit', async functio
         
         console.log('Sending payment request:', formData);
         
-        // Use absolute URL for reliability
-        const baseUrl = window.location.origin;
-        const response = await fetch(`${baseUrl}/api/flow/payment`, {
+        // FIX: Use Vercel URL directly - THIS IS THE KEY FIX
+        const vercelUrl = 'https://vinculemos.vercel.app';
+        const response = await fetch(`${vercelUrl}/api/flow/payment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
