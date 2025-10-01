@@ -1,6 +1,5 @@
-// /api/flow/payment.js - Vercel Serverless Function para integración con Flow
-
-import crypto from 'crypto';
+// /api/flow/payment.js - Vercel Serverless Function para integración con Flow (CommonJS)
+const crypto = require('crypto');
 
 // Configuración de Flow - REEMPLAZAR CON TUS CREDENCIALES REALES
 const FLOW_CONFIG = {
@@ -31,7 +30,21 @@ function generateOrderNumber() {
   return `VIN-${timestamp}-${random}`;
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
+  // Configurar CORS para permitir requests desde tu frontend
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
+
+  // Manejar preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   // Solo permitir POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido' });
@@ -42,7 +55,16 @@ export default async function handler(req, res) {
 
     // Validar datos requeridos
     if (!experience || !name || !email || !phone || !date || !price) {
-      return res.status(400).json({ error: 'Faltan datos requeridos' });
+      return res.status(400).json({ 
+        error: 'Faltan datos requeridos',
+        required: ['experience', 'name', 'email', 'phone', 'date', 'price']
+      });
+    }
+
+    // Validar que price sea un número válido
+    const amount = parseInt(price);
+    if (isNaN(amount) || amount <= 0) {
+      return res.status(400).json({ error: 'El precio debe ser un número válido mayor a 0' });
     }
 
     // Generar número de orden único
@@ -54,7 +76,7 @@ export default async function handler(req, res) {
       commerceOrder: commerceOrder,
       subject: `Vinculemos - ${experience}`,
       currency: 'CLP',
-      amount: parseInt(price),
+      amount: amount,
       email: email,
       paymentMethod: 9, // 9 = Todos los medios de pago
       urlConfirmation: FLOW_CONFIG.URL_CONFIRMATION,
@@ -64,10 +86,12 @@ export default async function handler(req, res) {
         name: name,
         phone: phone,
         date: date,
-        comments: comments,
+        comments: comments || '',
         experience: experience
       })
     };
+
+    console.log('Creando pago Flow para:', email, 'Monto:', amount);
 
     // Generar firma
     const signature = generateFlowSignature(flowParams, FLOW_CONFIG.SECRET_KEY);
@@ -91,16 +115,17 @@ export default async function handler(req, res) {
     const flowResult = await flowResponse.json();
 
     if (flowResult.url && flowResult.token) {
-      // Aquí podrías guardar la información en una base de datos
-      // Por ahora, solo devolvemos la URL de pago
+      console.log('Pago creado exitosamente:', commerceOrder);
       
       return res.status(200).json({
         success: true,
         flowUrl: `${flowResult.url}?token=${flowResult.token}`,
         commerceOrder: commerceOrder,
-        token: flowResult.token
+        token: flowResult.token,
+        redirectUrl: flowResult.url
       });
     } else {
+      console.error('Error de Flow:', flowResult);
       throw new Error(flowResult.message || 'Error al crear el pago en Flow');
     }
 
@@ -111,13 +136,4 @@ export default async function handler(req, res) {
       details: error.message 
     });
   }
-}
-
-// Configuración para Vercel
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '1mb',
-    },
-  },
 }
