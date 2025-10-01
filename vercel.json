@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "functions": {
+    "api/flow/payment.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
+    },
+    "api/flow/confirm.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/payment/success",
+      "destination": "/payment/success.html"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
