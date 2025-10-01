@@ -500,7 +500,7 @@
         </div>
     </footer>
 
- <script>
+<script>
         // Mobile menu functionality
         function closeMobileMenu() {
             document.getElementById("mobile-menu").classList.remove("active");
@@ -524,7 +524,7 @@
             }
         });
 
-        // Floating heart button functionality - FIXED
+        // All functionality inside DOMContentLoaded to avoid duplicate declarations
         document.addEventListener('DOMContentLoaded', function() {
             // Fix for floating heart button
             const floatingHeart = document.querySelector('.floating-btn');
@@ -535,7 +535,7 @@
                 });
             }
 
-            // Fix for "Participar" button in hero section - FIXED
+            // Fix for "Participar" button in hero section
             const participarBtn = document.getElementById('floating-heart-btn');
             if (participarBtn) {
                 participarBtn.addEventListener('click', function(e) {
@@ -577,7 +577,7 @@
                 });
             }
 
-            // Price display functionality
+            // Price display functionality - FIXED: Removed duplicate declaration
             const experienceSelect = document.getElementById('experience');
             if (experienceSelect) {
                 experienceSelect.addEventListener('change', function() {
@@ -593,7 +593,7 @@
                 });
             }
 
-            // Form submission with Flow integration - COMPLETELY REWRITTEN
+            // Form submission with Flow integration
             const paymentForm = document.getElementById('payment-form');
             if (paymentForm) {
                 paymentForm.addEventListener('submit', async function(e) {
@@ -677,10 +677,10 @@
                 });
             }
 
-            // Auto-select the only experience option
-            const experienceSelect = document.getElementById('experience');
-            if (experienceSelect) {
-                experienceSelect.selectedIndex = 1;
+            // Auto-select the only experience option - FIXED: Using same variable name
+            const expSelect = document.getElementById('experience');
+            if (expSelect) {
+                expSelect.selectedIndex = 1;
             }
             
             // Initialize price display
