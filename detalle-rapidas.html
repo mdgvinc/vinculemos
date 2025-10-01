@@ -402,7 +402,7 @@
                                     <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Experiencia</label>
                                     <select id="experience" name="experience" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
                                         <option value="" disabled selected>Selecciona una experiencia</option>
-                                        <option value="Citas Rápidas Vinculemos" data-price="29990">Citas Rápidas Vinculemos - $29,990 CLP</option>
+                                        <option value="Citas Rápidas Vinculemos" data-price="29990">Citas rápidas (30 a 45 años) - $29,990 CLP</option>
                                     </select>
                                 </div>
                                 
@@ -421,10 +421,15 @@
                                     <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
                                 </div>
                                 
-                                <div>
-                                    <label for="date" class="block text-sm font-medium text-gray-700 mb-2">Fecha preferida</label>
-                                    <input type="date" id="date" name="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
-                                </div>
+
+<div>
+    <label for="genero" class="block text-sm font-medium text-gray-700 mb-2">Género</label>
+    <select id="genero" name="genero" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+        <option value="" disabled selected>Selecciona tu género</option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+    </select>
+</div>
                                 
                                 <div>
                                     <div id="price-display" class="bg-gray-100 p-4 rounded-md text-center">
@@ -495,7 +500,7 @@
         </div>
     </footer>
 
-  <script>
+ <script>
         // Mobile menu functionality
         function closeMobileMenu() {
             document.getElementById("mobile-menu").classList.remove("active");
@@ -521,22 +526,25 @@
 
         // Floating heart button functionality - FIXED
         document.addEventListener('DOMContentLoaded', function() {
-            const floatingHeart = document.getElementById('floating-heart');
+            // Fix for floating heart button
+            const floatingHeart = document.querySelector('.floating-btn');
             if (floatingHeart) {
-                floatingHeart.addEventListener('click', function() {
+                floatingHeart.addEventListener('click', function(e) {
+                    e.preventDefault();
                     document.getElementById('popup-overlay').classList.add('active');
                 });
             }
 
-            // Also make the "Participar" button open the popup - FIXED
+            // Fix for "Participar" button in hero section - FIXED
             const participarBtn = document.getElementById('floating-heart-btn');
             if (participarBtn) {
-                participarBtn.addEventListener('click', function() {
+                participarBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
                     document.getElementById('popup-overlay').classList.add('active');
                 });
             }
 
-            // Close popup - FIXED
+            // Close popup
             const popupClose = document.getElementById('popup-close');
             if (popupClose) {
                 popupClose.addEventListener('click', function() {
@@ -544,7 +552,7 @@
                 });
             }
 
-            // Close popup when clicking outside - FIXED
+            // Close popup when clicking outside
             const popupOverlay = document.getElementById('popup-overlay');
             if (popupOverlay) {
                 popupOverlay.addEventListener('click', function(event) {
@@ -554,7 +562,7 @@
                 });
             }
 
-            // Legal disclaimer toggle - FIXED
+            // Legal disclaimer toggle
             const legalToggle = document.getElementById('legal-toggle');
             if (legalToggle) {
                 legalToggle.addEventListener('click', function() {
@@ -569,7 +577,7 @@
                 });
             }
 
-            // Price display functionality - FIXED
+            // Price display functionality
             const experienceSelect = document.getElementById('experience');
             if (experienceSelect) {
                 experienceSelect.addEventListener('change', function() {
@@ -585,11 +593,12 @@
                 });
             }
 
-            // Form submission with Flow integration - FIXED
+            // Form submission with Flow integration - COMPLETELY REWRITTEN
             const paymentForm = document.getElementById('payment-form');
             if (paymentForm) {
                 paymentForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
+                    console.log('Form submission started');
                     
                     const payBtn = document.getElementById('pay-btn');
                     const spinner = document.getElementById('loading-spinner');
@@ -602,28 +611,27 @@
                         payBtn.innerHTML = '<div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Procesando...';
                         
                         // Get form data
-                        const selectedExperience = document.getElementById('experience');
-                        const price = selectedExperience.options[selectedExperience.selectedIndex].getAttribute('data-price');
-                        
                         const formData = {
                             experience: document.getElementById('experience').value,
                             name: document.getElementById('name').value,
                             email: document.getElementById('email').value,
                             phone: document.getElementById('phone').value,
-                            date: document.getElementById('date').value,
+                            genero: document.getElementById('genero').value,
                             comments: document.getElementById('comments').value,
-                            price: price
+                            price: document.getElementById('experience').options[document.getElementById('experience').selectedIndex].getAttribute('data-price')
                         };
                         
+                        console.log('Form data:', formData);
+                        
                         // Validate required fields
-                        if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.date || !formData.price) {
+                        if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.genero || !formData.price) {
                             throw new Error('Por favor completa todos los campos requeridos');
                         }
                         
-                        console.log('Sending payment request:', formData);
-                        
                         // Use Vercel URL directly
                         const vercelUrl = 'https://vinculemos.vercel.app';
+                        console.log('Sending request to:', `${vercelUrl}/api/flow/payment`);
+                        
                         const response = await fetch(`${vercelUrl}/api/flow/payment`, {
                             method: 'POST',
                             headers: {
@@ -632,15 +640,18 @@
                             body: JSON.stringify(formData)
                         });
                         
+                        console.log('Response status:', response.status);
+                        
                         // Check if response is JSON
                         const contentType = response.headers.get('content-type');
                         if (!contentType || !contentType.includes('application/json')) {
                             const text = await response.text();
-                            console.error('Non-JSON response:', text.substring(0, 200));
-                            throw new Error('Error inesperado del servidor');
+                            console.error('Non-JSON response:', text);
+                            throw new Error('El servidor respondió con un error inesperado');
                         }
                         
                         const result = await response.json();
+                        console.log('API response:', result);
                         
                         if (!response.ok) {
                             throw new Error(result.error || `Error ${response.status} al procesar el pago`);
@@ -666,26 +677,6 @@
                 });
             }
 
-            // Set default date to October 30th and minimum date to today
-            const dateInput = document.getElementById('date');
-            if (dateInput) {
-                const today = new Date().toISOString().split('T')[0];
-                dateInput.setAttribute('min', today);
-                
-                // Set default date to October 30, 2024
-                const defaultDate = '2024-10-30';
-                dateInput.value = defaultDate;
-            }
-            
-            // Optional: Add input validation
-            const phoneInput = document.getElementById('phone');
-            if (phoneInput) {
-                phoneInput.addEventListener('input', function(e) {
-                    // Allow only numbers, +, and spaces
-                    e.target.value = e.target.value.replace(/[^\d+\s]/g, '');
-                });
-            }
-            
             // Auto-select the only experience option
             const experienceSelect = document.getElementById('experience');
             if (experienceSelect) {
