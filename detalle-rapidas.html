@@ -670,7 +670,7 @@ document.getElementById('legal-toggle').addEventListener('click', function() {
     }
 });
 
-// Updated payment form functionality for Flow.cl with FormSubmit.co
+// Updated payment form functionality with better error handling
 document.getElementById('payment-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -720,6 +720,8 @@ document.getElementById('payment-form').addEventListener('submit', async functio
     submitBtn.disabled = true;
     
     try {
+        console.log('Creating payment for:', formData.userEmail);
+        
         // Create Flow payment
         const paymentResponse = await fetch('/api/flow/create-payment', {
             method: 'POST',
@@ -729,15 +731,29 @@ document.getElementById('payment-form').addEventListener('submit', async functio
             body: JSON.stringify(formData)
         });
         
-        if (!paymentResponse.ok) {
-            const errorData = await paymentResponse.json();
-            throw new Error(errorData.error || 'Error creating payment');
+        // First, check if the response is JSON
+        const responseText = await paymentResponse.text();
+        let data;
+        
+        try {
+            data = JSON.parse(responseText);
+        } catch (parseError) {
+            console.error('Failed to parse API response:', responseText);
+            throw new Error('El servidor respondió con un formato inválido. Por favor contacta a soporte.');
         }
         
-        const data = await paymentResponse.json();
+        if (!paymentResponse.ok) {
+            throw new Error(data.error || data.message || `Error del servidor: ${paymentResponse.status}`);
+        }
+        
+        if (!data.success) {
+            throw new Error(data.message || 'Error creando el pago');
+        }
         
         // Store commerceOrder in localStorage for status checking
-        localStorage.setItem('lastCommerceOrder', data.commerceOrder);
+        if (data.commerceOrder) {
+            localStorage.setItem('lastCommerceOrder', data.commerceOrder);
+        }
         
         // Populate hidden FormSubmit.co form
         document.getElementById('formsubmit_experience').value = formData.experience;
@@ -754,13 +770,26 @@ document.getElementById('payment-form').addEventListener('submit', async functio
         formsubmitForm.submit();
         
         // Redirect to Flow payment page
-        window.location.href = data.flowPayment.url;
+        if (data.flowPayment && data.flowPayment.url) {
+            console.log('Redirecting to Flow:', data.flowPayment.url);
+            window.location.href = data.flowPayment.url;
+        } else {
+            throw new Error('No se recibió la URL de pago');
+        }
             
     } catch (error) {
         console.error('Payment error:', error);
         
         // Show user-friendly error message
-        alert(`Error al procesar el pago: ${error.message}. Por favor intenta nuevamente o contacta a soporte.`);
+        let errorMessage = error.message;
+        
+        if (error.message.includes('Failed to fetch')) {
+            errorMessage = 'Error de conexión. Verifica tu internet e intenta nuevamente.';
+        } else if (error.message.includes('JSON')) {
+            errorMessage = 'Error del servidor. Por favor contacta a soporte.';
+        }
+        
+        alert(`Error al procesar el pago: ${errorMessage}`);
         
         // Reset button
         submitBtn.innerHTML = originalText;
