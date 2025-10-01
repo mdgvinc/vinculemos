@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas Rápidas - Vinculemos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-magenta: #FF0079;
+            --primary-azul: #092E3E;
+            --secondary-rosa: #FC89C6;
+            --secondary-celeste: #7784CF;
+            --secondary-crema: #EBE1D9;
+        }
+
+         body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: var(--primary-azul);
+        color: #333;
+    }
+
+    .header {
+        background: var(--secondary-crema);
+    }
+
+    .header-gradient {
+        background: linear-gradient(135deg, var(--primary-azul) 0%, #1a4a5f 100%);
+    }
+
+    /* Logo Styles */
+    .logo-container {
+        height: 90px;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo-img {
+        max-height: 90px;
+        width: auto;
+        object-fit: contain;
+    }
+
+        .heart-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-primary {
+            background: var(--primary-magenta);
+            color: white;
+            border: 2px solid var(--primary-magenta);
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary-magenta);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-crema);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .price-badge {
+            background: var(--primary-magenta);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-magenta);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(255, 0, 121, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 0, 121, 0.6);
+            color: white;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100%;
+            background: white;
+            z-index: 1500;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header text-gray-800 py-6">
+    <div class="container mx-auto px-4 h-full">
+        <div class="flex justify-between items-center h-full py-2">
+            <!-- Logo Container -->
+            <div class="logo-container">
+                <img src="logo.png" alt="VINCULEMOS Logo" class="logo-img">
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#que-son" class="hover:text-pink-200 transition">¿Qué son?</a>
+                <a href="#como-funciona" class="hover:text-pink-200 transition">¿Cómo funciona?</a>
+                <a href="#por-que-elegirnos" class="hover:text-pink-200 transition">¿Por qué elegirnos?</a>
+                <a href="#reservar" class="hover:text-pink-200 transition">Reservar</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="mobile-menu-btn text-white md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu">
+        <button id="mobile-menu-close" class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col space-y-6 mt-8">
+            <a href="#que-son" class="text-lg font-medium">¿Qué son?</a>
+            <a href="#como-funciona" class="text-lg font-medium">¿Cómo funciona?</a>
+            <a href="#por-que-elegirnos" class="text-lg font-medium">¿Por qué elegirnos?</a>
+            <a href="#reservar" class="text-lg font-medium">Reservar</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="py-16 header-gradient text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">💘 Citas Rápidas Vinculemos</h1>
+            <p class="text-xl max-w-3xl mx-auto mb-8">
+                "¿Quieres conocer a varias personas en una sola noche de manera divertida y auténtica? Las citas rápidas de Vinculemos son la forma ideal de abrirte a nuevas conexiones, sin pantallas, sin filtros y con la chispa de lo real."
+            </p>
+            <button id="floating-heart-btn" class="btn-primary text-lg">
+                <i class="fas fa-heart mr-2"></i> Vinculemos
+            </button>
+        </div>
+    </section>
+
+    <!-- What are Speed Dates Section -->
+    <section id="que-son" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">¿Qué son las Citas Rápidas?</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <p class="text-lg mb-8 text-center">
+                    "Las citas rápidas (speed dating) son encuentros breves, dinámicos y guiados en un ambiente seguro y relajado. Durante una velada de aproximadamente 3 horas, tendrás la oportunidad de conversar con 14 personas del sexo opuesto."
+                </p>
+                
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-pink-500 mb-8">
+                    <p class="text-lg">
+                        "Cada mini cita dura entre 10/15 minutos, tiempo suficiente para compartir gustos, intereses y primeras impresiones. Al finalizar, podrás elegir a las personas que más te interesaron y, si la atracción es mutua, ¡te enviaremos el contacto para que sigas conociéndolas!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works Section -->
+    <section id="como-funciona" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">¿Cómo funciona?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="feature-icon">
+                        <span>🥂</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Bienvenida especial con un trago de cortesía</h3>
+                    <p class="text-gray-600">Empezamos relajados: un brindis para que la noche comience con buena energía.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="feature-icon">
+                        <span>🎲</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Actividad rompe hielo</h3>
+                    <p class="text-gray-600">Una dinámica divertida para soltar nervios y reír en grupo antes de las rondas.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="feature-icon">
+                        <span>🪑</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Mesas de 4 personas</h3>
+                    <p class="text-gray-600">(2 hombres y 2 mujeres) con cartas dinámicas con preguntas y juegos (úsalas solo si lo deseas).</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="feature-icon">
+                        <span>⏱</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Rondas de 15 minutos</h3>
+                    <p class="text-gray-600">Cada hombre rota de mesa, asegurando que todos puedan conocerse.</p>
+                </div>
+                
+                <!-- Step 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="feature-icon">
+                        <span>⏳</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Duración total: 3 horas</h3>
+                    <p class="text-gray-600">Música, buena onda y un ambiente pensado para que fluya la conexión.</p>
+                </div>
+                
+                <!-- Step 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="feature-icon">
+                        <span>🍽</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Opciones para compartir</h3>
+                    <p class="text-gray-600">Puedes pedir tablas para picotear y compartir durante la experiencia.</p>
+                </div>
+            </div>
+            
+            <!-- Final Step -->
+            <div class="max-w-4xl mx-auto mt-12 bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="feature-icon mx-auto">
+                    <span>💌</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Un final con posibilidades</h3>
+                <p class="text-lg">
+                    "Al terminar, indicas en privado quién te interesó. Si hay match, recibirás el contacto de manera segura y reservada."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="por-que-elegirnos" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">¿Por qué elegir Vinculemos?</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-4">✨</span>
+                        <p class="text-lg">Porque ampliamos tu círculo social en poco tiempo.</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-4">✨</span>
+                        <p class="text-lg">Porque es un espacio seguro, guiado y entretenido.</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-4">✨</span>
+                        <p class="text-lg">Porque no solo se trata de encontrar pareja: también puedes descubrir nuevas amistades y afinidades.</p>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-4">✨</span>
+                        <p class="text-lg">Porque las dinámicas están diseñadas para que la conversación fluya sin incomodidad.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-blue-500 mb-8">
+                    <h3 class="text-xl font-bold mb-4">La experiencia completa</h3>
+                    <p class="text-lg">
+                        "Nuestros eventos no terminan cuando finalizan las rondas: siempre te invitamos a quedarte en el lugar anfitrión (bar, restaurante, pub) para seguir compartiendo con los demás asistentes, en un ambiente más relajado y sin cronómetros."
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <p class="text-lg font-medium">
+                        "👉 En Vinculemos, las citas rápidas son mucho más que un encuentro: son una experiencia segura, emocionante y real para solteros y solteras de 28 a 60 años."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="reservar" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Reserva tu Participación</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-8">
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Citas Rápidas Vinculemos</h3>
+                                <p class="text-gray-600">Una experiencia única para conocer personas</p>
+                            </div>
+                            <div class="mt-4 md:mt-0">
+                                <div class="price-badge text-xl">
+                                    PREVENTA: $29,990 CLP
+                                </div>
+                                <p class="text-sm text-gray-500 mt-2 text-center">Normal: $35,000 CLP</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg mb-6">
+                            <p class="text-center font-medium text-yellow-800">
+                                <i class="fas fa-exclamation-circle mr-2"></i> No se venden entradas en la puerta
+                            </p>
+                            <p class="text-center text-yellow-700 mt-2">
+                                No hay acceso sin entradas
+                            </p>
+                        </div>
+                        
+                        <form id="payment-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Experiencia</label>
+                                    <select id="experience" name="experience" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+                                        <option value="" disabled selected>Selecciona una experiencia</option>
+                                        <option value="Citas rápidas (30 a 45 años)" data-price="29990">Citas rápidas (30 a 45 años) - $29,990 CLP</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nombre completo</label>
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+                                </div>
+                                
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                                    <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+                                </div>
+                                
+
+<div>
+    <label for="genero" class="block text-sm font-medium text-gray-700 mb-2">Género</label>
+    <select id="genero" name="genero" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500" required>
+        <option value="" disabled selected>Selecciona tu género</option>
+        <option value="masculino">Masculino</option>
+        <option value="femenino">Femenino</option>
+    </select>
+</div>
+                                
+                                <div>
+                                    <div id="price-display" class="bg-gray-100 p-4 rounded-md text-center">
+                                        <p class="text-sm text-gray-600">Precio:</p>
+                                        <p class="text-xl font-bold text-pink-600">$<span id="selected-price">29,990</span> CLP</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="comments" class="block text-sm font-medium text-gray-700 mb-2">Comentarios adicionales (opcional)</label>
+                                <textarea id="comments" name="comments" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+                            </div>
+                            
+                            <div class="bg-gray-50 p-4 rounded-md">
+                                <button type="button" id="legal-toggle" class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
+                                    <i class="fas fa-chevron-down mr-2"></i> Información legal
+                                </button>
+                                <div id="legal-disclaimer" class="mt-2 text-xs text-gray-600 hidden">
+                                    <p>Al realizar tu reserva, aceptas nuestros términos y condiciones. Vinculemos se reserva el derecho de admisión. Las cancelaciones con más de 48 horas de anticipación recibirán un reembolso del 80%. No se realizan reembolsos por cancelaciones con menos de 48 horas de anticipación.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" id="pay-btn" class="btn-primary text-lg px-8 py-3">
+                                    <i class="fas fa-lock mr-2"></i>Proceder al Pago con Flow
+                                </button>
+                                <div id="loading-spinner" class="mt-4 hidden">
+                                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600"></div>
+                                    <p class="mt-2 text-gray-600">Procesando tu pago...</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Button -->
+    <a href="#reservar" class="floating-btn heart-pulse">
+        <i class="fas fa-heart"></i>
+    </a>
+
+    <!-- Popup Overlay -->
+    <div id="popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <button id="popup-close" class="popup-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="text-2xl font-bold mb-4 text-center">💘 Reserva tu Participación</h3>
+            <p class="text-gray-600 mb-6 text-center">
+                Completa el formulario para reservar tu lugar en nuestras citas rápidas
+            </p>
+            <div class="text-center">
+                <a href="#reservar" class="btn-primary inline-block">
+                    <i class="fas fa-arrow-down mr-2"></i>Ir al Formulario
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2024 Vinculemos - Citas Rápidas. Todos los derechos reservados.</p>
+            <p class="mt-2 text-gray-400">Contacto: info@vinculemos.cl</p>
+        </div>
+    </footer>
+
+<script>
+        // Mobile menu functionality
+        function closeMobileMenu() {
+            document.getElementById("mobile-menu").classList.remove("active");
+        }
+
+        document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+            document.getElementById("mobile-menu").classList.add("active");
+        });
+
+        document.getElementById("mobile-menu-close").addEventListener("click", function() {
+            closeMobileMenu();
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            
+            if (mobileMenu && menuBtn && !mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // All functionality inside DOMContentLoaded to avoid duplicate declarations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fix for floating heart button
+            const floatingHeart = document.querySelector('.floating-btn');
+            if (floatingHeart) {
+                floatingHeart.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('popup-overlay').classList.add('active');
+                });
+            }
+
+            // Fix for "Participar" button in hero section
+            const participarBtn = document.getElementById('floating-heart-btn');
+            if (participarBtn) {
+                participarBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('popup-overlay').classList.add('active');
+                });
+            }
+
+            // Close popup
+            const popupClose = document.getElementById('popup-close');
+            if (popupClose) {
+                popupClose.addEventListener('click', function() {
+                    document.getElementById('popup-overlay').classList.remove('active');
+                });
+            }
+
+            // Close popup when clicking outside
+            const popupOverlay = document.getElementById('popup-overlay');
+            if (popupOverlay) {
+                popupOverlay.addEventListener('click', function(event) {
+                    if (event.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            }
+
+            // Legal disclaimer toggle
+            const legalToggle = document.getElementById('legal-toggle');
+            if (legalToggle) {
+                legalToggle.addEventListener('click', function() {
+                    const disclaimer = document.getElementById('legal-disclaimer');
+                    if (disclaimer.classList.contains('hidden')) {
+                        disclaimer.classList.remove('hidden');
+                        this.innerHTML = '<i class="fas fa-chevron-up mr-2"></i> Información legal';
+                    } else {
+                        disclaimer.classList.add('hidden');
+                        this.innerHTML = '<i class="fas fa-chevron-down mr-2"></i> Información legal';
+                    }
+                });
+            }
+
+            // Price display functionality - FIXED: Removed duplicate declaration
+            const experienceSelect = document.getElementById('experience');
+            if (experienceSelect) {
+                experienceSelect.addEventListener('change', function() {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const price = selectedOption.getAttribute('data-price');
+                    
+                    if (price) {
+                        document.getElementById('selected-price').textContent = parseInt(price).toLocaleString('es-CL');
+                        document.getElementById('price-display').style.display = 'block';
+                    } else {
+                        document.getElementById('price-display').style.display = 'none';
+                    }
+                });
+            }
+
+            // Form submission with Flow integration
+            const paymentForm = document.getElementById('payment-form');
+            if (paymentForm) {
+                paymentForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    console.log('Form submission started');
+                    
+                    const payBtn = document.getElementById('pay-btn');
+                    const spinner = document.getElementById('loading-spinner');
+                    const originalBtnText = payBtn.innerHTML;
+                    
+                    try {
+                        // Show loading state
+                        payBtn.disabled = true;
+                        if (spinner) spinner.style.display = 'block';
+                        payBtn.innerHTML = '<div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Procesando...';
+                        
+                        // Get form data
+                        const formData = {
+                            experience: document.getElementById('experience').value,
+                            name: document.getElementById('name').value,
+                            email: document.getElementById('email').value,
+                            phone: document.getElementById('phone').value,
+                            genero: document.getElementById('genero').value,
+                            comments: document.getElementById('comments').value,
+                            price: document.getElementById('experience').options[document.getElementById('experience').selectedIndex].getAttribute('data-price')
+                        };
+                        
+                        console.log('Form data:', formData);
+                        
+                        // Validate required fields
+                        if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.genero || !formData.price) {
+                            throw new Error('Por favor completa todos los campos requeridos');
+                        }
+                        
+                        // Use Vercel URL directly
+                        const vercelUrl = 'https://vinculemos.vercel.app';
+                        console.log('Sending request to:', `${vercelUrl}/api/flow/payment`);
+                        
+                        const response = await fetch(`${vercelUrl}/api/flow/payment`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        console.log('Response status:', response.status);
+                        
+                        // Check if response is JSON
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            const text = await response.text();
+                            console.error('Non-JSON response:', text);
+                            throw new Error('El servidor respondió con un error inesperado');
+                        }
+                        
+                        const result = await response.json();
+                        console.log('API response:', result);
+                        
+                        if (!response.ok) {
+                            throw new Error(result.error || `Error ${response.status} al procesar el pago`);
+                        }
+                        
+                        if (result.success && result.flowUrl) {
+                            console.log('Redirecting to Flow:', result.flowUrl);
+                            // Redirect to Flow payment page
+                            window.location.href = result.flowUrl;
+                        } else {
+                            throw new Error(result.error || 'No se pudo generar el enlace de pago');
+                        }
+                        
+                    } catch (error) {
+                        console.error('Payment error:', error);
+                        alert('Error al procesar el pago: ' + error.message);
+                        
+                        // Reset button state
+                        payBtn.disabled = false;
+                        if (spinner) spinner.style.display = 'none';
+                        payBtn.innerHTML = originalBtnText;
+                    }
+                });
+            }
+
+            // Auto-select the only experience option - FIXED: Using same variable name
+            const expSelect = document.getElementById('experience');
+            if (expSelect) {
+                expSelect.selectedIndex = 1;
+            }
+            
+            // Initialize price display
+            const priceDisplay = document.getElementById('price-display');
+            if (priceDisplay) {
+                priceDisplay.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
