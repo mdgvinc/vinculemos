@@ -777,6 +777,38 @@ document.addEventListener('DOMContentLoaded', function() {
     dateInput.setAttribute('min', today);
 });
 
+  // In your frontend JavaScript
+async function processPayment(formData) {
+  try {
+    const response = await fetch('/api/flow/payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      console.error('Non-JSON response:', text.substring(0, 200));
+      throw new Error('El servidor respondió con un error inesperado');
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Error al procesar el pago');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Payment error:', error);
+    throw error;
+  }
+}
+
 // Video hover play functionality
 document.querySelectorAll('.video-hover iframe').forEach(iframe => {
     const src = iframe.src;
