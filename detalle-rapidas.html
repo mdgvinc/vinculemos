@@ -361,7 +361,7 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
           <div class="bg-slate-700 p-4 rounded-lg mb-6">
             <div class="flex items-center justify-between mb-2">
               <span>Valor de la experiencia:</span>
-              <span class="font-semibold">$25.000 CLP</span>
+              <span class="font-semibold">$500 CLP</span>
             </div>
             <div class="text-sm text-gray-400">* El pago confirma tu reserva en el evento</div>
           </div>
@@ -411,52 +411,241 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function() 
   </div>
 </footer>
   
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/56912345678?text=Hola%20Vinculemos,%20me%20interesa%20participar%20en%20sus%20eventos" target="_blank" class="floating-whatsapp">
-    <i class="fab fa-whatsapp text-white text-2xl"></i>
-  </a>
+ <!-- Popup Form for Payment -->
+<div class="popup-overlay" id="popup-overlay">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h3>Reserva tu Experiencia</h3>
+            <button class="popup-close" id="popup-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="popup-body">
+            <!-- FormSubmit.co Form for Contact Information -->
+            <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" id="contact-form" style="display: none;">
+                <input type="hidden" name="_subject" value="Nueva Reserva - Vinculemos">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://vinculemos.vercel.app/payment/success.html">
+                
+                <input type="hidden" name="experience" id="formsubmit_experience">
+                <input type="hidden" name="name" id="formsubmit_name">
+                <input type="hidden" name="email" id="formsubmit_email">
+                <input type="hidden" name="phone" id="formsubmit_phone">
+                <input type="hidden" name="preferred_date" id="formsubmit_date">
+                <input type="hidden" name="comments" id="formsubmit_comments">
+                <input type="hidden" name="price" id="formsubmit_price">
+                <input type="hidden" name="commerce_order" id="formsubmit_commerce_order">
+            </form>
 
-  <!-- JavaScript -->
+            <!-- Flow Payment Form (visible) -->
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="experience">Selecciona tu Experiencia</label>
+                    <select id="experience" class="form-control" required style="background: rgba(71, 85, 105, 0.8); color: white; border: 1px solid var(--secondary-celeste);">
+                        <option value="" disabled selected style="background: var(--primary-azul); color: white;">Elige una experiencia</option>
+                        <option value="citas-rapidas" data-price="20000" style="background: var(--primary-azul); color: white;">Citas Rápidas - $20.000 CLP</option>
+                        <option value="citas-conscientes" data-price="25000" style="background: var(--primary-azul); color: white;">Citas Conscientes - $25.000 CLP</option>
+                        <option value="conecta-tribu" data-price="30000" style="background: var(--primary-azul); color: white;">Conecta con tu Tribu - $30.000 CLP</option>
+                        <option value="combo-completo" data-price="65000" style="background: var(--primary-azul); color: white;">Combo Completo (3 experiencias) - $65.000 CLP</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Fecha Preferida</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Comentarios Adicionales</label>
+                    <textarea id="comments" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <input type="checkbox" id="legal-check" required>
+                        <label for="legal-check">Acepto los <span class="legal-toggle" id="legal-toggle">términos y condiciones</span></label>
+                    </div>
+                    <div class="legal-disclaimer" id="legal-disclaimer" style="display: none;">
+                        <p><strong>Términos y Condiciones de Participación</strong></p>
+                        <p>Al participar en nuestras experiencias, aceptas:</p>
+                        <ul>
+                            <li>Respetar a todos los participantes y mantener un comportamiento adecuado</li>
+                            <li>Asistir puntualmente a la experiencia seleccionada</li>
+                            <li>Cancelar con al menos 48 horas de anticipación para obtener reembolso</li>
+                            <li>Autorizar el uso de fotografías para fines promocionales (opcional)</li>
+                            <li>Cumplir con las normas de seguridad establecidas para cada actividad</li>
+                        </ul>
+                        <p>Vinculemos se reserva el derecho de admisión y puede modificar las condiciones según sea necesario.</p>
+                    </div>
+                </div>
+                <button type="submit" class="btn-payment">
+                    <i class="fas fa-lock"></i>
+                    Proceder al Pago
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+    <!-- JavaScript -->
   <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-      document.getElementById('mobile-menu').classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      
-      if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target)) {
-        mobileMenu.classList.remove('active');
-      }
-    });
-
-    // Form validation and payment simulation
-    function simularPago() {
-      const form = document.querySelector('form');
-      let valid = true;
-      
-      // Simple validation
-      const requiredFields = form.querySelectorAll('[required]');
-      requiredFields.forEach(field => {
+// Updated payment form functionality for Flow.cl with FormSubmit.co
+document.getElementById('payment-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Validation
+    const requiredFields = this.querySelectorAll('[required]');
+    let valid = true;
+    
+    requiredFields.forEach(field => {
         if (!field.value.trim()) {
-          field.style.borderColor = 'red';
-          valid = false;
+            field.style.borderColor = 'red';
+            valid = false;
         } else {
-          field.style.borderColor = '';
+            field.style.borderColor = '';
         }
-      });
-      
-      if (valid) {
-        // Simulate payment process
-        alert('Redirigiendo a Mercado Pago para completar tu pago seguro...');
-        // In a real implementation, this would redirect to the payment gateway
-      } else {
-        alert('Por favor completa todos los campos obligatorios antes de proceder al pago.');
-      }
+    });
+    
+    if (!document.getElementById('legal-check').checked) {
+        alert('Debes aceptar los términos y condiciones para continuar.');
+        valid = false;
     }
+    
+    if (!valid) {
+        alert('Por favor completa todos los campos obligatorios antes de proceder al pago.');
+        return;
+    }
+    
+    // Get form data
+    const experienceSelect = document.getElementById('experience');
+    const selectedOption = experienceSelect.options[experienceSelect.selectedIndex];
+    const experience = selectedOption.text;
+    const price = selectedOption.getAttribute('data-price');
+    
+    const formData = {
+        experience: experience,
+        price: price,
+        userEmail: document.getElementById('email').value,
+        userName: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        preferredDate: document.getElementById('date').value,
+        comments: document.getElementById('comments').value
+    };
+    
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+    submitBtn.disabled = true;
+    
+    try {
+        // Create Flow payment
+        const paymentResponse = await fetch('/api/flow/create-payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        if (!paymentResponse.ok) {
+            const errorData = await paymentResponse.json();
+            throw new Error(errorData.error || 'Error creating payment');
+        }
+        
+        const data = await paymentResponse.json();
+        
+        // Store commerceOrder in localStorage for status checking
+        localStorage.setItem('lastCommerceOrder', data.commerceOrder);
+        
+        // Populate hidden FormSubmit.co form
+        document.getElementById('formsubmit_experience').value = formData.experience;
+        document.getElementById('formsubmit_name').value = formData.userName;
+        document.getElementById('formsubmit_email').value = formData.userEmail;
+        document.getElementById('formsubmit_phone').value = formData.phone;
+        document.getElementById('formsubmit_date').value = formData.preferredDate;
+        document.getElementById('formsubmit_comments').value = formData.comments;
+        document.getElementById('formsubmit_price').value = formData.price;
+        document.getElementById('formsubmit_commerce_order').value = data.commerceOrder;
+        
+        // Submit FormSubmit.co form in background
+        const formsubmitForm = document.getElementById('contact-form');
+        formsubmitForm.submit();
+        
+        // Redirect to Flow payment page
+        window.location.href = data.flowPayment.url;
+            
+    } catch (error) {
+        console.error('Payment error:', error);
+        
+        // Show user-friendly error message
+        alert(`Error al procesar el pago: ${error.message}. Por favor intenta nuevamente o contacta a soporte.`);
+        
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+// Mobile menu functionality
+function closeMobileMenu() {
+    document.getElementById("mobile-menu").classList.remove("active");
+}
+
+document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+    document.getElementById("mobile-menu").classList.add("active");
+});
+
+document.getElementById("mobile-menu-close").addEventListener("click", function() {
+    closeMobileMenu();
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    
+    if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
+
+// Floating heart button functionality
+document.getElementById('floating-heart').addEventListener('click', function() {
+    document.getElementById('popup-overlay').classList.add('active');
+});
+
+// Close popup
+document.getElementById('popup-close').addEventListener('click', function() {
+    document.getElementById('popup-overlay').classList.remove('active');
+});
+
+// Close popup when clicking outside
+document.getElementById('popup-overlay').addEventListener('click', function(event) {
+    if (event.target === this) {
+        document.getElementById('popup-overlay').classList.remove('active');
+    }
+});
+
+// Legal disclaimer toggle
+document.getElementById('legal-toggle').addEventListener('click', function() {
+    const disclaimer = document.getElementById('legal-disclaimer');
+    if (disclaimer.style.display === 'none') {
+        disclaimer.style.display = 'block';
+    } else {
+        disclaimer.style.display = 'none';
+    }
+});
+  
 
     // Video hover play functionality
     document.querySelectorAll('.video-hover iframe').forEach(iframe => {
