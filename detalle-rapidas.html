@@ -718,32 +718,44 @@ document.getElementById('experience').addEventListener('change', function() {
     }
 });
 
-// Form submission with Flow integration
+// Form submission with Flow integration - IMPROVED VERSION
 document.getElementById('payment-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     const payBtn = document.getElementById('pay-btn');
     const spinner = document.getElementById('loading-spinner');
-    
-    // Show loading state
-    payBtn.disabled = true;
-    spinner.style.display = 'inline-block';
-    payBtn.innerHTML = '<div class="loading-spinner" style="display: inline-block;"></div><i class="fas fa-lock mr-2"></i>Procesando...';
-    
-    // Get form data
-    const formData = {
-        experience: document.getElementById('experience').value,
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        date: document.getElementById('date').value,
-        comments: document.getElementById('comments').value,
-        price: document.getElementById('experience').options[document.getElementById('experience').selectedIndex].getAttribute('data-price')
-    };
+    const originalBtnText = payBtn.innerHTML;
     
     try {
-        // Send to Flow payment API endpoint
-        const response = await fetch('/api/flow/payment', {
+        // Show loading state
+        payBtn.disabled = true;
+        if (spinner) spinner.style.display = 'inline-block';
+        payBtn.innerHTML = '<div class="loading-spinner" style="display: inline-block;"></div><i class="fas fa-lock mr-2"></i>Procesando...';
+        
+        // Get form data
+        const selectedExperience = document.getElementById('experience');
+        const price = selectedExperience.options[selectedExperience.selectedIndex].getAttribute('data-price');
+        
+        const formData = {
+            experience: document.getElementById('experience').value,
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            date: document.getElementById('date').value,
+            comments: document.getElementById('comments').value,
+            price: price
+        };
+        
+        // Validate required fields
+        if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.date || !formData.price) {
+            throw new Error('Por favor completa todos los campos requeridos');
+        }
+        
+        console.log('Sending payment request:', formData);
+        
+        // Use absolute URL for reliability
+        const baseUrl = window.location.origin;
+        const response = await fetch(`${baseUrl}/api/flow/payment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -751,22 +763,36 @@ document.getElementById('payment-form').addEventListener('submit', async functio
             body: JSON.stringify(formData)
         });
         
+        // Check if response is JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            const text = await response.text();
+            console.error('Non-JSON response:', text.substring(0, 200));
+            throw new Error('Error inesperado del servidor');
+        }
+        
         const result = await response.json();
         
+        if (!response.ok) {
+            throw new Error(result.error || `Error ${response.status} al procesar el pago`);
+        }
+        
         if (result.success && result.flowUrl) {
+            console.log('Redirecting to Flow:', result.flowUrl);
             // Redirect to Flow payment page
             window.location.href = result.flowUrl;
         } else {
-            throw new Error(result.error || 'Error al procesar el pago');
+            throw new Error(result.error || 'No se pudo generar el enlace de pago');
         }
         
     } catch (error) {
+        console.error('Payment error:', error);
         alert('Error al procesar el pago: ' + error.message);
         
         // Reset button state
         payBtn.disabled = false;
-        spinner.style.display = 'none';
-        payBtn.innerHTML = '<i class="fas fa-lock mr-2"></i>Proceder al Pago con Flow';
+        if (spinner) spinner.style.display = 'none';
+        payBtn.innerHTML = originalBtnText;
     }
 });
 
@@ -775,40 +801,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const dateInput = document.getElementById('date');
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
+    
+    // Optional: Add input validation
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            // Allow only numbers, +, and spaces
+            e.target.value = e.target.value.replace(/[^\d+\s]/g, '');
+        });
+    }
 });
-
-  // In your frontend JavaScript
-async function processPayment(formData) {
-  try {
-    const response = await fetch('/api/flow/payment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    });
-
-    // Check if response is JSON
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const text = await response.text();
-      console.error('Non-JSON response:', text.substring(0, 200));
-      throw new Error('El servidor respondió con un error inesperado');
-    }
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Error al procesar el pago');
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Payment error:', error);
-    throw error;
-  }
-}
-
+  
 // Video hover play functionality
 document.querySelectorAll('.video-hover iframe').forEach(iframe => {
     const src = iframe.src;
