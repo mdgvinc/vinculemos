@@ -1,12 +1,11 @@
-// /api/flow/confirm.js - Endpoint de confirmación de pago Flow
-
-import crypto from 'crypto';
+// /api/flow/confirm.js - CommonJS version
+const crypto = require('crypto');
 
 // Configuración de Flow
 const FLOW_CONFIG = {
   API_URL: process.env.FLOW_API_URL || 'https://sandbox.flow.cl/api',
-  API_KEY: process.env.FLOW_API_KEY || 'tu_api_key_aqui',
-  SECRET_KEY: process.env.FLOW_SECRET_KEY || 'tu_secret_key_aqui'
+  API_KEY: process.env.FLOW_API_KEY,
+  SECRET_KEY: process.env.FLOW_SECRET_KEY
 };
 
 // Función para generar firma Flow
@@ -22,34 +21,11 @@ function verifyFlowSignature(params, signature, secretKey) {
   return expectedSignature === signature;
 }
 
-// Función para enviar email de confirmación (opcional)
+// Función para enviar email de confirmación
 async function sendConfirmationEmail(paymentData) {
-  // Aquí puedes integrar con un servicio de email como SendGrid, Resend, etc.
   console.log('Enviando email de confirmación:', paymentData);
   
-  // Ejemplo básico con fetch a un webhook de FormSubmit
   try {
-    const emailData = {
-      to: paymentData.payer,
-      subject: 'Confirmación de Pago - Vinculemos',
-      message: `
-        Hola ${paymentData.optional?.name || 'Cliente'},
-        
-        ¡Tu pago ha sido confirmado exitosamente!
-        
-        Detalles de la reserva:
-        - Experiencia: ${paymentData.optional?.experience || 'No especificado'}
-        - Monto: $${paymentData.amount} CLP
-        - Fecha preferida: ${paymentData.optional?.date || 'No especificada'}
-        - Número de orden: ${paymentData.commerceOrder}
-        
-        Te contactaremos pronto para confirmar los detalles finales.
-        
-        ¡Gracias por elegir Vinculemos!
-      `
-    };
-    
-    // Enviar a FormSubmit como backup
     await fetch('https://formsubmit.co/vinculemos.marketingdigital@gmail.com', {
       method: 'POST',
       headers: {
@@ -71,7 +47,7 @@ async function sendConfirmationEmail(paymentData) {
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Flow envía confirmaciones via POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Método no permitido' });
@@ -110,10 +86,8 @@ export default async function handler(req, res) {
     const paymentData = await flowResponse.json();
 
     if (paymentData.status === 2) { // 2 = Pago exitoso
-      // Procesar pago exitoso
       console.log('Pago confirmado:', paymentData);
       
-      // Parsear datos opcionales
       let optionalData = {};
       try {
         optionalData = JSON.parse(paymentData.optional || '{}');
@@ -121,23 +95,14 @@ export default async function handler(req, res) {
         console.log('Error parsing optional data:', e);
       }
 
-      // Aquí puedes:
-      // 1. Guardar en base de datos
-      // 2. Enviar emails de confirmación
-      // 3. Actualizar inventario
-      // 4. Enviar notificaciones
-
-      // Enviar email de confirmación
       await sendConfirmationEmail({
         ...paymentData,
         optional: optionalData
       });
 
-      // Respuesta exitosa a Flow
       return res.status(200).send('PAYMENT_CONFIRMED');
       
     } else {
-      // Pago no exitoso
       console.log('Pago no confirmado:', paymentData);
       return res.status(400).json({ 
         error: 'Pago no confirmado',
@@ -152,12 +117,4 @@ export default async function handler(req, res) {
       details: error.message 
     });
   }
-}
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '1mb',
-    },
-  },
 }
