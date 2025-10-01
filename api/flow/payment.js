@@ -81,14 +81,15 @@ module.exports = async function handler(req, res) {
     const body = req.body || {};
     console.log('Body:', body);
 
-    const { experience, name, email, phone, date, comments, price } = body;
+    // FIX: Use 'genero' instead of 'genre' and 'date' is no longer used
+    const { experience, name, email, phone, genero, comments, price } = body;
 
-    // Validate required fields
-    if (!experience || !name || !email || !phone || !genre || !price) {
-      console.log('Missing required fields:', { experience, name, email, phone, genre, price });
+    // FIX: Validate 'genero' instead of 'genre' and remove 'date'
+    if (!experience || !name || !email || !phone || !genero || !price) {
+      console.log('Missing required fields:', { experience, name, email, phone, genero, price });
       return res.status(400).json({ 
         error: 'Faltan datos requeridos',
-        received: { experience, name, email, phone, genre, price }
+        received: { experience, name, email, phone, genero, price }
       });
     }
 
@@ -113,10 +114,11 @@ module.exports = async function handler(req, res) {
       urlConfirmation: FLOW_CONFIG.URL_CONFIRMATION,
       urlReturn: FLOW_CONFIG.URL_RETURN,
       // Datos adicionales para confirmación
+      // FIX: Use 'genero' in the optional data
       optional: JSON.stringify({
         name: name,
         phone: phone,
-        genre: genre,
+        genero: genero,
         comments: comments || '',
         experience: experience
       })
