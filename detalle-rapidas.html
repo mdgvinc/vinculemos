@@ -495,9 +495,7 @@
         </div>
     </footer>
 
-   <script>
-
-       
+  <script>
         // Mobile menu functionality
         function closeMobileMenu() {
             document.getElementById("mobile-menu").classList.remove("active");
@@ -516,145 +514,168 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const menuBtn = document.getElementById('mobile-menu-btn');
             
-            if (!mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
+            if (mobileMenu && menuBtn && !mobileMenu.contains(event.target) && !menuBtn.contains(event.target) && mobileMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
 
-        // Floating heart button functionality
-        document.getElementById('floating-heart').addEventListener('click', function() {
-            document.getElementById('popup-overlay').classList.add('active');
-        });
-
-        // Also make the "Participar" button open the popup
-        document.getElementById('floating-heart-btn').addEventListener('click', function() {
-            document.getElementById('popup-overlay').classList.add('active');
-        });
-
-        // Close popup
-        document.getElementById('popup-close').addEventListener('click', function() {
-            document.getElementById('popup-overlay').classList.remove('active');
-        });
-
-        // Close popup when clicking outside
-        document.getElementById('popup-overlay').addEventListener('click', function(event) {
-            if (event.target === this) {
-                document.getElementById('popup-overlay').classList.remove('active');
-            }
-        });
-
-        // Legal disclaimer toggle - FIXED
-        document.getElementById('legal-toggle').addEventListener('click', function() {
-            const disclaimer = document.getElementById('legal-disclaimer');
-            if (disclaimer.classList.contains('hidden')) {
-                disclaimer.classList.remove('hidden');
-                this.innerHTML = '<i class="fas fa-chevron-up mr-2"></i> Información legal';
-            } else {
-                disclaimer.classList.add('hidden');
-                this.innerHTML = '<i class="fas fa-chevron-down mr-2"></i> Información legal';
-            }
-        });
-
-        // Price display functionality
-        document.getElementById('experience').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const price = selectedOption.getAttribute('data-price');
-            
-            if (price) {
-                document.getElementById('selected-price').textContent = parseInt(price).toLocaleString('es-CL');
-                document.getElementById('price-display').style.display = 'block';
-            } else {
-                document.getElementById('price-display').style.display = 'none';
-            }
-        });
-
-        // Form submission with Flow integration - FIXED VERSION
-        document.getElementById('payment-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const payBtn = document.getElementById('pay-btn');
-            const spinner = document.getElementById('loading-spinner');
-            const originalBtnText = payBtn.innerHTML;
-            
-            try {
-                // Show loading state
-                payBtn.disabled = true;
-                if (spinner) spinner.style.display = 'block';
-                payBtn.innerHTML = '<div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Procesando...';
-                
-                // Get form data
-                const selectedExperience = document.getElementById('experience');
-                const price = selectedExperience.options[selectedExperience.selectedIndex].getAttribute('data-price');
-                
-                const formData = {
-                    experience: document.getElementById('experience').value,
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    date: document.getElementById('date').value,
-                    comments: document.getElementById('comments').value,
-                    price: price
-                };
-                
-                // Validate required fields
-                if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.date || !formData.price) {
-                    throw new Error('Por favor completa todos los campos requeridos');
-                }
-                
-                console.log('Sending payment request:', formData);
-                
-                // FIX: Use Vercel URL directly - THIS IS THE KEY FIX
-                const vercelUrl = 'https://vinculemos.vercel.app';
-                const response = await fetch(`${vercelUrl}/api/flow/payment`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                // Check if response is JSON
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    const text = await response.text();
-                    console.error('Non-JSON response:', text.substring(0, 200));
-                    throw new Error('Error inesperado del servidor');
-                }
-                
-                const result = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(result.error || `Error ${response.status} al procesar el pago`);
-                }
-                
-                if (result.success && result.flowUrl) {
-                    console.log('Redirecting to Flow:', result.flowUrl);
-                    // Redirect to Flow payment page
-                    window.location.href = result.flowUrl;
-                } else {
-                    throw new Error(result.error || 'No se pudo generar el enlace de pago');
-                }
-                
-            } catch (error) {
-                console.error('Payment error:', error);
-                alert('Error al procesar el pago: ' + error.message);
-                
-                // Reset button state
-                payBtn.disabled = false;
-                if (spinner) spinner.style.display = 'none';
-                payBtn.innerHTML = originalBtnText;
-            }
-        });
-
-        // Set default date to October 30th and minimum date to today
+        // Floating heart button functionality - FIXED
         document.addEventListener('DOMContentLoaded', function() {
+            const floatingHeart = document.getElementById('floating-heart');
+            if (floatingHeart) {
+                floatingHeart.addEventListener('click', function() {
+                    document.getElementById('popup-overlay').classList.add('active');
+                });
+            }
+
+            // Also make the "Participar" button open the popup - FIXED
+            const participarBtn = document.getElementById('floating-heart-btn');
+            if (participarBtn) {
+                participarBtn.addEventListener('click', function() {
+                    document.getElementById('popup-overlay').classList.add('active');
+                });
+            }
+
+            // Close popup - FIXED
+            const popupClose = document.getElementById('popup-close');
+            if (popupClose) {
+                popupClose.addEventListener('click', function() {
+                    document.getElementById('popup-overlay').classList.remove('active');
+                });
+            }
+
+            // Close popup when clicking outside - FIXED
+            const popupOverlay = document.getElementById('popup-overlay');
+            if (popupOverlay) {
+                popupOverlay.addEventListener('click', function(event) {
+                    if (event.target === this) {
+                        this.classList.remove('active');
+                    }
+                });
+            }
+
+            // Legal disclaimer toggle - FIXED
+            const legalToggle = document.getElementById('legal-toggle');
+            if (legalToggle) {
+                legalToggle.addEventListener('click', function() {
+                    const disclaimer = document.getElementById('legal-disclaimer');
+                    if (disclaimer.classList.contains('hidden')) {
+                        disclaimer.classList.remove('hidden');
+                        this.innerHTML = '<i class="fas fa-chevron-up mr-2"></i> Información legal';
+                    } else {
+                        disclaimer.classList.add('hidden');
+                        this.innerHTML = '<i class="fas fa-chevron-down mr-2"></i> Información legal';
+                    }
+                });
+            }
+
+            // Price display functionality - FIXED
+            const experienceSelect = document.getElementById('experience');
+            if (experienceSelect) {
+                experienceSelect.addEventListener('change', function() {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const price = selectedOption.getAttribute('data-price');
+                    
+                    if (price) {
+                        document.getElementById('selected-price').textContent = parseInt(price).toLocaleString('es-CL');
+                        document.getElementById('price-display').style.display = 'block';
+                    } else {
+                        document.getElementById('price-display').style.display = 'none';
+                    }
+                });
+            }
+
+            // Form submission with Flow integration - FIXED
+            const paymentForm = document.getElementById('payment-form');
+            if (paymentForm) {
+                paymentForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const payBtn = document.getElementById('pay-btn');
+                    const spinner = document.getElementById('loading-spinner');
+                    const originalBtnText = payBtn.innerHTML;
+                    
+                    try {
+                        // Show loading state
+                        payBtn.disabled = true;
+                        if (spinner) spinner.style.display = 'block';
+                        payBtn.innerHTML = '<div class="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Procesando...';
+                        
+                        // Get form data
+                        const selectedExperience = document.getElementById('experience');
+                        const price = selectedExperience.options[selectedExperience.selectedIndex].getAttribute('data-price');
+                        
+                        const formData = {
+                            experience: document.getElementById('experience').value,
+                            name: document.getElementById('name').value,
+                            email: document.getElementById('email').value,
+                            phone: document.getElementById('phone').value,
+                            date: document.getElementById('date').value,
+                            comments: document.getElementById('comments').value,
+                            price: price
+                        };
+                        
+                        // Validate required fields
+                        if (!formData.experience || !formData.name || !formData.email || !formData.phone || !formData.date || !formData.price) {
+                            throw new Error('Por favor completa todos los campos requeridos');
+                        }
+                        
+                        console.log('Sending payment request:', formData);
+                        
+                        // Use Vercel URL directly
+                        const vercelUrl = 'https://vinculemos.vercel.app';
+                        const response = await fetch(`${vercelUrl}/api/flow/payment`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        // Check if response is JSON
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            const text = await response.text();
+                            console.error('Non-JSON response:', text.substring(0, 200));
+                            throw new Error('Error inesperado del servidor');
+                        }
+                        
+                        const result = await response.json();
+                        
+                        if (!response.ok) {
+                            throw new Error(result.error || `Error ${response.status} al procesar el pago`);
+                        }
+                        
+                        if (result.success && result.flowUrl) {
+                            console.log('Redirecting to Flow:', result.flowUrl);
+                            // Redirect to Flow payment page
+                            window.location.href = result.flowUrl;
+                        } else {
+                            throw new Error(result.error || 'No se pudo generar el enlace de pago');
+                        }
+                        
+                    } catch (error) {
+                        console.error('Payment error:', error);
+                        alert('Error al procesar el pago: ' + error.message);
+                        
+                        // Reset button state
+                        payBtn.disabled = false;
+                        if (spinner) spinner.style.display = 'none';
+                        payBtn.innerHTML = originalBtnText;
+                    }
+                });
+            }
+
+            // Set default date to October 30th and minimum date to today
             const dateInput = document.getElementById('date');
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.setAttribute('min', today);
-            
-            // Set default date to October 30, 2024
-            const defaultDate = '2024-10-30';
-            dateInput.value = defaultDate;
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+                
+                // Set default date to October 30, 2024
+                const defaultDate = '2024-10-30';
+                dateInput.value = defaultDate;
+            }
             
             // Optional: Add input validation
             const phoneInput = document.getElementById('phone');
@@ -666,26 +687,17 @@
             }
             
             // Auto-select the only experience option
-            document.getElementById('experience').selectedIndex = 1;
+            const experienceSelect = document.getElementById('experience');
+            if (experienceSelect) {
+                experienceSelect.selectedIndex = 1;
+            }
             
             // Initialize price display
-            document.getElementById('price-display').style.display = 'block';
+            const priceDisplay = document.getElementById('price-display');
+            if (priceDisplay) {
+                priceDisplay.style.display = 'block';
+            }
         });
-
-  
-// Video hover play functionality
-document.querySelectorAll('.video-hover iframe').forEach(iframe => {
-    const src = iframe.src;
-    iframe.src = src.replace('autoplay=1', 'autoplay=0');
-    
-    iframe.parentElement.addEventListener('mouseenter', function() {
-        iframe.src = src.replace('autoplay=0', 'autoplay=1');
-    });
-    
-    iframe.parentElement.addEventListener('mouseleave', function() {
-        iframe.src = src.replace('autoplay=1', 'autoplay=0');
-    });
-});
-</script>
+    </script>
 </body>
 </html>
