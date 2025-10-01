@@ -723,7 +723,7 @@ document.getElementById('payment-form').addEventListener('submit', async functio
         console.log('Sending payment request:', formData);
         
         // TEST: Use debug endpoint first
-        const paymentResponse = await fetch('/api/debug/simple-payment', {
+       const paymentResponse = await fetch('/api/payment/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
