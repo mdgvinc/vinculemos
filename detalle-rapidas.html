@@ -134,11 +134,19 @@
       padding: 12px 20px;
       font-weight: 600;
       cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 4px 20px rgba(255, 0, 121, 0.4); }
+      50% { box-shadow: 0 6px 30px rgba(255, 0, 121, 0.7); }
+      100% { box-shadow: 0 4px 20px rgba(255, 0, 121, 0.4); }
     }
 
     .floating-heart:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 25px rgba(255, 0, 121, 0.6);
+      animation: none;
     }
 
     .floating-heart i {
@@ -153,7 +161,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.8);
       z-index: 2000;
       display: none;
       align-items: center;
@@ -182,6 +190,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: linear-gradient(135deg, var(--primary-magenta), #e0006a);
     }
 
     .popup-header h3 {
@@ -225,6 +234,7 @@
     .form-control:focus {
       outline: none;
       border-color: var(--primary-magenta);
+      box-shadow: 0 0 10px rgba(255, 0, 121, 0.3);
     }
 
     .legal-disclaimer {
@@ -247,7 +257,7 @@
     }
 
     .btn-payment {
-      background: var(--primary-magenta);
+      background: linear-gradient(135deg, var(--primary-magenta), #e0006a);
       color: white;
       border: none;
       border-radius: 8px;
@@ -261,8 +271,13 @@
     }
 
     .btn-payment:hover {
-      background: #e0006a;
       transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(255, 0, 121, 0.3);
+    }
+
+    .btn-payment:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .mobile-menu {
@@ -335,6 +350,32 @@
       object-fit: cover;
       object-position: center;
       display: block;
+    }
+
+    .price-display {
+      background: var(--primary-magenta);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     @media (max-width: 768px) {
@@ -496,30 +537,13 @@
   <div class="popup-overlay" id="popup-overlay">
     <div class="popup-content">
         <div class="popup-header">
-            <h3>Reserva tu Experiencia</h3>
+            <h3><i class="fas fa-credit-card mr-2"></i>Reserva tu Experiencia</h3>
             <button class="popup-close" id="popup-close">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <div class="popup-body">
-            <!-- FormSubmit.co Form for Contact Information -->
-            <form action="https://formsubmit.co/vinculemos.marketingdigital@gmail.com" method="POST" id="contact-form" style="display: none;">
-                <input type="hidden" name="_subject" value="Nueva Reserva - Encuentros Express">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_next" value="https://vinculemos.vercel.app/payment/success.html">
-                
-                <input type="hidden" name="experience" id="formsubmit_experience">
-                <input type="hidden" name="name" id="formsubmit_name">
-                <input type="hidden" name="email" id="formsubmit_email">
-                <input type="hidden" name="phone" id="formsubmit_phone">
-                <input type="hidden" name="preferred_date" id="formsubmit_date">
-                <input type="hidden" name="comments" id="formsubmit_comments">
-                <input type="hidden" name="price" id="formsubmit_price">
-                <input type="hidden" name="commerce_order" id="formsubmit_commerce_order">
-            </form>
-
-            <!-- Flow Payment Form (visible) -->
+            <!-- Flow Payment Form -->
             <form id="payment-form">
                 <div class="form-group">
                     <label for="experience">Selecciona tu Experiencia</label>
@@ -530,27 +554,36 @@
                         <option value="conecta-tribu" data-price="30000">Conecta con tu Tribu - $30.000 CLP</option>
                         <option value="combo-completo" data-price="65000">Combo Completo (3 experiencias) - $65.000 CLP</option>
                     </select>
+                    <div id="price-display" class="price-display" style="display: none;">
+                        <i class="fas fa-tag mr-2"></i>Total: $<span id="selected-price">0</span> CLP
+                    </div>
                 </div>
+                
                 <div class="form-group">
                     <label for="name">Nombre Completo</label>
                     <input type="text" id="name" class="form-control" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="email">Correo Electrónico</label>
                     <input type="email" id="email" class="form-control" required>
                 </div>
+                
                 <div class="form-group">
-                    <label for="phone">Teléfono</label>
-                    <input type="tel" id="phone" class="form-control" required>
+                    <label for="phone">Teléfono (incluye código de país)</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="+56912345678" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="date">Fecha Preferida</label>
                     <input type="date" id="date" class="form-control" required>
                 </div>
+                
                 <div class="form-group">
                     <label for="comments">Comentarios Adicionales</label>
-                    <textarea id="comments" class="form-control" rows="3"></textarea>
+                    <textarea id="comments" class="form-control" rows="3" placeholder="Menciona cualquier preferencia especial..."></textarea>
                 </div>
+                
                 <div class="form-group">
                     <div>
                         <input type="checkbox" id="legal-check" required>
@@ -569,8 +602,10 @@
                         <p>Vinculemos se reserva el derecho de admisión y puede modificar las condiciones según sea necesario.</p>
                     </div>
                 </div>
-                <button type="submit" class="btn-payment">
-                    <i class="fas fa-lock"></i>
+                
+                <button type="submit" class="btn-payment" id="pay-btn">
+                    <div class="loading-spinner" id="loading-spinner"></div>
+                    <i class="fas fa-lock mr-2"></i>
                     Proceder al Pago con Flow
                 </button>
             </form>
@@ -670,7 +705,77 @@ document.getElementById('legal-toggle').addEventListener('click', function() {
     }
 });
 
+// Price display functionality
+document.getElementById('experience').addEventListener('change', function() {
+    const selectedOption = this.options[this.selectedIndex];
+    const price = selectedOption.getAttribute('data-price');
+    
+    if (price) {
+        document.getElementById('selected-price').textContent = parseInt(price).toLocaleString('es-CL');
+        document.getElementById('price-display').style.display = 'block';
+    } else {
+        document.getElementById('price-display').style.display = 'none';
+    }
+});
 
+// Form submission with Flow integration
+document.getElementById('payment-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const payBtn = document.getElementById('pay-btn');
+    const spinner = document.getElementById('loading-spinner');
+    
+    // Show loading state
+    payBtn.disabled = true;
+    spinner.style.display = 'inline-block';
+    payBtn.innerHTML = '<div class="loading-spinner" style="display: inline-block;"></div><i class="fas fa-lock mr-2"></i>Procesando...';
+    
+    // Get form data
+    const formData = {
+        experience: document.getElementById('experience').value,
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        date: document.getElementById('date').value,
+        comments: document.getElementById('comments').value,
+        price: document.getElementById('experience').options[document.getElementById('experience').selectedIndex].getAttribute('data-price')
+    };
+    
+    try {
+        // Send to Flow payment API endpoint
+        const response = await fetch('/api/flow/payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success && result.flowUrl) {
+            // Redirect to Flow payment page
+            window.location.href = result.flowUrl;
+        } else {
+            throw new Error(result.error || 'Error al procesar el pago');
+        }
+        
+    } catch (error) {
+        alert('Error al procesar el pago: ' + error.message);
+        
+        // Reset button state
+        payBtn.disabled = false;
+        spinner.style.display = 'none';
+        payBtn.innerHTML = '<i class="fas fa-lock mr-2"></i>Proceder al Pago con Flow';
+    }
+});
+
+// Set minimum date to today
+document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+});
 
 // Video hover play functionality
 document.querySelectorAll('.video-hover iframe').forEach(iframe => {
