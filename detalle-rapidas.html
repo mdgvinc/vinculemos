@@ -18,12 +18,16 @@
 
     body {
         font-family: 'Montserrat', sans-serif;
-        background-color: #f8f9fa;
+        background-color: var(--primary-azul);
         color: #333;
     }
 
     .header {
-        background: #EBE1D9;
+        background: var(--secondary-crema);
+    }
+
+    .header-gradient {
+        background: linear-gradient(135deg, var(--primary-azul) 0%, #1a4a5f 100%);
     }
 
     /* Logo Styles */
@@ -194,7 +198,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <header class="header-gradient text-white py-6">
+    <header class="header text-white py-6">
     <div class="container mx-auto px-4 h-full">
         <div class="flex justify-between items-center h-full py-2">
             <!-- Logo Container -->
@@ -204,31 +208,18 @@
             
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6">
-                <a href="#que-son" class="hover:text-pink-200 transition">¿Qué son?</a>
-                <a href="#como-funciona" class="hover:text-pink-200 transition">¿Cómo funciona?</a>
-                <a href="#por-que-elegirnos" class="hover:text-pink-200 transition">¿Por qué elegirnos?</a>
-                <a href="#reservar" class="hover:text-pink-200 transition">Reservar</a>
+                <a href="#que-son" class="text-gray-800 hover:text-pink-600 transition font-medium">¿Qué son?</a>
+                <a href="#como-funciona" class="text-gray-800 hover:text-pink-600 transition font-medium">¿Cómo funciona?</a>
+                <a href="#por-que-elegirnos" class="text-gray-800 hover:text-pink-600 transition font-medium">¿Por qué elegirnos?</a>
+                <a href="#reservar" class="text-gray-800 hover:text-pink-600 transition font-medium">Reservar</a>
             </nav>
             
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="mobile-menu-btn text-white md:hidden">
+            <button id="mobile-menu-btn" class="mobile-menu-btn text-gray-800 md:hidden">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
     </header>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
-        <button id="mobile-menu-close" class="mobile-menu-close">
-            <i class="fas fa-times"></i>
-        </button>
-        <nav class="flex flex-col space-y-6 mt-8">
-            <a href="#que-son" class="text-lg font-medium">¿Qué son?</a>
-            <a href="#como-funciona" class="text-lg font-medium">¿Cómo funciona?</a>
-            <a href="#por-que-elegirnos" class="text-lg font-medium">¿Por qué elegirnos?</a>
-            <a href="#reservar" class="text-lg font-medium">Reservar</a>
-        </nav>
-    </div>
 
     <!-- Hero Section -->
     <section class="py-16 header-gradient text-white">
@@ -242,7 +233,6 @@
             </button>
         </div>
     </section>
-
     <!-- What are Speed Dates Section -->
     <section id="que-son" class="py-16 bg-white">
         <div class="container mx-auto px-4">
