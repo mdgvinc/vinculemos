@@ -84,11 +84,11 @@ module.exports = async function handler(req, res) {
     const { experience, name, email, phone, date, comments, price } = body;
 
     // Validate required fields
-    if (!experience || !name || !email || !phone || !date || !price) {
-      console.log('Missing required fields:', { experience, name, email, phone, date, price });
+    if (!experience || !name || !email || !phone || !genre || !price) {
+      console.log('Missing required fields:', { experience, name, email, phone, genre, price });
       return res.status(400).json({ 
         error: 'Faltan datos requeridos',
-        received: { experience, name, email, phone, date, price }
+        received: { experience, name, email, phone, genre, price }
       });
     }
 
@@ -116,7 +116,7 @@ module.exports = async function handler(req, res) {
       optional: JSON.stringify({
         name: name,
         phone: phone,
-        date: date,
+        genre: genre,
         comments: comments || '',
         experience: experience
       })
