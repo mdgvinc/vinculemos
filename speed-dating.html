@@ -213,6 +213,27 @@
                 display: block;
             }
         }
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    }
+        
     </style>
 </head>
 <body class="bg-gray-50">
@@ -532,11 +553,16 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>© 2024 Vinculemos - Citas Rápidas. Todos los derechos reservados.</p>
+            <p>© 2025 Vinculemos - Citas Rápidas. Todos los derechos reservados.</p>
             <p class="mt-2 text-gray-400">Contacto: info@vinculemos.cl</p>
         </div>
     </footer>
-
+    
+ <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/56954003064?text=Hola%20Vinculemos,%20me%20interesa%20participar%20en%20sus%20eventos" target="_blank" class="floating-whatsapp">
+    <i class="fab fa-whatsapp text-white text-2xl"></i>
+  </a>
+    
 <script>
         // Mobile menu functionality
         function closeMobileMenu() {
