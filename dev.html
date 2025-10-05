@@ -766,20 +766,25 @@
           </div>
           
           <div class="grid grid-cols-3 gap-8 mt-12">
-            <div class="text-center">
-              <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">500+</div>
-              <div class="text-gray-400">Eventos Realizados</div>
-            </div>
-            <div class="text-center">
-              <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">2K+</div>
-              <div class="text-gray-400">Conexiones Creadas</div>
-            </div>
-            <div class="text-center">
-              <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">15</div>
-              <div class="text-gray-400">Ciudades Activas</div>
-            </div>
+          <div class="text-center">
+          <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">
+            <span id="counter-1">0</span>+
           </div>
-        </div>
+          <div class="text-gray-400">Eventos Realizados</div>
+          </div>
+          <div class="text-center">
+          <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">
+            <span id="counter-2">0</span>+
+          </div>
+          <div class="text-gray-400">Conexiones Creadas</div>
+          </div>
+          <div class="text-center">
+          <div class="text-3xl font-bold mb-2" style="color: var(--primary-magenta);">
+            <span id="counter-3">0</span>
+          </div>
+          <div class="text-gray-400">Ciudades Activas</div>
+          </div>
+          </div>
         
         <div class="grid grid-cols-2 gap-6">
           <div class="space-y-6">
@@ -1051,6 +1056,50 @@
 
   <!-- JavaScript -->
   <script>
+
+    // Counter animation function
+function animateCounter(elementId, targetNumber, duration = 2000) {
+    const element = document.getElementById(elementId);
+    const startNumber = 0;
+    const increment = targetNumber / (duration / 16); // 60fps
+    let currentNumber = startNumber;
+    
+    const timer = setInterval(() => {
+        currentNumber += increment;
+        if (currentNumber >= targetNumber) {
+            currentNumber = targetNumber;
+            clearInterval(timer);
+        }
+        element.textContent = Math.floor(currentNumber).toLocaleString();
+    }, 16);
+}
+
+// Start counters when the section comes into view
+function startCounters() {
+    animateCounter('counter-1', 500, 1500);
+    animateCounter('counter-2', 2000, 2000); // Changed 2K to 2000
+    animateCounter('counter-3', 15, 1000);
+}
+
+// Intersection Observer to trigger animation when section is visible
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            startCounters();
+            observer.unobserve(entry.target); // Only animate once
+        }
+    });
+}, { threshold: 0.5 });
+
+// Observe the counter section
+const counterSection = document.querySelector('#nosotros');
+if (counterSection) {
+    observer.observe(counterSection);
+}
+
+// Fallback: start counters after page load if IntersectionObserver is not supported
+setTimeout(startCounters, 1000);
+    
     // Mobile menu functionality
     function closeMobileMenu() {
         document.getElementById("mobile-menu").classList.remove("active");
