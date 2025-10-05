@@ -23,6 +23,24 @@
       scroll-behavior: smooth;
     }
 
+    /* Scroll Animation Styles */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .scroll-animate.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered animations */
+  .scroll-animate.delay-100 { transition-delay: 0.1s; }
+  .scroll-animate.delay-200 { transition-delay: 0.2s; }
+  .scroll-animate.delay-300 { transition-delay: 0.3s; }
+  .scroll-animate.delay-400 { transition-delay: 0.4s; }
+    
     /* Fix para el problema del header que oculta contenido */
     html {
       scroll-padding-top: 80px; /* Altura aproximada del header */
@@ -618,7 +636,7 @@
         </div>
       </div>
 
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-600">
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-600 scroll-animate">
         No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
       </p>
       <div class="flex flex-col md:flex-row gap-4 justify-center">
@@ -636,7 +654,7 @@
   <section id="experiencias" class="section-height py-20 md:py-40">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">NUESTRAS EXPERIENCIAS</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 scroll-animate">NUESTRAS EXPERIENCIAS</h2>
         <p class="text-xl max-w-3xl mx-auto" style="color: var(--secondary-crema);">
           Conecta con personas afines a través de experiencias diseñadas para crear vínculos auténticos.
         </p>
@@ -746,21 +764,21 @@
         <div class="grid lg:grid-cols-2 gap-16 items-center">
             <!-- Col 1: Text Content -->
             <div>
-                <h2 class="text-4xl md:text-5xl font-bold mb-8 text-gray-800">QUIÉNES SOMOS</h2>
+                <h2 class="text-4xl md:text-5xl font-bold mb-8 text-gray-800 scroll-animate">QUIÉNES SOMOS</h2>
                 <div class="space-y-6 text-lg text-gray-800 leading-relaxed">
-                    <p>
+                    <p class="scroll-animate delay-100">
                         Vinculemos es una marca que busca una conciencia colectiva a través de la unión de 2 mundos (2 personas, 2 almas). 
                         Puede ser a través de una amistad, de un compromiso, de una búsqueda personal y el amor.
                     </p>
-                    <p>
+                    <p class="scroll-animate delay-200">
                         Somos un movimiento que nació de la necesidad genuina de reconectar personas en un mundo cada vez más digital. 
                         Creemos firmemente que las mejores relaciones se construyen compartiendo experiencias reales, no a través de pantallas.
                     </p>
-                    <p>
+                    <p class="scroll-animate delay-300">
                         Nuestra misión es simple pero poderosa: crear oportunidades para que personas afines se encuentren, 
                         compartan aventuras y construyan amistades auténticas que trascienden lo virtual.
                     </p>
-                    <p>
+                    <p class="scroll-animate delay-400">
                         Desde 2023, hemos facilitado más de 500 encuentros, conectando a miles de personas que ahora forman parte 
                         de una comunidad vibrante y solidaria que se extiende por toda Latinoamérica.
                     </p>
@@ -770,24 +788,24 @@
             <!-- Col 2: Feature Cards -->
             <div class="grid grid-cols-2 gap-6">
                 <div class="space-y-6">
-                    <div class="p-6 rounded-xl border border-slate-700">
+                    <div class="p-6 rounded-xl border border-slate-700 scroll-animate delay-100">
                         <i class="fas fa-heart text-3xl mb-4" style="color: var(--primary-magenta);"></i>
                         <h4 class="text-xl font-semibold mb-2 text-gray-800">Conexiones Auténticas</h4>
                         <p class="text-gray-800">Facilitamos encuentros reales que generan amistades duraderas.</p>
                     </div>
-                    <div class="p-6 rounded-xl border border-slate-700">
+                    <div class="p-6 rounded-xl border border-slate-700 scroll-animate delay-200">
                         <i class="fas fa-shield-alt text-3xl mb-4" style="color: var(--secondary-celeste);"></i>
                         <h4 class="text-xl font-semibold mb-2 text-gray-800">Entorno Seguro</h4>
                         <p class="text-gray-800">Priorizamos la seguridad y comodidad de todos los participantes.</p>
                     </div>
                 </div>
                 <div class="space-y-6 mt-8">
-                    <div class="p-6 rounded-xl border border-slate-700">
+                    <div class="p-6 rounded-xl border border-slate-700 scroll-animate delay-300">
                         <i class="fas fa-globe-americas text-3xl mb-4" style="color: var(--secondary-rosa);"></i>
                         <h4 class="text-xl font-semibold mb-2 text-gray-800">Comunidad Diversa</h4>
                         <p class="text-gray-800">Celebramos la diversidad y fomentamos la inclusión social.</p>
                     </div>
-                    <div class="p-6 rounded-xl border border-slate-700">
+                    <div class="p-6 rounded-xl border border-slate-700 scroll-animate delay-400">
                         <i class="fas fa-leaf text-3xl mb-4" style="color: var(--secondary-celeste);"></i>
                         <h4 class="text-xl font-semibold mb-2 text-gray-800">Impacto Positivo</h4>
                         <p class="text-gray-800">Promovemos actividades que benefician a la comunidad y el medio ambiente.</p>
@@ -820,7 +838,7 @@
 
        <!-- Ventajas Competitivas -->
 <div class="mt-20">
-    <h3 class="text-3xl font-bold mb-12 text-center text-gray-800">Ventaja Competitiva</h3>
+    <h3 class="text-3xl font-bold mb-12 text-center text-gray-800 scroll-animate">Ventaja Competitiva</h3>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div class="bg-white p-6 rounded-lg shadow-md text-center flex flex-col h-full">
             <div class="w-16 h-16 mx-auto bg-pink-400/10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0">
@@ -859,7 +877,7 @@
   <section id="contacto" class="section-height py-20">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-6">CONTÁCTANOS</h2>
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 scroll-animate">CONTÁCTANOS</h2>
         <p class="text-xl text-gray-400 max-w-3xl mx-auto">
           ¿Tienes preguntas o quieres colaborar con nosotros? Estamos aquí para ayudarte.
         </p>
@@ -1060,6 +1078,31 @@
 
   <!-- JavaScript -->
   <script>
+
+    // Scroll animation function
+function initScrollAnimations() {
+  const animatedElements = document.querySelectorAll('.scroll-animate');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+        // Stop observing after animation triggers
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { 
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  animatedElements.forEach(element => {
+    observer.observe(element);
+  });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initScrollAnimations);
 
     // Counter animation function
 function animateCounter(elementId, targetNumber, duration = 2000) {
