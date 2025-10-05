@@ -1044,6 +1044,16 @@
                     <label for="date">Fecha Preferida</label>
                     <input type="date" id="date" class="form-control" required>
                 </div>
+              
+              <div class="form-group">
+              <label for="genero">Género</label>
+              <select id="genero" class="form-control" required style="background: rgba(71, 85, 105, 0.8); color: white; border: 1px solid var(--secondary-celeste);">
+              <option value="" disabled selected style="background: var(--primary-azul); color: white;">Selecciona tu género</option>
+              <option value="masculino" style="background: var(--primary-azul); color: white;">Masculino</option>
+              <option value="femenino" style="background: var(--primary-azul); color: white;">Femenino</option>
+              </select>
+              </div>
+              
                 <div class="form-group">
                     <label for="comments">Comentarios Adicionales</label>
                     <textarea id="comments" class="form-control" rows="3"></textarea>
@@ -1236,8 +1246,7 @@ document.getElementById('payment-form').addEventListener('submit', async functio
         phone: document.getElementById('phone').value,
         comments: document.getElementById('comments').value,
         price: selectedOption.getAttribute('data-price'),
-        // Add gender field if needed
-        genero: '' // You can add a gender field to your popup if required
+        genero: document.getElementById('genero').value
     };
     
     console.log('Form data:', formData);
