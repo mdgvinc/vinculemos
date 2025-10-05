@@ -537,6 +537,47 @@
         height: 280px !important;
       }
     }
+
+    /* Mobile-optimized YouTube video styles */
+@media (max-width: 768px) {
+  .hero-video {
+    /* Force 9:16 aspect ratio on mobile */
+    width: 100vw;
+    height: 177.78vw; /* 16:9 ratio inverted for mobile (9:16) */
+    max-height: 100vh;
+    max-width: 56.25vh; /* Maintain aspect ratio */
+    
+    /* Center and crop the video */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    
+    /* Ensure it stays behind content */
+    z-index: 1;
+  }
+  
+  /* Adjust the overlay for mobile */
+  .absolute.inset-0.bg-black.opacity-40 {
+    z-index: 2; /* Ensure overlay stays above video */
+  }
+  
+  /* Container adjustments for mobile */
+  #inicio.section-height {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
   </style>
 </head>
 
