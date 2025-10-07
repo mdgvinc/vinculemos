@@ -78,15 +78,29 @@
     }
 
 
-    .card-hover {
-      transition: all 0.3s ease;
-      overflow: hidden;
-    }
+   .card-hover {
+  min-height: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(255, 0, 121, 0.2);
-    }
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Ensure proper aspect ratio handling */
+.relative[style*="padding-bottom: 100%"] {
+  position: relative;
+  width: 100%;
+}
+
+.relative[style*="padding-bottom: 100%"] > .absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
     .video-hover {
       position: relative;
@@ -690,30 +704,31 @@
 
     <!-- Citas Rápidas -->
     <div class="mb-20">
-      <h3 class="text-3xl font-bold mb-12 text-center" style="color: var(--primary-magenta);">
-      </h3>
       <div class="grid md:grid-cols-3 gap-8">
 
         <!-- Card 1 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
-          <div class="image-hover relative aspect-square">
-            <!-- Image -->
-            <img 
-              class="absolute inset-0 w-full h-full object-cover"
-              src="citas_rapidas.png"
-              alt="Citas rápidas Vinculemos"
-            >
+        <div class="card-hover rounded-xl overflow-hidden border border-slate-700 bg-gray-800">
+          <div class="relative" style="padding-bottom: 100%;"> <!-- 1:1 aspect ratio -->
+            <!-- Image Container -->
+            <div class="absolute inset-0 w-full h-full">
+              <img 
+                class="w-full h-full object-cover"
+                src="citas_rapidas.png"
+                alt="Citas rápidas Vinculemos"
+                onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #FF0079 0%, #FC89C6 100%)'"
+              >
+            </div>
 
             <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute inset-0 bg-black/40 hover:bg-black/20 transition-all duration-300"></div>
 
             <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
               <h4 class="text-xl font-bold mb-3 text-white">Citas Rápidas</h4>
-              <p class="mb-4 text-white">
+              <p class="mb-4 text-white text-sm md:text-base">
                 Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
               </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
+              <a href="#formulario" class="inline-flex items-center text-pink-300 hover:text-pink-200 font-semibold transition-colors">
                 Participar <i class="fas fa-arrow-right ml-2"></i>
               </a>
             </div>
@@ -721,25 +736,28 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
-          <div class="image-hover relative aspect-square">
-            <!-- Image -->
-            <img 
-              class="absolute inset-0 w-full h-full object-cover"
-              src="citas_lentas.png"
-              alt="Citas temáticas Vinculemos"
-            >
+        <div class="card-hover rounded-xl overflow-hidden border border-slate-700 bg-gray-800">
+          <div class="relative" style="padding-bottom: 100%;"> <!-- 1:1 aspect ratio -->
+            <!-- Image Container -->
+            <div class="absolute inset-0 w-full h-full">
+              <img 
+                class="w-full h-full object-cover"
+                src="citas_lentas.png"
+                alt="Citas temáticas Vinculemos"
+                onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #7784CF 0%, #092E3E 100%)'"
+              >
+            </div>
 
             <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="absolute inset-0 bg-black/40 hover:bg-black/20 transition-all duration-300"></div>
 
             <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
               <h4 class="text-xl font-bold mb-3 text-white">Citas Conscientes</h4>
-              <p class="mb-4 text-white">
+              <p class="mb-4 text-white text-sm md:text-base">
                 Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
               </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
+              <a href="#formulario" class="inline-flex items-center text-pink-300 hover:text-pink-200 font-semibold transition-colors">
                 Participar <i class="fas fa-arrow-right ml-2"></i>
               </a>
             </div>
@@ -747,25 +765,28 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700">
-          <div class="image-hover relative aspect-square">
-            <!-- Image -->
-            <img 
-              class="absolute inset-0 w-full h-full object-cover"
-              src="tribu.png"
-              alt="Speed dating Vinculemos"
-            >
+        <div class="card-hover rounded-xl overflow-hidden border border-slate-700 bg-gray-800">
+          <div class="relative" style="padding-bottom: 100%;"> <!-- 1:1 aspect ratio -->
+            <!-- Image Container -->
+            <div class="absolute inset-0 w-full h-full">
+              <img 
+                class="w-full h-full object-cover"
+                src="tribu.png"
+                alt="Speed dating Vinculemos"
+                onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #092E3E 0%, #7784CF 100%)'"
+              >
+            </div>
 
             <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="absolute inset-0 bg-black/40 hover:bg-black/20 transition-all duration-300"></div>
 
             <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
               <h4 class="text-xl font-bold mb-3 text-white">Conecta con tu Tribu</h4>
-              <p class="mb-4 text-white">
+              <p class="mb-4 text-white text-sm md:text-base">
                 Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
               </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-500 font-semibold">
+              <a href="#formulario" class="inline-flex items-center text-pink-300 hover:text-pink-200 font-semibold transition-colors">
                 Participar <i class="fas fa-arrow-right ml-2"></i>
               </a>
             </div>
