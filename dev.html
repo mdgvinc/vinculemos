@@ -710,7 +710,7 @@
         <div class="card-hover rounded-xl overflow-hidden border border-slate-700 bg-gray-800">
           <div class="relative" style="padding-bottom: 100%;"> <!-- 1:1 aspect ratio -->
             <!-- Image Container -->
-            <div class="absolute inset-0 w-full h-full">
+            <div class="absolute inset-0 w-full h-full z-0">
               <img 
                 class="w-full h-full object-cover"
                 src="citas_rapidas.png"
@@ -720,10 +720,10 @@
             </div>
 
             <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/65 hover:bg-black/20 transition-all duration-300"></div>
+            <div class="absolute inset-0 bg-black/65 hover:bg-black/20 transition-all duration-300 z-10"></div>
 
             <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
               <h4 class="text-xl font-bold mb-3 text-white">Citas Rápidas</h4>
               <p class="mb-4 text-white text-sm md:text-base">
                 Conoce varias personas en una sola noche a través de citas cortas y dinámicas. Perfecto para romper el hielo.
