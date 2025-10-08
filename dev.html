@@ -579,34 +579,6 @@
     object-fit: cover;
   }
 }
-
-    /* Mobile Hero Video Styles */
-@media (max-width: 768px) {
-  .hero-video-mobile {
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-  }
-  
-  .hero-video-desktop {
-    display: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .hero-video-mobile {
-    display: none;
-  }
-  
-  .hero-video-desktop {
-    display: block;
-  }
-}
   </style>
 </head>
 
@@ -680,57 +652,45 @@
     </nav>
   </header>
 
-<!-- Hero Section -->
+  <!-- Hero Section -->
 <section id="inicio" class="section-height relative overflow-hidden">
   <div class="absolute inset-0">
     <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
-    
-    <!-- Desktop Video (hidden on mobile) -->
     <iframe 
-      class="hero-video-desktop z-10"
+      class="hero-video z-10"
       src="https://www.youtube.com/embed/1BpFOxK1zm8?autoplay=1&mute=1&loop=1&playlist=1BpFOxK1zm8&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&v=2"
-      title="Video de fondo Vinculemos - Desktop"
-      frameborder="0"
-      allow="autoplay; encrypted-media; accelerometer; gyroscope"
-      allowfullscreen>
-    </iframe>
-    
-    <!-- Mobile Video (hidden on desktop) -->
-    <iframe 
-      class="hero-video-mobile z-10"
-      src="https://www.youtube.com/embed/MLnI8UVKg1Q?autoplay=1&mute=1&loop=1&playlist=MLnI8UVKg1Q&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&v=2"
-      title="Video de fondo Vinculemos - Mobile"
+      title="Video de fondo Vinculemos"
       frameborder="0"
       allow="autoplay; encrypted-media; accelerometer; gyroscope"
       allowfullscreen>
     </iframe>
   </div>
 
-  <div class="relative z-20 container mx-auto px-4 text-center">
-    <!-- Replaced h1 with logo -->
-    <div class="flex justify-center mb-6">
-      <div class="bg-black/70 rounded-xl flex items-center justify-center w-[350px] h-[250px] md:w-[500px] md:h-[350px]">
-        <img 
-          src="logo_s.png" 
-          alt="Logo Vinculemos" 
-          class="max-w-full max-h-full object-contain"
-        >
+    <div class="relative z-10 container mx-auto px-4 text-center">
+      <!-- Replaced h1 with logo -->
+      <div class="flex justify-center mb-6">
+        <div class="bg-black/70 rounded-xl flex items-center justify-center w-[350px] h-[250px] md:w-[500px] md:h-[350px]">
+          <img 
+            src="logo_s.png" 
+            alt="Logo Vinculemos" 
+            class="max-w-full max-h-full object-contain"
+          >
+        </div>
+      </div>
+
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto scroll-animate font-bold text-white">
+        No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
+      </p>
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <a href="#experiencias" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all">
+          Encuentra tu match perfecto
+        </a>
+        <a href="#nosotros" class="btn-secondary px-8 py-4 rounded-lg font-semibold transition-all">
+          Conoce más de nosotros
+        </a>
       </div>
     </div>
-
-    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto scroll-animate font-bold text-white">
-      No hacemos match, hacemos vínculos. Conectamos personas reales a través de experiencias auténticas y memorables.
-    </p>
-    <div class="flex flex-col md:flex-row gap-4 justify-center">
-      <a href="#experiencias" class="btn-primary px-8 py-4 rounded-lg font-semibold transition-all">
-        Encuentra tu match perfecto
-      </a>
-      <a href="#nosotros" class="btn-secondary px-8 py-4 rounded-lg font-semibold transition-all">
-        Conoce más de nosotros
-      </a>
-    </div>
-  </div>
-</section>
+  </section>
 
 <!-- Experiences Section -->
 <section id="experiencias" class="section-height py-20 md:py-40">
@@ -1168,36 +1128,7 @@
 
   <!-- JavaScript -->
   <script>
-    
-// Mobile video optimization
-function optimizeHeroVideo() {
-  const isMobile = window.innerWidth <= 768;
-  const desktopVideo = document.querySelector('.hero-video-desktop');
-  const mobileVideo = document.querySelector('.hero-video-mobile');
-  
-  if (isMobile) {
-    // On mobile, ensure mobile video is loaded and desktop video is paused
-    if (desktopVideo) {
-      desktopVideo.style.display = 'none';
-    }
-    if (mobileVideo) {
-      mobileVideo.style.display = 'block';
-    }
-  } else {
-    // On desktop, ensure desktop video is loaded and mobile video is paused
-    if (mobileVideo) {
-      mobileVideo.style.display = 'none';
-    }
-    if (desktopVideo) {
-      desktopVideo.style.display = 'block';
-    }
-  }
-}
 
-// Run on load and resize
-document.addEventListener('DOMContentLoaded', optimizeHeroVideo);
-window.addEventListener('resize', optimizeHeroVideo);
-    
     // Scroll animation function
 function initScrollAnimations() {
   const animatedElements = document.querySelectorAll('.scroll-animate');
