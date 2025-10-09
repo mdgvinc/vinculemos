@@ -722,7 +722,7 @@
     <div class="mb-20">
       <div class="grid md:grid-cols-3 gap-8">
 
-        <!-- Card 1 -->
+        <!-- Card 1 - UNCHANGED -->
         <div class="card-hover rounded-xl overflow-hidden border border-slate-700 bg-gray-800">
           <div class="relative" style="padding-bottom: 100%;"> <!-- 1:1 aspect ratio -->
             <!-- Image Container -->
@@ -751,11 +751,11 @@
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700 bg-gray-800">
-          <div class="relative" style="padding-bottom: 100%;"> <!-- 1:1 aspect ratio -->
-            <!-- Image Container -->
-            <div class="absolute inset-0 w-full h-full">
+        <!-- Card 2 - UPDATED WITH BLUR EFFECT -->
+        <div class="rounded-xl overflow-hidden border border-slate-700 bg-gray-800 relative">
+          <div class="relative" style="padding-bottom: 100%;">
+            <!-- Image Container with Blur -->
+            <div class="absolute inset-0 w-full h-full filter blur-sm">
               <img 
                 class="w-full h-full object-cover"
                 src="citas_lentas.png"
@@ -764,27 +764,29 @@
               >
             </div>
 
-            <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/65 hover:bg-black/20 transition-all duration-300"></div>
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 bg-black/70"></div>
 
-            <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
-              <h4 class="text-xl font-bold mb-3 text-white">Citas Conscientes</h4>
-              <p class="mb-4 text-white text-sm md:text-base">
-                Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
-              </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-300 hover:text-pink-200 font-semibold transition-colors">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+            <!-- "Próximamente" Content -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
+              <div class="bg-black/60 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <h4 class="text-xl font-bold mb-3 text-white">Citas Conscientes</h4>
+                <p class="mb-4 text-white text-sm md:text-base">
+                  Conexiones profundas basadas en valores compartidos y búsquedas personales auténticas.
+                </p>
+                <div class="inline-flex items-center bg-gray-600/50 text-gray-300 font-semibold px-4 py-2 rounded-lg cursor-not-allowed">
+                  Próximamente <i class="fas fa-clock ml-2"></i>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="card-hover rounded-xl overflow-hidden border border-slate-700 bg-gray-800">
-          <div class="relative" style="padding-bottom: 100%;"> <!-- 1:1 aspect ratio -->
-            <!-- Image Container -->
-            <div class="absolute inset-0 w-full h-full">
+        <!-- Card 3 - UPDATED WITH BLUR EFFECT -->
+        <div class="rounded-xl overflow-hidden border border-slate-700 bg-gray-800 relative">
+          <div class="relative" style="padding-bottom: 100%;">
+            <!-- Image Container with Blur -->
+            <div class="absolute inset-0 w-full h-full filter blur-sm">
               <img 
                 class="w-full h-full object-cover"
                 src="tribu.png"
@@ -793,18 +795,20 @@
               >
             </div>
 
-            <!-- Black Overlay -->
-            <div class="absolute inset-0 bg-black/65 hover:bg-black/20 transition-all duration-300"></div>
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 bg-black/70"></div>
 
-            <!-- Centered Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
-              <h4 class="text-xl font-bold mb-3 text-white">Conecta con tu Tribu</h4>
-              <p class="mb-4 text-white text-sm md:text-base">
-                Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
-              </p>
-              <a href="#formulario" class="inline-flex items-center text-pink-300 hover:text-pink-200 font-semibold transition-colors">
-                Participar <i class="fas fa-arrow-right ml-2"></i>
-              </a>
+            <!-- "Próximamente" Content -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-20">
+              <div class="bg-black/60 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <h4 class="text-xl font-bold mb-3 text-white">Conecta con tu Tribu</h4>
+                <p class="mb-4 text-white text-sm md:text-base">
+                  Descubre rutas espectaculares mientras forjas amistades duraderas en medio de la naturaleza.
+                </p>
+                <div class="inline-flex items-center bg-gray-600/50 text-gray-300 font-semibold px-4 py-2 rounded-lg cursor-not-allowed">
+                  Próximamente <i class="fas fa-clock ml-2"></i>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -957,7 +961,7 @@
                 <i class="fas fa-envelope mt-1" style="color: var(--primary-magenta);"></i>
                 <div>
                   <h4 class="font-medium mb-1">Correo</h4>
-                  <p class="text-gray-400">vinculemos.marketingdigital@gmail.com</p>
+                  <p class="text-gray-400">info@vinculemos.cl</p>
                 </div>
               </div>
               
@@ -1053,7 +1057,7 @@
   </footer>
 
   <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/56912345678?text=Hola%20Vinculemos,%20me%20interesa%20participar%20en%20sus%20eventos" target="_blank" class="floating-whatsapp">
+  <a href="https://wa.me/56954003064?text=Hola%20Vinculemos,%20me%20interesa%20participar%20en%20sus%20eventos" target="_blank" class="floating-whatsapp">
     <i class="fab fa-whatsapp text-white text-2xl"></i>
   </a>
 
