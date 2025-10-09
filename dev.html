@@ -539,24 +539,29 @@
       }
     }
 
- /* Mobile-optimized YouTube video styles */
+/* Mobile-optimized YouTube video styles */
 @media (max-width: 768px) {
   .hero-video-mobile {
     /* Force 9:16 aspect ratio for mobile */
     width: 100vw;
-    height: 177.78vw; /* 16:9 ratio inverted for mobile (9:16) */
+    height: 177.78vw;
     max-height: 100vh;
-    max-width: 56.25vh; /* Maintain aspect ratio */
+    max-width: 56.25vh;
     
     /* Center and crop the video */
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    object-fit: cover;
     
     /* Ensure it stays behind content */
     z-index: 1;
+  }
+  
+  .hero-video-mobile iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
   }
   
   /* Hide desktop video on mobile */
@@ -663,7 +668,7 @@
   <div class="absolute inset-0">
     <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
     
-    <!-- Desktop Video (existing hero-video class) -->
+    <!-- Desktop Video -->
     <iframe 
       class="hero-video z-10"
       src="https://www.youtube.com/embed/1BpFOxK1zm8?autoplay=1&mute=1&loop=1&playlist=1BpFOxK1zm8&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&v=2"
@@ -673,15 +678,8 @@
       allowfullscreen>
     </iframe>
     
-    <!-- Mobile Video (new hero-video-mobile class) -->
-    <iframe 
-      class="hero-video-mobile z-10"
-      src="https://www.youtube.com/embed/MLnI8UVKg1Q?autoplay=1&mute=1&loop=1&playlist=MLnI8UVKg1Q&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&v=1"
-      title="Video de fondo Vinculemos - Mobile"
-      frameborder="0"
-      allow="autoplay; encrypted-media; accelerometer; gyroscope"
-      allowfullscreen>
-    </iframe>
+    <!-- Mobile Video Container -->
+    <div id="mobile-video-container" class="hero-video-mobile z-10"></div>
   </div>
 
   <div class="relative z-20 container mx-auto px-4 text-center">
@@ -1146,6 +1144,73 @@
 
   <!-- JavaScript -->
   <script>
+
+    // YouTube API for mobile video
+function loadYouTubeAPI() {
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+let mobilePlayer;
+
+function onYouTubeIframeAPIReady() {
+  // Only create mobile player if on mobile device
+  if (window.innerWidth <= 768) {
+    mobilePlayer = new YT.Player('mobile-video-container', {
+      videoId: 'MLnI8UVKg1Q',
+      playerVars: {
+        'autoplay': 1,
+        'mute': 1,
+        'loop': 1,
+        'playlist': 'MLnI8UVKg1Q',
+        'controls': 0,
+        'showinfo': 0,
+        'rel': 0,
+        'iv_load_policy': 3,
+        'modestbranding': 1,
+        'playsinline': 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+}
+
+function onPlayerReady(event) {
+  event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+  // Loop the video when it ends
+  if (event.data === YT.PlayerState.ENDED) {
+    event.target.playVideo();
+  }
+}
+
+// Load YouTube API when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  loadYouTubeAPI();
+  
+  // Fallback: if API doesn't load, use iframe for mobile
+  setTimeout(function() {
+    if (window.innerWidth <= 768 && !mobilePlayer) {
+      const mobileContainer = document.getElementById('mobile-video-container');
+      mobileContainer.innerHTML = `
+        <iframe 
+          src="https://www.youtube.com/embed/MLnI8UVKg1Q?autoplay=1&mute=1&loop=1&playlist=MLnI8UVKg1Q&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
+          title="Video de fondo Vinculemos - Mobile"
+          frameborder="0"
+          allow="autoplay; encrypted-media; accelerometer; gyroscope; playsinline"
+          allowfullscreen>
+        </iframe>
+      `;
+    }
+  }, 2000);
+});
 
     // Scroll animation function
 function initScrollAnimations() {
